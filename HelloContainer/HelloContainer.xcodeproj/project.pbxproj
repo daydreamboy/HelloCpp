@@ -11,6 +11,7 @@
 		4F4AA13A20DA06E900456516 /* unordered_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F4AA13920DA06E900456516 /* unordered_map.cpp */; };
 		4F4AA14520DA28CE00456516 /* convert_NSDictionary_to_unordered_map.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4AA14420DA28CE00456516 /* convert_NSDictionary_to_unordered_map.mm */; };
 		4F4AA16620DA36CB00456516 /* convert_NSArray_to_vector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4AA16520DA36CB00456516 /* convert_NSArray_to_vector.mm */; };
+		4F4AA1A420DA55DB00456516 /* convert_NSString_to_string.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4AA1A320DA55DB00456516 /* convert_NSString_to_string.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +51,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		4F4AA19F20DA55DB00456516 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +71,8 @@
 		4F4AA14420DA28CE00456516 /* convert_NSDictionary_to_unordered_map.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = convert_NSDictionary_to_unordered_map.mm; sourceTree = "<group>"; };
 		4F4AA16320DA36CB00456516 /* convert_NSArray_to_vector */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = convert_NSArray_to_vector; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4AA16520DA36CB00456516 /* convert_NSArray_to_vector.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = convert_NSArray_to_vector.mm; sourceTree = "<group>"; };
+		4F4AA1A120DA55DB00456516 /* convert_NSString_to_string */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = convert_NSString_to_string; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F4AA1A320DA55DB00456516 /* convert_NSString_to_string.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = convert_NSString_to_string.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +104,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4F4AA19E20DA55DB00456516 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -102,6 +121,7 @@
 				4F4AA13820DA06E900456516 /* unordered_map */,
 				4F4AA14320DA28CE00456516 /* convert_NSDictionary_to_unordered_map */,
 				4F4AA16420DA36CB00456516 /* convert_NSArray_to_vector */,
+				4F4AA1A220DA55DB00456516 /* convert_NSString_to_string */,
 				4F4AA11F20DA053B00456516 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,6 +133,7 @@
 				4F4AA13720DA06E900456516 /* unordered_map */,
 				4F4AA14220DA28CE00456516 /* convert_NSDictionary_to_unordered_map */,
 				4F4AA16320DA36CB00456516 /* convert_NSArray_to_vector */,
+				4F4AA1A120DA55DB00456516 /* convert_NSString_to_string */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,6 +168,14 @@
 				4F4AA16520DA36CB00456516 /* convert_NSArray_to_vector.mm */,
 			);
 			path = convert_NSArray_to_vector;
+			sourceTree = "<group>";
+		};
+		4F4AA1A220DA55DB00456516 /* convert_NSString_to_string */ = {
+			isa = PBXGroup;
+			children = (
+				4F4AA1A320DA55DB00456516 /* convert_NSString_to_string.mm */,
+			);
+			path = convert_NSString_to_string;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +249,23 @@
 			productReference = 4F4AA16320DA36CB00456516 /* convert_NSArray_to_vector */;
 			productType = "com.apple.product-type.tool";
 		};
+		4F4AA1A020DA55DB00456516 /* convert_NSString_to_string */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F4AA1A520DA55DB00456516 /* Build configuration list for PBXNativeTarget "convert_NSString_to_string" */;
+			buildPhases = (
+				4F4AA19D20DA55DB00456516 /* Sources */,
+				4F4AA19E20DA55DB00456516 /* Frameworks */,
+				4F4AA19F20DA55DB00456516 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = convert_NSString_to_string;
+			productName = convert_NSString_to_string;
+			productReference = 4F4AA1A120DA55DB00456516 /* convert_NSString_to_string */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -241,6 +287,9 @@
 					4F4AA16220DA36CB00456516 = {
 						CreatedOnToolsVersion = 9.4;
 					};
+					4F4AA1A020DA55DB00456516 = {
+						CreatedOnToolsVersion = 9.4;
+					};
 				};
 			};
 			buildConfigurationList = 4F4AA11920DA053B00456516 /* Build configuration list for PBXProject "HelloContainer" */;
@@ -259,6 +308,7 @@
 				4F4AA13620DA06E900456516 /* unordered_map */,
 				4F4AA14120DA28CE00456516 /* convert_NSDictionary_to_unordered_map */,
 				4F4AA16220DA36CB00456516 /* convert_NSArray_to_vector */,
+				4F4AA1A020DA55DB00456516 /* convert_NSString_to_string */,
 			);
 		};
 /* End PBXProject section */
@@ -293,6 +343,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F4AA16620DA36CB00456516 /* convert_NSArray_to_vector.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F4AA19D20DA55DB00456516 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F4AA1A420DA55DB00456516 /* convert_NSString_to_string.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +530,22 @@
 			};
 			name = Release;
 		};
+		4F4AA1A620DA55DB00456516 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4F4AA1A720DA55DB00456516 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -516,6 +590,15 @@
 			buildConfigurations = (
 				4F4AA16820DA36CB00456516 /* Debug */,
 				4F4AA16920DA36CB00456516 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F4AA1A520DA55DB00456516 /* Build configuration list for PBXNativeTarget "convert_NSString_to_string" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F4AA1A620DA55DB00456516 /* Debug */,
+				4F4AA1A720DA55DB00456516 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
