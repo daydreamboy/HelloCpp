@@ -10,16 +10,16 @@
 #include <iostream>
 #include <string>
 
-void convert_NSString_to_string(void);
+void convert_NSString_to_cppString(void);
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        convert_NSString_to_string();
+        convert_NSString_to_cppString();
     }
     return 0;
 }
 
-void convert_NSString_to_string(void)
+void convert_NSString_to_cppString(void)
 {
     // Case 1: NSString to std::string
     
@@ -34,10 +34,10 @@ void convert_NSString_to_string(void)
     
     // Case 2: std::string to NSString
     
-    std::string string1 = [nsString1 cStringUsingEncoding:[NSString defaultCStringEncoding]];
-    std::cout << "string1: " << string1 << std::endl;
+    std::string cppString1 = [nsString1 cStringUsingEncoding:[NSString defaultCStringEncoding]];
+    std::cout << "string1: " << cppString1 << std::endl;
     
-    std::string string2 = [nsString2 UTF8String];
-    std::cout << "string2: " << string2 << std::endl;
+    std::string cppString2 = [nsString2 UTF8String];
+    std::cout << "string2: " << cppString2 << std::endl;
 }
 
