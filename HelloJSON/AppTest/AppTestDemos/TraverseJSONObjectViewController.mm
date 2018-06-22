@@ -12,21 +12,7 @@
 
 using json = nlohmann::json;
 
-void traverse_object(json jsonObject, int indent)
-{
-    if (jsonObject.is_object()) {
-        
-        std::string space = std::string(indent, ' ');
-        
-        for (json::iterator it = jsonObject.begin(); it != jsonObject.end(); ++it) {
-            std::cout << it.key() << " : " << "\n";
-            
-            
-        }
-    }
-}
-
-void loop_array(void);
+void traverse_object(json jsonObject, int indent, bool isLastElement, bool hasParentArray);
 
 @implementation TraverseJSONObjectViewController
 
@@ -34,36 +20,95 @@ void loop_array(void);
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    json jsonObject = json::parse(self.jsonString);
-//    if (jsonObject.is_object()) {
-//        for (json::iterator it = jsonObject.begin(); it != jsonObject.end(); ++it) {
-//            std::cout << it.key() << " : " << it.value() << "\n";
-//        }
-//    }
-//    else {
-//        std::cout << "jsonObject is not an dictionary" << std::endl;
-//    }
-    
-    loop_array();
-}
-
-void loop_array(void)
-{
-    auto array = R"(
-    [ "1", 2, true, null ]
+    auto j = R"(
+    {
+        "header": {
+            "title": "标题",
+            "summary": "摘要"
+        },
+        "template": {
+            "id": 20014,
+            "data": {
+                "bgl": "",
+                "layout": "fix",
+                "body": {}
+            }
+        },
+        "data": [
+             "data1",
+             100,
+             true,
+             3.14
+         ]
+    }
     )"_json;
     
-    std::cout << array.dump() << std::endl;
-    
-    // iterate the array
-    for (json::iterator it = array.begin(); it != array.end(); ++it) {
-        
-        if ((*it).is_null()) {
-            std::cout << "null: ";
+    json jsonObject = json::parse(self.jsonString);
+    if (jsonObject.is_structured()) {
+        traverse_object(jsonObject, 0, true, false);
+    }
+    else {
+        std::cout << "jsonObject is not an dictionary or array" << std::endl;
+    }
+}
+
+void traverse_object(json jsonObject, int indent, bool isLastElement, bool hasParentArray)
+{
+    if (jsonObject.is_object()) {
+        if (hasParentArray) {
+            std::cout << std::string(indent, ' ') << "{\n";
         }
-        
-        std::cout << *it << '\n';
+        else {
+            std::cout << "{\n";
+        }
+        for (json::iterator it = jsonObject.begin(); it != jsonObject.end();) {
+            // +indent: as key
+            std::cout << std::string(indent + 2, ' ') << "\"" << it.key() << "\"" << " : ";
+            
+            json value = it.value();
+            
+            // @see https://stackoverflow.com/questions/33657743/detect-if-iterator-is-last-element-of-stdmap
+            bool isLast = false;
+            if (++it == jsonObject.end()) {
+                isLast = true;
+            }
+            
+            if (value.is_structured()) {
+                // +indent: as new object or array
+                traverse_object(value, indent + 2, isLast, false);
+            }
+            else {
+                std::cout << value << (isLast ? "\n" : ",\n");
+            }
+        }
+        std::cout << std::string(indent, ' ') << (isLastElement ? "}\n" : "},\n");
+    }
+    else if (jsonObject.is_array()) {
+        if (hasParentArray) {
+            std::cout << std::string(indent, ' ') << "[\n";
+        }
+        else {
+            std::cout << "[\n";
+        }
+        for (json::iterator it = jsonObject.begin(); it != jsonObject.end(); ++it) {
+            
+            bool isLast = false;
+            if (it + 1 == jsonObject.end()) {
+                isLast = true;
+            }
+            
+            if ((*it).is_structured()) {
+                // +indent: as new object or array
+                traverse_object(*it, indent + 2, isLast, true);
+            }
+            else {
+                std::cout << std::string(indent + 2, ' ') << *it << (isLast ? "\n" : ",\n");
+            }
+        }
+        std::cout << std::string(indent, ' ') << (isLastElement ? "]\n" : "],\n");
     }
 }
 
 @end
+
+
