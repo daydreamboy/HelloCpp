@@ -12,10 +12,12 @@
 		4F4AA18A20DA4DB200456516 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F4AA18920DA4DB200456516 /* Assets.xcassets */; };
 		4F4AA18D20DA4DB200456516 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4AA18B20DA4DB200456516 /* LaunchScreen.storyboard */; };
 		4F4AA19020DA4DB200456516 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4AA18F20DA4DB200456516 /* main.m */; };
-		4F4AA19420DA4E1E00456516 /* json.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F4AA16B20DA471100456516 /* json.hpp */; };
-		4F4AA19820DA4F5800456516 /* ConvertNSDictionaryToJSONViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4AA19620DA4F5800456516 /* ConvertNSDictionaryToJSONViewController.mm */; };
+		4F4AA19820DA4F5800456516 /* ConvertStringToJSONObjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4AA19620DA4F5800456516 /* ConvertStringToJSONObjectViewController.mm */; };
 		4F4AA19B20DA4F6500456516 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4AA19A20DA4F6500456516 /* RootViewController.m */; };
 		4F4AA19C20DA50B400456516 /* data1.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F4AA17920DA49B900456516 /* data1.json */; };
+		4F7316E120DCE33500A0A4B5 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7316E020DCE33500A0A4B5 /* BaseViewController.m */; };
+		4F7316E420DCE6A100A0A4B5 /* TraverseJSONObjectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F7316E320DCE6A100A0A4B5 /* TraverseJSONObjectViewController.mm */; };
+		4F7316E720DCED1900A0A4B5 /* JSONElementTypeCheckViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F7316E620DCED1900A0A4B5 /* JSONElementTypeCheckViewController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,10 +44,16 @@
 		4F4AA18C20DA4DB200456516 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F4AA18E20DA4DB200456516 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F4AA18F20DA4DB200456516 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4F4AA19620DA4F5800456516 /* ConvertNSDictionaryToJSONViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConvertNSDictionaryToJSONViewController.mm; sourceTree = "<group>"; };
-		4F4AA19720DA4F5800456516 /* ConvertNSDictionaryToJSONViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertNSDictionaryToJSONViewController.h; sourceTree = "<group>"; };
+		4F4AA19620DA4F5800456516 /* ConvertStringToJSONObjectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConvertStringToJSONObjectViewController.mm; sourceTree = "<group>"; };
+		4F4AA19720DA4F5800456516 /* ConvertStringToJSONObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertStringToJSONObjectViewController.h; sourceTree = "<group>"; };
 		4F4AA19920DA4F6400456516 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		4F4AA19A20DA4F6500456516 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		4F7316DF20DCE33500A0A4B5 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		4F7316E020DCE33500A0A4B5 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		4F7316E220DCE6A100A0A4B5 /* TraverseJSONObjectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TraverseJSONObjectViewController.h; sourceTree = "<group>"; };
+		4F7316E320DCE6A100A0A4B5 /* TraverseJSONObjectViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TraverseJSONObjectViewController.mm; sourceTree = "<group>"; };
+		4F7316E520DCED1900A0A4B5 /* JSONElementTypeCheckViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONElementTypeCheckViewController.h; sourceTree = "<group>"; };
+		4F7316E620DCED1900A0A4B5 /* JSONElementTypeCheckViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = JSONElementTypeCheckViewController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +137,14 @@
 		4F4AA19520DA4F5800456516 /* AppTestDemos */ = {
 			isa = PBXGroup;
 			children = (
-				4F4AA19720DA4F5800456516 /* ConvertNSDictionaryToJSONViewController.h */,
-				4F4AA19620DA4F5800456516 /* ConvertNSDictionaryToJSONViewController.mm */,
+				4F4AA19720DA4F5800456516 /* ConvertStringToJSONObjectViewController.h */,
+				4F4AA19620DA4F5800456516 /* ConvertStringToJSONObjectViewController.mm */,
+				4F7316E220DCE6A100A0A4B5 /* TraverseJSONObjectViewController.h */,
+				4F7316E320DCE6A100A0A4B5 /* TraverseJSONObjectViewController.mm */,
+				4F7316E520DCED1900A0A4B5 /* JSONElementTypeCheckViewController.h */,
+				4F7316E620DCED1900A0A4B5 /* JSONElementTypeCheckViewController.mm */,
+				4F7316DF20DCE33500A0A4B5 /* BaseViewController.h */,
+				4F7316E020DCE33500A0A4B5 /* BaseViewController.m */,
 			);
 			path = AppTestDemos;
 			sourceTree = "<group>";
@@ -234,11 +248,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F4AA19420DA4E1E00456516 /* json.hpp in Sources */,
-				4F4AA19820DA4F5800456516 /* ConvertNSDictionaryToJSONViewController.mm in Sources */,
+				4F7316E720DCED1900A0A4B5 /* JSONElementTypeCheckViewController.mm in Sources */,
+				4F7316E120DCE33500A0A4B5 /* BaseViewController.m in Sources */,
+				4F4AA19820DA4F5800456516 /* ConvertStringToJSONObjectViewController.mm in Sources */,
 				4F4AA19020DA4DB200456516 /* main.m in Sources */,
 				4F4AA18220DA4DB100456516 /* AppDelegate.m in Sources */,
 				4F4AA19B20DA4F6500456516 /* RootViewController.m in Sources */,
+				4F7316E420DCE6A100A0A4B5 /* TraverseJSONObjectViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

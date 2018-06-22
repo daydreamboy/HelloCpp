@@ -8,7 +8,9 @@
 
 #import "RootViewController.h"
 
-#import "ConvertNSDictionaryToJSONViewController.h"
+#import "ConvertStringToJSONObjectViewController.h"
+#import "JSONElementTypeCheckViewController.h"
+#import "TraverseJSONObjectViewController.h"
 
 @interface RootViewController ()
 @property (nonatomic, strong) NSArray *titles;
@@ -31,11 +33,15 @@
 
     // MARK: Configure titles and classes for table view
     _titles = @[
-        @"Convert NSDictionary to nlohmann json",
+        @"Convert string to nlohmann json object",
+        @"Check json element type",
+        @"Traverse nlohmann json object",
         @"call a test method",
     ];
     _classes = @[
-        [ConvertNSDictionaryToJSONViewController class],
+        [ConvertStringToJSONObjectViewController class],
+        [JSONElementTypeCheckViewController class],
+        [TraverseJSONObjectViewController class],
         @"testMethod",
     ];
 }
