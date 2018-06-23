@@ -1,6 +1,6 @@
 ## Templated JSON
 
-## 1、结构
+### 1、结构
 
 ```
 {
@@ -33,9 +33,9 @@
 * action，用于事件响应
 
 
-## 2、语法
+### 2、语法
 
-### 1. ifelse语句
+#### 1. ifelse语句
 
 ```
 // if-elseif-else
@@ -61,7 +61,7 @@
 
 注意事项：关键字和expression至少有一个空格。expression中不允许有空格。
 
-### 2. each语句
+#### 2. each语句
 
 ```
 {
