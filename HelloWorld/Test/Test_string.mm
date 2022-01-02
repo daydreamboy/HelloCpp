@@ -1,5 +1,5 @@
 //
-//  Test_CPP.m
+//  Test_string.m
 //  Test
 //
 //  Created by wesley_chen on 2021/12/29.
@@ -9,11 +9,11 @@
 #include <string>
 #include <iostream>
 
-@interface Test_CPP : XCTestCase
+@interface Test_string : XCTestCase
 
 @end
 
-@implementation Test_CPP
+@implementation Test_string
 
 // https://stackoverflow.com/questions/8001677/how-do-i-convert-a-nsstring-into-a-stdstring
 - (void)test_NSString_to_std_string {
