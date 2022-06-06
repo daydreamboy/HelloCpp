@@ -46,3 +46,8 @@ C++11支持using用于别名
 
 [1] https://en.cppreference.com/w/cpp/language/string_literal
 
+
+
+ISSUE
+
+https://stackoverflow.com/questions/8112656/objective-c-blocks-and-c-objects

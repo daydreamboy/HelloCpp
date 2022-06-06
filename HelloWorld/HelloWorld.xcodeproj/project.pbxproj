@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F197DAE2784012100D6B11C /* Test_issue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F197DAD2784012100D6B11C /* Test_issue.mm */; };
 		4F39BE0E277C9A1400BAF59E /* WCCPPTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE0D277C9A1400BAF59E /* WCCPPTool.mm */; };
 		4F39BE16277C9ADB00BAF59E /* Test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE15277C9ADB00BAF59E /* Test.mm */; };
 		4F39BE1B277C9D1400BAF59E /* Test_string.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE1A277C9D1400BAF59E /* Test_string.mm */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		4F13B42E277CAC8E007AB14E /* WCCPPMacroTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCCPPMacroTool.h; sourceTree = "<group>"; };
+		4F197DAD2784012100D6B11C /* Test_issue.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_issue.mm; sourceTree = "<group>"; };
 		4F39BE0C277C9A1400BAF59E /* WCCPPTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCCPPTool.h; sourceTree = "<group>"; };
 		4F39BE0D277C9A1400BAF59E /* WCCPPTool.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WCCPPTool.mm; sourceTree = "<group>"; };
 		4F39BE13277C9ADB00BAF59E /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,7 @@
 				4F39BE1A277C9D1400BAF59E /* Test_string.mm */,
 				4FA0079B277D9C8F000B2746 /* Test_vector.mm */,
 				4FD17251277DAB54000F8F49 /* Test_move.m */,
+				4F197DAD2784012100D6B11C /* Test_issue.mm */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F197DAE2784012100D6B11C /* Test_issue.mm in Sources */,
 				4FD17252277DAB54000F8F49 /* Test_move.m in Sources */,
 				4F39BE16277C9ADB00BAF59E /* Test.mm in Sources */,
 				4F39BE1B277C9D1400BAF59E /* Test_string.mm in Sources */,
