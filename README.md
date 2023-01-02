@@ -28,6 +28,30 @@ std::cout << cppString2 << std::endl;
 
 
 
+### (1) String IO
+
+`ostringstream`是`basic_ostringstream<char>`的别名，它定义在`<sstream>`头文件中。作用是存放输出字符串。
+
+举个例子，如下
+
+```c++
+- (void)test_std_ostringstream {
+    std::ostringstream stream;
+    
+    stream << "Hello, " << "ostring" << "stream";
+    stream << std::endl;
+    
+    std::string string = stream.str();
+    const char* s = string.c_str();
+    
+    printf("%s", s);
+}
+```
+
+
+
+
+
 
 
 ## 2、using
