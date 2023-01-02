@@ -35,6 +35,10 @@ struct LogSetting {
      The flag for show source file locaiton. Default is true
      */
     bool showSourceFileLocation = true;
+    /**
+     The flag for show timestamp. Default is true
+     */
+    bool showTimestamp = true;
 };
 
 /**

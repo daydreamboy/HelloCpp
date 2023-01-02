@@ -31,4 +31,18 @@
     printf("%s", s);
 }
 
+- (void)test_std_strlen {
+    char buf[64];
+    
+    if (std::strlen(buf) > 0) {
+        printf("%s", buf);
+    }
+    
+    const char buf2[] = "How many characters does this string contain?\n";
+    
+    if (std::strlen(buf2) > 0) {
+        printf("%s", buf2);
+    }
+}
+
 @end

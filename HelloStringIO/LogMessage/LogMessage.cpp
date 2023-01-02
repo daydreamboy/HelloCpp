@@ -9,6 +9,7 @@
 #include "LogSetting.hpp"
 
 #include <iostream>
+#include <sys/time.h>
 
 namespace wc {
 
@@ -61,6 +62,22 @@ LogMessage::LogMessage(LogLevel level,
     // Note: componentable log message
     // full format for printf: @"%s %llu:[%s][%s:%d]`%s: %s"
     // 2022-12-12 11:01:14.923000+0800 1:[DEBUG][PrintLogInCFunctionsViewController.m:18]`void callAFunction(NSString *__strong): a test for calling c function with `some parameters`
+    
+    if (GetLogSetting().showTimestamp) {
+        char fmt[64], buf[64];
+        struct timeval tv;
+        struct tm *tm;
+
+        gettimeofday(&tv, NULL);
+        if ((tm = localtime(&tv.tv_sec)) != NULL) {
+            strftime(fmt, sizeof fmt, "%Y-%m-%d %H:%M:%S.%%06u%z", tm);
+            snprintf(buf, sizeof buf, fmt, tv.tv_usec);
+        }
+        
+        if (std::strlen(buf) > 0) {
+            _stream << buf << " ";
+        }
+    }
     
     if (GetLogSetting().showOrderNumber) {
         _stream << sOrder++ << ":";

@@ -20,6 +20,7 @@ void SetLogSetting(const LogSetting& setting)
     gLogSetting.showCallerFunction = setting.showCallerFunction;
     gLogSetting.showOrderNumber = setting.showOrderNumber;
     gLogSetting.showSourceFileLocation = setting.showSourceFileLocation;
+    gLogSetting.showTimestamp = setting.showTimestamp;
 }
 
 LogSetting GetLogSetting() {

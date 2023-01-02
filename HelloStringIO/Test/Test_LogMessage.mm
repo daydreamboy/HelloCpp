@@ -98,4 +98,19 @@ void CustomLogMessageHandler(int logLevel, const char* message)
     WCLogFatal << "This is a fatal message";
 }
 
+- (void)test_flags_showTimestamp {
+#if DEBUG
+    wc::LogSetting logSetting;
+    logSetting.minLogLevel = ::wc::WCLOG_DEBUG;
+    logSetting.showTimestamp = false;
+    ::wc::SetLogSetting(logSetting);
+#endif
+    
+    WCLogDebug << "This is a second debug message" << ", param: something";
+    WCLogInfo << "This is a info message";
+    WCLogWarning << "This is a warning message";
+    WCLogError << "This is an error message";
+    WCLogFatal << "This is a fatal message";
+}
+
 @end
