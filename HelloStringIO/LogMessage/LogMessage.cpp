@@ -44,12 +44,12 @@ bool ShouldCreateLogMessage(LogLevel level) {
     return level >= GetMinLogLevel();
 }
 
+static long long unsigned sOrder;
 
 LogMessage::LogMessage(LogLevel level,
                        const char *file,
                        int line,
                        const char *function,
-                       const char *condition,
                        const std::string& content) : _isValid(true), _level(level), _file(file), _line(line),  _function(function)
 {
     if (_file == nullptr) {
@@ -62,22 +62,23 @@ LogMessage::LogMessage(LogLevel level,
     // full format for printf: @"%s %llu:[%s][%s:%d]`%s: %s"
     // 2022-12-12 11:01:14.923000+0800 1:[DEBUG][PrintLogInCFunctionsViewController.m:18]`void callAFunction(NSString *__strong): a test for calling c function with `some parameters`
     
+    if (GetLogSetting().showOrderNumber) {
+        _stream << sOrder++ << ":";
+    }
+    
     _stream << "[";
     _stream << GetLogTagForLogLevel(_level);
     _stream << "]";
-    _stream << "["
-            << fileName
-            << ":" << _line << "]";
-
-    _stream << "`"
-            << _function
-            << ":";
+    
+    if (GetLogSetting().showSourceFileLocation) {
+        _stream << "[" << fileName << ":" << _line << "]";
+    }
+    
+    if (GetLogSetting().showCallerFunction) {
+        _stream << "`" << _function << ":";
+    }
     
     _stream << " ";
-    
-    if (condition) {
-        _stream << "Check failed: " << condition << ". ";
-    }
     
     if (!content.empty()) {
         _stream << content;

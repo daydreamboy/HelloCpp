@@ -15,7 +15,7 @@
 !(condition) ? (void)0 : ::wc::LogMessageVoidify() & (stream)
 
 #define WCLogStream(level) \
-::wc::LogMessage(::wc::WCLOG_##level, __FILE__, __LINE__, __PRETTY_FUNCTION__, nullptr).stream()
+::wc::LogMessage(::wc::WCLOG_##level, __FILE__, __LINE__, __PRETTY_FUNCTION__).stream()
 
 #define WCLogIsOn(level) \
   (::wc::ShouldCreateLogMessage(::wc::WCLOG_##level))

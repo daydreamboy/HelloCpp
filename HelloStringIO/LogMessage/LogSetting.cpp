@@ -15,6 +15,11 @@ void SetLogSetting(const LogSetting& setting)
 {
     gLogSetting.minLogLevel = std::min(WCLOG_FATAL, setting.minLogLevel);
     gLogSetting.logMessageHandler = setting.logMessageHandler;
+    
+    // Set flags
+    gLogSetting.showCallerFunction = setting.showCallerFunction;
+    gLogSetting.showOrderNumber = setting.showOrderNumber;
+    gLogSetting.showSourceFileLocation = setting.showSourceFileLocation;
 }
 
 LogSetting GetLogSetting() {

@@ -14,11 +14,80 @@
 
 @implementation Test_LogMessage
 
+void CustomLogMessageHandler(int logLevel, const char* message)
+{
+    NSLog(@"%s", message);
+}
+
 - (void)test_log {
 #if DEBUG
     wc::LogSetting logSetting;
     logSetting.minLogLevel = ::wc::WCLOG_DEBUG;
     //logSetting.logMessageHandler = CustomLogHandler;
+    ::wc::SetLogSetting(logSetting);
+#endif
+    
+    WCLogDebug << "This is a second debug message" << ", param: something";
+    WCLogInfo << "This is a info message";
+    WCLogWarning << "This is a warning message";
+    WCLogError << "This is an error message";
+    WCLogFatal << "This is a fatal message";
+}
+
+- (void)test_use_logMessageHandler {
+#if DEBUG
+    wc::LogSetting logSetting;
+    logSetting.minLogLevel = ::wc::WCLOG_DEBUG;
+    logSetting.logMessageHandler = CustomLogMessageHandler;
+    ::wc::SetLogSetting(logSetting);
+#else
+    wc::LogSetting logSetting;
+    logSetting.logMessageHandler = CustomLogMessageHandler;
+    ::wc::SetLogSetting(logSetting);
+#endif
+    
+    WCLogDebug << "This is a second debug message" << ", param: something";
+    WCLogInfo << "This is a info message";
+    WCLogWarning << "This is a warning message";
+    WCLogError << "This is an error message";
+    WCLogFatal << "This is a fatal message";
+}
+
+- (void)test_flags_showCallerFunction {
+#if DEBUG
+    wc::LogSetting logSetting;
+    logSetting.minLogLevel = ::wc::WCLOG_DEBUG;
+    logSetting.showCallerFunction = false;
+    ::wc::SetLogSetting(logSetting);
+#endif
+    
+    WCLogDebug << "This is a second debug message" << ", param: something";
+    WCLogInfo << "This is a info message";
+    WCLogWarning << "This is a warning message";
+    WCLogError << "This is an error message";
+    WCLogFatal << "This is a fatal message";
+}
+
+- (void)test_flags_showOrderNumber {
+#if DEBUG
+    wc::LogSetting logSetting;
+    logSetting.minLogLevel = ::wc::WCLOG_DEBUG;
+    logSetting.showOrderNumber = false;
+    ::wc::SetLogSetting(logSetting);
+#endif
+    
+    WCLogDebug << "This is a second debug message" << ", param: something";
+    WCLogInfo << "This is a info message";
+    WCLogWarning << "This is a warning message";
+    WCLogError << "This is an error message";
+    WCLogFatal << "This is a fatal message";
+}
+
+- (void)test_flags_showSourceFileLocation {
+#if DEBUG
+    wc::LogSetting logSetting;
+    logSetting.minLogLevel = ::wc::WCLOG_DEBUG;
+    logSetting.showSourceFileLocation = false;
     ::wc::SetLogSetting(logSetting);
 #endif
     

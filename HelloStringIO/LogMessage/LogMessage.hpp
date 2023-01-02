@@ -28,7 +28,6 @@ public:
                const char *file,
                int line,
                const char *function,
-               const char *condition,
                const std::string& content = "");
     ~LogMessage();
     std::ostream& stream() { return _stream; }
