@@ -39,7 +39,7 @@
 		4F39BE13277C9ADB00BAF59E /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F39BE15277C9ADB00BAF59E /* Test.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test.mm; sourceTree = "<group>"; };
 		4F39BE1A277C9D1400BAF59E /* Test_string.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_string.mm; sourceTree = "<group>"; };
-		4F72D3B824CEC28F00D25E53 /* HelloWorld */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloWorld; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F72D3B824CEC28F00D25E53 /* HelloCPP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloCPP; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F72D3BB24CEC28F00D25E53 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4F72D3C024CEC3A400D25E53 /* MyService.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MyService.cpp; sourceTree = "<group>"; };
 		4F72D3C124CEC3A400D25E53 /* MyService.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MyService.hpp; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		4F72D3B924CEC28F00D25E53 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4F72D3B824CEC28F00D25E53 /* HelloWorld */,
+				4F72D3B824CEC28F00D25E53 /* HelloCPP */,
 				4F39BE13277C9ADB00BAF59E /* Test.xctest */,
 			);
 			name = Products;
@@ -137,9 +137,9 @@
 			productReference = 4F39BE13277C9ADB00BAF59E /* Test.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4F72D3B724CEC28F00D25E53 /* HelloWorld */ = {
+		4F72D3B724CEC28F00D25E53 /* HelloCPP */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F72D3BD24CEC28F00D25E53 /* Build configuration list for PBXNativeTarget "HelloWorld" */;
+			buildConfigurationList = 4F72D3BD24CEC28F00D25E53 /* Build configuration list for PBXNativeTarget "HelloCPP" */;
 			buildPhases = (
 				4F72D3B424CEC28F00D25E53 /* Sources */,
 				4F72D3B524CEC28F00D25E53 /* Frameworks */,
@@ -149,9 +149,9 @@
 			);
 			dependencies = (
 			);
-			name = HelloWorld;
+			name = HelloCPP;
 			productName = HelloWorld;
-			productReference = 4F72D3B824CEC28F00D25E53 /* HelloWorld */;
+			productReference = 4F72D3B824CEC28F00D25E53 /* HelloCPP */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -170,7 +170,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4F72D3B124CEC27100D25E53 /* Build configuration list for PBXProject "HelloWorld" */;
+			buildConfigurationList = 4F72D3B124CEC27100D25E53 /* Build configuration list for PBXProject "HelloCPP" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -183,7 +183,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4F72D3B724CEC28F00D25E53 /* HelloWorld */,
+				4F72D3B724CEC28F00D25E53 /* HelloCPP */,
 				4F39BE12277C9ADB00BAF59E /* Test */,
 			);
 		};
@@ -501,7 +501,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F72D3B124CEC27100D25E53 /* Build configuration list for PBXProject "HelloWorld" */ = {
+		4F72D3B124CEC27100D25E53 /* Build configuration list for PBXProject "HelloCPP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F72D3B224CEC27100D25E53 /* Debug */,
@@ -510,7 +510,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F72D3BD24CEC28F00D25E53 /* Build configuration list for PBXNativeTarget "HelloWorld" */ = {
+		4F72D3BD24CEC28F00D25E53 /* Build configuration list for PBXNativeTarget "HelloCPP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F72D3BE24CEC28F00D25E53 /* Debug */,
