@@ -161,4 +161,17 @@ void printVector(std::vector<int> v)
     printVector(v1);
 }
 
+- (void)test_lambda_expression_capture_list_initialize_variable {
+    int x = 4;
+     
+    auto y = [&r = x, x = x + 1]() -> int
+    {
+        r += 2;
+        return x * x;
+    }(); // updates ::x to 6 and initializes y to 25.
+    
+    std::cout << "x: " << x << std::endl;
+    std::cout << "y: " << y << std::endl;
+}
+
 @end
