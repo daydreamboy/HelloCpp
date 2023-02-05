@@ -277,7 +277,7 @@ capture列表，如果只使用`=`，表示lambda表达式作用域内的变量�
 
 
 
-这里列举几个常用格式的例子，如下
+这里列举几个常用格式的例子[^4]，如下
 
 ```c++
 - (void)test_lambda_expression_capture_list_specify_variable {
@@ -364,6 +364,10 @@ std::cout << "Square of 5 is : " << square(5) << std::endl;
 ```
 
 
+
+#### e. pack expansion
+
+TODO: https://learn.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=msvc-170
 
 
 
@@ -679,4 +683,6 @@ C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
 
 [^2]:https://en.cppreference.com/w/cpp/thread
 [^3]:https://en.cppreference.com/w/cpp/thread/call_once
+
+[^4]:https://www.geeksforgeeks.org/lambda-expression-in-c/
 
