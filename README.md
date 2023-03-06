@@ -1,52 +1,10 @@
-# C++语法手册
+# Learn C++
 
 [TOC]
 
-## 1、std::string
+## 1、前言
 
-std::string有下面几种初始化方式
-
-* 从const char*初始化
-
-```c++
-// Creating a string from const char*     
-std::string str1 = "hello";
-std::string str2 = std::string("hello");
-```
-
-* 字面量初始化
-
-```c++
-using namespace std::literals;
-auto cppString2 = "中文"s;
-std::cout << cppString2 << std::endl;
-```
-
-注意
-
-> 字面量字符串带后缀s，并且配合using namespace std::literals;使用，否则auto推断的类型会不准确，导致调用这个变量的方法时，可能会有编译错误。
-
-
-
-### (1) String IO
-
-`ostringstream`是`basic_ostringstream<char>`的别名，它定义在`<sstream>`头文件中。作用是存放输出字符串。
-
-举个例子，如下
-
-```c++
-- (void)test_std_ostringstream {
-    std::ostringstream stream;
-    
-    stream << "Hello, " << "ostring" << "stream";
-    stream << std::endl;
-    
-    std::string string = stream.str();
-    const char* s = string.c_str();
-    
-    printf("%s", s);
-}
-```
+本文目录结构参考[cppreference.com](https://en.cppreference.com/)提供的目录[^5]
 
 
 
@@ -371,7 +329,59 @@ TODO: https://learn.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=m
 
 
 
-## 3、algorithm库
+
+
+## 3、string库
+
+### (1) std::string
+
+std::string有下面几种初始化方式
+
+* 从const char*初始化
+
+```c++
+// Creating a string from const char*     
+std::string str1 = "hello";
+std::string str2 = std::string("hello");
+```
+
+* 字面量初始化
+
+```c++
+using namespace std::literals;
+auto cppString2 = "中文"s;
+std::cout << cppString2 << std::endl;
+```
+
+注意
+
+> 字面量字符串带后缀s，并且配合using namespace std::literals;使用，否则auto推断的类型会不准确，导致调用这个变量的方法时，可能会有编译错误。
+
+
+
+### (2) String IO
+
+`ostringstream`是`basic_ostringstream<char>`的别名，它定义在`<sstream>`头文件中。作用是存放输出字符串。
+
+举个例子，如下
+
+```c++
+- (void)test_std_ostringstream {
+    std::ostringstream stream;
+    
+    stream << "Hello, " << "ostring" << "stream";
+    stream << std::endl;
+    
+    std::string string = stream.str();
+    const char* s = string.c_str();
+    
+    printf("%s", s);
+}
+```
+
+
+
+## 4、algorithm库
 
 algorithm库提供一些常用的工具函数。
 
@@ -430,7 +440,7 @@ void printVector(std::vector<int> v)
 
 
 
-## 4、concurrency库
+## 5、concurrency库
 
 concurrency库是C++提供内置的能力，用于支持threads、atomic operations、mutual exclusion、condition variable等等。
 
@@ -627,13 +637,75 @@ TODO
 
 
 
+## 6、utilities库
+
+### (1) std::bind
+
+std::bind函数的签名，如下
+
+| 函数签名                                                     | 序号 | C++版本                          |
+| ------------------------------------------------------------ | ---- | -------------------------------- |
+| template< class F, class... Args ><br/>/\*unspecified\*/ bind( F&& f, Args&&... args ); | (1)  | (since C++11) <br/>(until C++20) |
+| template< class F, class... Args ><br/>constexpr */\*unspecified\*/* bind( F&& f, Args&&... args ); | (1)  | (since C++20)                    |
+| template< class R, class F, class... Args ><br/>/\*unspecified\*/ bind( F&& f, Args&&... args ); | (2)  | (since C++11) <br/>(until C++20) |
+| template< class R, class F, class... Args ><br/>constexpr /\*unspecified\*/ bind( F&& f, Args&&... args ) | (2)  | (since C++20)                    |
+
+定义在`<functional>`头文件中。
+
+std::bind函数的作用是包装已有的函数生成一个函数对象，这个函数对象可以像原始函数那样去调用。
+
+举个简单的例子[^6]，如下
+
+```c++
+#include <functional>
+#include <iostream>
+#include <cassert>
+
+using namespace std;
+using namespace std::placeholders;  // for _1, _2, _3...
+
+int add(int first, int second)
+{
+    printf("first: %d, second: %d\n", first, second);
+    return first + second;
+}
+
+- (void)test_bind_with_placeholder_parameters {
+    // Note: add_func accept two parameters
+    auto add_func = std::bind(&add, _1, _2);
+    int result = add_func(4, 5);
+    std::cout << result << std::endl;
+    assert(result == 9);
+}
+```
+
+std::bind函数的参数，有两部分
+
+* 第一个参数，是Callable对象，例如函数指针等
+* 剩余参数，是传递给原始函数的参数，可以是默认值，或者占位变量，例如`_1`、`_2`等
+
+说明
+
+> 1. `_1`、`_2`，定义在std::placeholders命名空间中
+> 2. std::bind函数的占位变量的顺序，可以是任意的，这个顺序决定传给原始函数的参数列表
 
 
-## 5、其他TODO
+
+std::bind函数常用的几个用法
+
+* 包装原始函数，方便像闭包一样传递和调用
+* 调整调用参数，可以安排参数顺序，设置默认值等
+* 配合STL函数使用，很多STL函数支持函数对象
 
 
 
-### 3、using
+
+
+
+
+## 7、其他TODO
+
+### (1) using
 
 （1）别名
 
@@ -643,7 +715,7 @@ C++11支持using用于别名
 
 
 
-### 4、R语法
+### (2) R语法
 
 格式：prefix(optional) R "delimiter( raw_characters )delimiter"
 
@@ -677,6 +749,14 @@ C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
 
 
 
+std::bind函数
+
+https://thispointer.com/stdbind-tutorial-and-usage-details/
+
+
+
+
+
 ## References
 
 [^1]:https://en.cppreference.com/w/cpp/language/lambda
@@ -685,4 +765,8 @@ C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
 [^3]:https://en.cppreference.com/w/cpp/thread/call_once
 
 [^4]:https://www.geeksforgeeks.org/lambda-expression-in-c/
+
+[^5]:https://en.cppreference.com/w/cpp
+
+[^6]:https://thispointer.com/stdbind-tutorial-and-usage-details/
 
