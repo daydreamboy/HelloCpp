@@ -8,8 +8,11 @@
 #include <iostream>
 #include "MyService.hpp"
 
+using namespace std;
+
 int main(int argc, const char * argv[]) {
-    std::cout << "Hello, World!\n";
+    std::cout << "Hello, World!" << std::endl;
+    
     company::SDK::MyService service1;
     service1.Request("HelloC++");
     
