@@ -905,6 +905,10 @@ void operator delete(void* ptr) noexcept;
   * hook编译成动态库，链接到可执行文件上。例如在Xcode中设置Link Binary With Libraries指定hook代码所在framework
   * hook编译成动态库，在可执行文件的环境变量设置`DYLD_INSERT_LIBRARIES`，指定hook代码所在framework
 
+说明
+
+> 上面几种hook形式，仅对当前可执行文件或动态库有效。如果是系统动态库，由于编译时已经确定链接的符号，hook会不生效（这点需要验证）
+
 以下面hook代码作为示例，介绍上面三种方式
 
 ```c++
