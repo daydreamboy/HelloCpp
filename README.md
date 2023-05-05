@@ -737,6 +737,107 @@ std::make_shared的签名，如下
 
 
 
+##### 1. 创建shared_ptr指针
+
+创建shared_ptr指针有两种方式
+
+* 使用std::make_shared函数
+* 使用shared_ptr的构造函数
+
+举个例子[^10]，如下
+
+```c++
+- (void)test_create_shared_ptr {
+    // Style1: Use make_shared to create
+    std::shared_ptr<int> foo = std::make_shared<int>(10);
+    // Style2: Use constructor to create
+    std::shared_ptr<int> foo2(new int(10));
+    
+    std::cout << *foo << std::endl;
+    std::cout << *foo2 << std::endl;
+}
+```
+
+官方文档[^9]不推荐使用构造函数的方式，原因有下面几点
+
+* `std::shared_ptr<T>(new T(args...))`，至少有两次内存分配，对象T和shared_ptr指针的分配。而`std::make_shared<T>`只有一次内存分配
+* `std::shared_ptr<T>(new T(args...))`可能会调用非public的构造函数，而`std::make_shared<T>`不会，明确要求是public函数
+
+这里列举了几条，完整参考官方文档[^9]，如下
+
+> This function may be used as an alternative to [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr)<T>(new T(args...)). The trade-offs are:
+>
+> - [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr)<T>(new T(args...)) performs at least two allocations (one for the object `T` and one for the control block of the shared pointer), while std::make_shared<T> typically performs only one allocation (the standard recommends, but does not require this; all known implementations do this)
+> - If any [std::weak_ptr](https://en.cppreference.com/w/cpp/memory/weak_ptr) references the control block created by `std::make_shared` after the lifetime of all shared owners ended, the memory occupied by `T` persists until all weak owners get destroyed as well, which may be undesirable if sizeof(T) is large.
+> - [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr)<T>(new T(args...)) may call a non-public constructor of `T` if executed in context where it is accessible, while `std::make_shared` requires public access to the selected constructor.
+> - Unlike the [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr) constructors, `std::make_shared` does not allow a custom deleter.
+> - `std::make_shared` uses ::new, so if any special behavior has been set up using a class-specific [`operator new`](https://en.cppreference.com/w/cpp/memory/new/operator_new), it will differ from [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr)<T>(new T(args...)).
+
+
+
+##### 2. std::make_shared函数返回值使用auto类型
+
+std::make_shared函数类型是std::shared_ptr，但是也可以使用auto类型，让编译器自己推断类型。
+
+举个例子，如下
+
+```c++
+- (void)test_make_shared_return_auto_type {
+    auto bar = std::make_shared<int>(20);
+    std::cout << *bar << std::endl;
+}
+```
+
+
+
+##### 3. std::make_shared函数使用标准库类型
+
+上面例子中`std::shared_ptr<int>`，T是int类型，是基本类型，但实际T也可以标准库类型。
+
+举个例子，如下
+
+```c++
+- (void)test_make_shared_with_std_pair {
+    auto baz = std::make_shared<std::pair<int,int>>(30, 40);
+    std::cout << "*baz: " << baz->first << ' ' << baz->second << std::endl;
+}
+```
+
+由于baz已经是指向std::pair对象的指针，访问对象的成员变量，不需要再解引用使用，例如`baz->first`
+
+
+
+##### 4. std::make_shared函数使用自定义类
+
+官方文档[^10]提供下面的示例代码，如下
+
+```c++
+struct C
+{
+    // constructors needed (until C++20)
+    C(int i) : i(i) {}
+    C(int i, float f) : i(i), f(f) {}
+    int i;
+    float f{};
+};
+
+- (void)test_make_shared_with_custom_struct {
+    // Case 1
+    auto sp1 = std::make_shared<C>(1); // overload (1)
+    static_assert(std::is_same_v<decltype(sp1), std::shared_ptr<C>>);
+    std::cout << "sp1->{ i:" << sp1->i << ", f:" << sp1->f << " }\n";
+    
+    // Case 2
+    std::shared_ptr<C> sp2 = std::make_shared<C>(2, 3.0f); // overload (1)
+    static_assert(std::is_same_v<decltype(sp2), std::shared_ptr<C>>);
+    std::cout << "sp2->{ i:" << sp2->i << ", f:" << sp2->f << " }\n";
+}
+```
+
+
+
+
+
 
 
 ## 7、C++ Hook
@@ -960,4 +1061,6 @@ https://thispointer.com/stdbind-tutorial-and-usage-details/
 
 [^7]:https://en.cppreference.com/w/cpp/memory/shared_ptr
 [^8]:https://en.cppreference.com/w/cpp/memory/new/operator_new
+[^9]:https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared
+[^10]:https://cplusplus.com/reference/memory/make_shared/
 
