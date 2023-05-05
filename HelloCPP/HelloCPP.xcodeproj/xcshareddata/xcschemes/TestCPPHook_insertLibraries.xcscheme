@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1420"
-   version = "1.3">
+   LastUpgradeVersion = "1430"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -10,15 +10,17 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4F39BE12277C9ADB00BAF59E"
-               BuildableName = "Test.xctest"
-               BlueprintName = "Test"
+               BlueprintIdentifier = "4F718F542A0501CC009E9093"
+               BuildableName = "TestCPPHook_insertLibraries.xctest"
+               BlueprintName = "TestCPPHook_insertLibraries"
                ReferencedContainer = "container:HelloCPP.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -34,6 +36,13 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "DYLD_INSERT_LIBRARIES"
+            value = "/Users/wesley_chen/Library/Developer/Xcode/DerivedData/HelloCPP-dsjwctyhbshyvggefqdemxhdgfbh/Build/Products/Debug-iphonesimulator/Injector.framework/Injector"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

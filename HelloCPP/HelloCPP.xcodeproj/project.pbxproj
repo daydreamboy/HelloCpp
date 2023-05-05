@@ -9,20 +9,40 @@
 /* Begin PBXBuildFile section */
 		4F197DAE2784012100D6B11C /* Test_issue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F197DAD2784012100D6B11C /* Test_issue.mm */; };
 		4F20EBAD296998F20029B8B9 /* Test_lambda_expression.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F20EBAC296998F20029B8B9 /* Test_lambda_expression.mm */; };
-		4F23675A29D43C7D00563DF5 /* Test_hook_new_constructor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F23675929D43C7D00563DF5 /* Test_hook_new_constructor.mm */; };
-		4F23676329D453AE00563DF5 /* Injector.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F23676229D453AE00563DF5 /* Injector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F23676929D453D700563DF5 /* Hook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F23676729D453D700563DF5 /* Hook.cpp */; };
-		4F23676A29D453D700563DF5 /* Hook.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4F23676829D453D700563DF5 /* Hook.hpp */; };
 		4F39BE0E277C9A1400BAF59E /* WCCPPTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE0D277C9A1400BAF59E /* WCCPPTool.mm */; };
 		4F39BE16277C9ADB00BAF59E /* Test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE15277C9ADB00BAF59E /* Test.mm */; };
 		4F39BE1B277C9D1400BAF59E /* Test_string.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE1A277C9D1400BAF59E /* Test_string.mm */; };
 		4F3AC4CE296AE2180027A8E1 /* Test_call_once.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F3AC4CD296AE2180027A8E1 /* Test_call_once.mm */; };
 		4F4F399029B5E33E00FDF8E5 /* Test_std_bind.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F398F29B5E33E00FDF8E5 /* Test_std_bind.mm */; };
+		4F718F242A04E5D0009E9093 /* Test_std_shared_ptr.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F718F232A04E5D0009E9093 /* Test_std_shared_ptr.mm */; };
+		4F718F2C2A04E8C9009E9093 /* Test_hook_new_delete.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F718F2B2A04E8C9009E9093 /* Test_hook_new_delete.mm */; };
+		4F718F342A04ED4A009E9093 /* Hook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F718F332A04ED4A009E9093 /* Hook.cpp */; };
+		4F718F4D2A050178009E9093 /* Test_hook_new_delete.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F718F4C2A050178009E9093 /* Test_hook_new_delete.mm */; };
+		4F718F582A0501CC009E9093 /* Test_hook_new_delete.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F718F572A0501CC009E9093 /* Test_hook_new_delete.mm */; };
+		4F718F5D2A05068A009E9093 /* Injector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F23676029D453AD00563DF5 /* Injector.framework */; };
 		4F72D3BC24CEC28F00D25E53 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F72D3BB24CEC28F00D25E53 /* main.cpp */; };
 		4F72D3C224CEC3A400D25E53 /* MyService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F72D3C024CEC3A400D25E53 /* MyService.cpp */; };
 		4FA0079C277D9C8F000B2746 /* Test_vector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FA0079B277D9C8F000B2746 /* Test_vector.mm */; };
 		4FD17252277DAB54000F8F49 /* Test_move.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD17251277DAB54000F8F49 /* Test_move.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4F718F2E2A04E8C9009E9093 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F72D3AE24CEC27100D25E53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F23675F29D453AD00563DF5;
+			remoteInfo = Injector;
+		};
+		4F718F5E2A05068F009E9093 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F72D3AE24CEC27100D25E53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F23675F29D453AD00563DF5;
+			remoteInfo = Injector;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		4F72D3B624CEC28F00D25E53 /* CopyFiles */ = {
@@ -40,11 +60,8 @@
 		4F13B42E277CAC8E007AB14E /* WCCPPMacroTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCCPPMacroTool.h; sourceTree = "<group>"; };
 		4F197DAD2784012100D6B11C /* Test_issue.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_issue.mm; sourceTree = "<group>"; };
 		4F20EBAC296998F20029B8B9 /* Test_lambda_expression.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_lambda_expression.mm; sourceTree = "<group>"; };
-		4F23675929D43C7D00563DF5 /* Test_hook_new_constructor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_hook_new_constructor.mm; sourceTree = "<group>"; };
 		4F23676029D453AD00563DF5 /* Injector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Injector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F23676229D453AE00563DF5 /* Injector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Injector.h; sourceTree = "<group>"; };
 		4F23676729D453D700563DF5 /* Hook.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hook.cpp; sourceTree = "<group>"; };
-		4F23676829D453D700563DF5 /* Hook.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Hook.hpp; sourceTree = "<group>"; };
 		4F39BE0C277C9A1400BAF59E /* WCCPPTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCCPPTool.h; sourceTree = "<group>"; };
 		4F39BE0D277C9A1400BAF59E /* WCCPPTool.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WCCPPTool.mm; sourceTree = "<group>"; };
 		4F39BE13277C9ADB00BAF59E /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +69,14 @@
 		4F39BE1A277C9D1400BAF59E /* Test_string.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_string.mm; sourceTree = "<group>"; };
 		4F3AC4CD296AE2180027A8E1 /* Test_call_once.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_call_once.mm; sourceTree = "<group>"; };
 		4F4F398F29B5E33E00FDF8E5 /* Test_std_bind.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_std_bind.mm; sourceTree = "<group>"; };
+		4F718F232A04E5D0009E9093 /* Test_std_shared_ptr.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_std_shared_ptr.mm; sourceTree = "<group>"; };
+		4F718F292A04E8C9009E9093 /* TestCPPHook_linkStatic.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestCPPHook_linkStatic.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F718F2B2A04E8C9009E9093 /* Test_hook_new_delete.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_hook_new_delete.mm; sourceTree = "<group>"; };
+		4F718F332A04ED4A009E9093 /* Hook.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hook.cpp; sourceTree = "<group>"; };
+		4F718F4A2A050178009E9093 /* TestCPPHook_linkDynamic.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestCPPHook_linkDynamic.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F718F4C2A050178009E9093 /* Test_hook_new_delete.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_hook_new_delete.mm; sourceTree = "<group>"; };
+		4F718F552A0501CC009E9093 /* TestCPPHook_insertLibraries.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestCPPHook_insertLibraries.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F718F572A0501CC009E9093 /* Test_hook_new_delete.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_hook_new_delete.mm; sourceTree = "<group>"; };
 		4F72D3B824CEC28F00D25E53 /* HelloCPP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloCPP; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F72D3BB24CEC28F00D25E53 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4F72D3C024CEC3A400D25E53 /* MyService.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MyService.cpp; sourceTree = "<group>"; };
@@ -75,6 +100,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4F718F262A04E8C9009E9093 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F718F472A050178009E9093 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F718F5D2A05068A009E9093 /* Injector.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F718F522A0501CC009E9093 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4F72D3B524CEC28F00D25E53 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -88,9 +135,7 @@
 		4F23676129D453AE00563DF5 /* Injector */ = {
 			isa = PBXGroup;
 			children = (
-				4F23676229D453AE00563DF5 /* Injector.h */,
 				4F23676729D453D700563DF5 /* Hook.cpp */,
-				4F23676829D453D700563DF5 /* Hook.hpp */,
 			);
 			path = Injector;
 			sourceTree = "<group>";
@@ -109,16 +154,48 @@
 			isa = PBXGroup;
 			children = (
 				4F3AC4CD296AE2180027A8E1 /* Test_call_once.mm */,
-				4F23675929D43C7D00563DF5 /* Test_hook_new_constructor.mm */,
 				4F197DAD2784012100D6B11C /* Test_issue.mm */,
 				4F20EBAC296998F20029B8B9 /* Test_lambda_expression.mm */,
 				4FD17251277DAB54000F8F49 /* Test_move.m */,
 				4F4F398F29B5E33E00FDF8E5 /* Test_std_bind.mm */,
+				4F718F232A04E5D0009E9093 /* Test_std_shared_ptr.mm */,
 				4F39BE1A277C9D1400BAF59E /* Test_string.mm */,
 				4FA0079B277D9C8F000B2746 /* Test_vector.mm */,
 				4F39BE15277C9ADB00BAF59E /* Test.mm */,
 			);
 			path = Test;
+			sourceTree = "<group>";
+		};
+		4F718F2A2A04E8C9009E9093 /* TestCPPHook_linkStatic */ = {
+			isa = PBXGroup;
+			children = (
+				4F718F2B2A04E8C9009E9093 /* Test_hook_new_delete.mm */,
+				4F718F332A04ED4A009E9093 /* Hook.cpp */,
+			);
+			path = TestCPPHook_linkStatic;
+			sourceTree = "<group>";
+		};
+		4F718F4B2A050178009E9093 /* TestCPPHook_linkDynamic */ = {
+			isa = PBXGroup;
+			children = (
+				4F718F4C2A050178009E9093 /* Test_hook_new_delete.mm */,
+			);
+			path = TestCPPHook_linkDynamic;
+			sourceTree = "<group>";
+		};
+		4F718F562A0501CC009E9093 /* TestCPPHook_insertLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				4F718F572A0501CC009E9093 /* Test_hook_new_delete.mm */,
+			);
+			path = TestCPPHook_insertLibraries;
+			sourceTree = "<group>";
+		};
+		4F718F5C2A05067A009E9093 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		4F72D3AD24CEC27100D25E53 = {
@@ -128,7 +205,11 @@
 				4F72D3BA24CEC28F00D25E53 /* HelloWorld */,
 				4F39BE14277C9ADB00BAF59E /* Test */,
 				4F23676129D453AE00563DF5 /* Injector */,
+				4F718F2A2A04E8C9009E9093 /* TestCPPHook_linkStatic */,
+				4F718F4B2A050178009E9093 /* TestCPPHook_linkDynamic */,
+				4F718F562A0501CC009E9093 /* TestCPPHook_insertLibraries */,
 				4F72D3B924CEC28F00D25E53 /* Products */,
+				4F718F5C2A05067A009E9093 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +219,9 @@
 				4F72D3B824CEC28F00D25E53 /* HelloCPP */,
 				4F39BE13277C9ADB00BAF59E /* Test.xctest */,
 				4F23676029D453AD00563DF5 /* Injector.framework */,
+				4F718F292A04E8C9009E9093 /* TestCPPHook_linkStatic.xctest */,
+				4F718F4A2A050178009E9093 /* TestCPPHook_linkDynamic.xctest */,
+				4F718F552A0501CC009E9093 /* TestCPPHook_insertLibraries.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,8 +243,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F23676329D453AE00563DF5 /* Injector.h in Headers */,
-				4F23676A29D453D700563DF5 /* Hook.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +284,59 @@
 			productReference = 4F39BE13277C9ADB00BAF59E /* Test.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		4F718F282A04E8C9009E9093 /* TestCPPHook_linkStatic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F718F302A04E8C9009E9093 /* Build configuration list for PBXNativeTarget "TestCPPHook_linkStatic" */;
+			buildPhases = (
+				4F718F252A04E8C9009E9093 /* Sources */,
+				4F718F262A04E8C9009E9093 /* Frameworks */,
+				4F718F272A04E8C9009E9093 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4F718F2F2A04E8C9009E9093 /* PBXTargetDependency */,
+			);
+			name = TestCPPHook_linkStatic;
+			productName = TestCPPHook;
+			productReference = 4F718F292A04E8C9009E9093 /* TestCPPHook_linkStatic.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4F718F492A050178009E9093 /* TestCPPHook_linkDynamic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F718F4E2A050178009E9093 /* Build configuration list for PBXNativeTarget "TestCPPHook_linkDynamic" */;
+			buildPhases = (
+				4F718F462A050178009E9093 /* Sources */,
+				4F718F472A050178009E9093 /* Frameworks */,
+				4F718F482A050178009E9093 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4F718F5F2A05068F009E9093 /* PBXTargetDependency */,
+			);
+			name = TestCPPHook_linkDynamic;
+			productName = TestCPPHook_linkDynamic;
+			productReference = 4F718F4A2A050178009E9093 /* TestCPPHook_linkDynamic.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4F718F542A0501CC009E9093 /* TestCPPHook_insertLibraries */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F718F592A0501CC009E9093 /* Build configuration list for PBXNativeTarget "TestCPPHook_insertLibraries" */;
+			buildPhases = (
+				4F718F512A0501CC009E9093 /* Sources */,
+				4F718F522A0501CC009E9093 /* Frameworks */,
+				4F718F532A0501CC009E9093 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestCPPHook_insertLibraries;
+			productName = TestCPPHook_insertLibraries;
+			productReference = 4F718F552A0501CC009E9093 /* TestCPPHook_insertLibraries.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4F72D3B724CEC28F00D25E53 /* HelloCPP */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4F72D3BD24CEC28F00D25E53 /* Build configuration list for PBXNativeTarget "HelloCPP" */;
@@ -233,6 +368,15 @@
 					4F39BE12277C9ADB00BAF59E = {
 						CreatedOnToolsVersion = 13.1;
 					};
+					4F718F282A04E8C9009E9093 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					4F718F492A050178009E9093 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					4F718F542A0501CC009E9093 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					4F72D3B724CEC28F00D25E53 = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -254,6 +398,9 @@
 				4F72D3B724CEC28F00D25E53 /* HelloCPP */,
 				4F39BE12277C9ADB00BAF59E /* Test */,
 				4F23675F29D453AD00563DF5 /* Injector */,
+				4F718F282A04E8C9009E9093 /* TestCPPHook_linkStatic */,
+				4F718F492A050178009E9093 /* TestCPPHook_linkDynamic */,
+				4F718F542A0501CC009E9093 /* TestCPPHook_insertLibraries */,
 			);
 		};
 /* End PBXProject section */
@@ -267,6 +414,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4F39BE11277C9ADB00BAF59E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F718F272A04E8C9009E9093 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F718F482A050178009E9093 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F718F532A0501CC009E9093 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -288,7 +456,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F23675A29D43C7D00563DF5 /* Test_hook_new_constructor.mm in Sources */,
 				4F4F399029B5E33E00FDF8E5 /* Test_std_bind.mm in Sources */,
 				4F3AC4CE296AE2180027A8E1 /* Test_call_once.mm in Sources */,
 				4F20EBAD296998F20029B8B9 /* Test_lambda_expression.mm in Sources */,
@@ -297,6 +464,32 @@
 				4F39BE16277C9ADB00BAF59E /* Test.mm in Sources */,
 				4F39BE1B277C9D1400BAF59E /* Test_string.mm in Sources */,
 				4FA0079C277D9C8F000B2746 /* Test_vector.mm in Sources */,
+				4F718F242A04E5D0009E9093 /* Test_std_shared_ptr.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F718F252A04E8C9009E9093 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F718F342A04ED4A009E9093 /* Hook.cpp in Sources */,
+				4F718F2C2A04E8C9009E9093 /* Test_hook_new_delete.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F718F462A050178009E9093 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F718F4D2A050178009E9093 /* Test_hook_new_delete.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F718F512A0501CC009E9093 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F718F582A0501CC009E9093 /* Test_hook_new_delete.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +504,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4F718F2F2A04E8C9009E9093 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F23675F29D453AD00563DF5 /* Injector */;
+			targetProxy = 4F718F2E2A04E8C9009E9093 /* PBXContainerItemProxy */;
+		};
+		4F718F5F2A05068F009E9093 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F23675F29D453AD00563DF5 /* Injector */;
+			targetProxy = 4F718F5E2A05068F009E9093 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4F23676529D453AE00563DF5 /* Debug */ = {
@@ -603,6 +809,384 @@
 			};
 			name = Release;
 		};
+		4F718F312A04E8C9009E9093 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wc.TestCPPHook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4F718F322A04E8C9009E9093 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wc.TestCPPHook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4F718F4F2A050178009E9093 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wc.TestCPPHook-linkDynamic";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4F718F502A050178009E9093 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wc.TestCPPHook-linkDynamic";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4F718F5A2A0501CC009E9093 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wc.TestCPPHook-insertLibraries";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4F718F5B2A0501CC009E9093 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wc.TestCPPHook-insertLibraries";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		4F72D3B224CEC27100D25E53 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -747,6 +1331,33 @@
 			buildConfigurations = (
 				4F39BE18277C9ADB00BAF59E /* Debug */,
 				4F39BE19277C9ADB00BAF59E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F718F302A04E8C9009E9093 /* Build configuration list for PBXNativeTarget "TestCPPHook_linkStatic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F718F312A04E8C9009E9093 /* Debug */,
+				4F718F322A04E8C9009E9093 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F718F4E2A050178009E9093 /* Build configuration list for PBXNativeTarget "TestCPPHook_linkDynamic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F718F4F2A050178009E9093 /* Debug */,
+				4F718F502A050178009E9093 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F718F592A0501CC009E9093 /* Build configuration list for PBXNativeTarget "TestCPPHook_insertLibraries" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F718F5A2A0501CC009E9093 /* Debug */,
+				4F718F5B2A0501CC009E9093 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

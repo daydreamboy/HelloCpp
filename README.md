@@ -699,11 +699,199 @@ std::bind函数常用的几个用法
 
 
 
+### (2) std::shared_ptr
+
+std::shared_ptr是C++智能指针(Smart Poiner)的一种，它持有对象的拥有权，几个shared_ptr指针可以拥有同一个对象。对象的销毁和内存释放，满足下面两个条件之一：
+
+* 最后持有对象的shared_ptr指针被销毁
+* 最后持有对象的shared_ptr指针，通过operator=被重新赋值，或者调用了reset()函数
+
+官方文档的描述[^7]，如下
+
+> `std::shared_ptr` is a smart pointer that retains shared ownership of an object through a pointer. Several `shared_ptr` objects may own the same object. The object is destroyed and its memory deallocated when either of the following happens:
+>
+> - the last remaining `shared_ptr` owning the object is destroyed;
+> - the last remaining `shared_ptr` owning the object is assigned another pointer via [operator=](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/shared_ptr/operator%3D.html) or [reset()](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/shared_ptr/reset.html).
+
+
+
+#### a. std::make_shared函数
+
+std::make_shared函数，用于创建std::shared_ptr指针。
+
+std::make_shared的签名，如下
+
+| 函数签名                                                     | 序号 | C++版本                            |
+| ------------------------------------------------------------ | ---- | ---------------------------------- |
+| template< class T, class... Args ><br/>shared_ptr<T> make_shared( Args&&... args ); | (1)  | (since C++11)<br/>(T is not array) |
+| template< class T ><br/>shared_ptr<T> make_shared( [std::size_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/size_t.html) N ); | (2)  | (since C++20)<br/>(T is U[])       |
+| template< class T ><br/>shared_ptr<T> make_shared();         | (3)  | (since C++20)<br/>(T is U[N])      |
+| template< class T ><br/>shared_ptr<T> make_shared( [std::size_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/size_t.html) N, const [std::remove_extent_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/remove_extent.html)<T>& u ); | (4)  | (since C++20)<br/>(T is U[])       |
+| template< class T ><br/>shared_ptr<T> make_shared( const [std::remove_extent_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/remove_extent.html)<T>& u ); | (5)  | (since C++20)<br/>(T is U[N])      |
+| template< class T ><br/>shared_ptr<T> make_shared_for_overwrite(); | (6)  | (since C++20)<br/>(T is not U[])   |
+| template< class T ><br/>shared_ptr<T> make_shared_for_overwrite( [std::size_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/size_t.html) N ); | (7)  | (since C++20)<br/>(T is U[])       |
+
+定义在`<memory>`头文件中。
+
+这里介绍最常见的写法(1)，它从C++11开始支持。
 
 
 
 
-## 7、其他TODO
+
+## 7、C++ Hook
+
+### (1) hook new和delete操作符
+
+在C++中new和delete操作符，实际是定义在`<new>`头文件中C函数，如下
+
+```c++
+void* operator new  ( std::size_t count );
+void operator delete(void* ptr) noexcept;
+```
+
+上面仅示例常用的函数形式，实际变体有很多种。new和delete操作符的函数实现，可以参考官方文档[^8]
+
+说明
+
+> 和普通的C函数命名不一样，上面的C函数符号名是包含空格的，例如new操作符对应的C函数的符号名是`operator new`。在lldb中，使用`image lookup -s`来查询对应的符号信息，如下
+>
+> ```shell
+> (lldb) image lookup -s "operator new"
+> 4 symbols match 'operator new' in /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libc++abi.dylib:
+>         Address: libc++abi.dylib[0x0000000000010e6f] (libc++abi.dylib.__TEXT.__text + 63567)
+>         Summary: libc++abi.dylib`operator new(unsigned long, std::align_val_t, std::nothrow_t const&)
+>         Address: libc++abi.dylib[0x0000000000010dc5] (libc++abi.dylib.__TEXT.__text + 63397)
+>         Summary: libc++abi.dylib`operator new(unsigned long, std::align_val_t)
+>         Address: libc++abi.dylib[0x0000000000010d1f] (libc++abi.dylib.__TEXT.__text + 63231)
+>         Summary: libc++abi.dylib`operator new(unsigned long, std::nothrow_t const&)
+>         Address: libc++abi.dylib[0x0000000000010cc0] (libc++abi.dylib.__TEXT.__text + 63136)
+>         Summary: libc++abi.dylib`operator new(unsigned long)
+> ```
+>
+> 上面有4个`operator new`符号，对应4种签名的重载函数，它们都定义在libc++abi.dylib中。
+>
+> 
+>
+> 查询delete操作符的实现函数，如下
+>
+> ```shell
+> (lldb) image lookup -s "operator delete"
+> 6 symbols match 'operator delete' in /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/usr/lib/libc++abi.dylib:
+>         Address: libc++abi.dylib[0x0000000000010d89] (libc++abi.dylib.__TEXT.__text + 63337)
+>         Summary: libc++abi.dylib`operator delete(void*)
+>         Address: libc++abi.dylib[0x0000000000010d93] (libc++abi.dylib.__TEXT.__text + 63347)
+>         Summary: libc++abi.dylib`operator delete(void*, std::nothrow_t const&)
+>         Address: libc++abi.dylib[0x0000000000010ec1] (libc++abi.dylib.__TEXT.__text + 63649)
+>         Summary: libc++abi.dylib`operator delete(void*, std::align_val_t)
+>         Address: libc++abi.dylib[0x0000000000010ecb] (libc++abi.dylib.__TEXT.__text + 63659)
+>         Summary: libc++abi.dylib`operator delete(void*, std::align_val_t, std::nothrow_t const&)
+>         Address: libc++abi.dylib[0x0000000000010d9d] (libc++abi.dylib.__TEXT.__text + 63357)
+>         Summary: libc++abi.dylib`operator delete(void*, unsigned long)
+>         Address: libc++abi.dylib[0x0000000000010ed5] (libc++abi.dylib.__TEXT.__text + 63669)
+>         Summary: libc++abi.dylib`operator delete(void*, unsigned long, std::align_val_t)
+> ```
+>
+> 上面有6个`operator delete`符号，对应6种签名的重载函数，它们也都定义在libc++abi.dylib中。
+
+
+
+如果要hook代码中new和delete的调用，目前有几种hook形式
+
+* 代码静态链接，即目标代码和hook代码可以编译在同一个可执行文件中
+  * 在实际验证中，编译器在链接符号时，总是链接hook代码中自定义重写的C函数
+* 代码动态链接，即目标代码在可执行文件中，而hook代码在另外一个动态库中。这种情况适用无法编译目标代码的场景，有两种方式可以插入hook代码
+  * hook编译成动态库，链接到可执行文件上。例如在Xcode中设置Link Binary With Libraries指定hook代码所在framework
+  * hook编译成动态库，在可执行文件的环境变量设置`DYLD_INSERT_LIBRARIES`，指定hook代码所在framework
+
+以下面hook代码作为示例，介绍上面三种方式
+
+```c++
+void* operator new(std::size_t size) {
+    std::cout << "Allocating " << size << " bytes" << std::endl;
+    void* ptr = std::malloc(size);
+    return ptr;
+}
+
+void operator delete(void* ptr) noexcept {
+    std::cout << "free " << ptr << std::endl;
+    std::free(ptr);
+}
+```
+
+上面代码参考官方文档提供的例子[^8]
+
+测试代码，如下
+
+```c++
+class MyClass {
+public:
+    MyClass() {
+        std::cout << "Constructing MyClass" << std::endl;
+    }
+    
+    ~MyClass() {
+        std::cout << "Destructing MyClass" << std::endl;
+    }
+};
+
+- (void)test {
+    std::cout << "Allocating MyClass" << std::endl;
+    MyClass* ptr = new MyClass();
+    std::cout << "Deleting MyClass" << std::endl;
+    delete ptr;
+}
+```
+
+
+
+#### a. 代码静态链接hook
+
+代码静态链接hook，在上面已经提到，是hook代码和目标代码都集成在同一个可执行文件中。不管hook代码和目标代码一起编译，还是作为静态库一起链接，都属于代码静态链接。
+
+示例如下图
+
+<img src="images/01_hook_by_static_link.png" style="zoom:67%; float:left;" />
+
+> 示例见TestCPPHook_linkStatic target
+
+
+
+#### b. 链接动态库hook
+
+链接动态库hook，是指编译可执行文件时，设置依赖的动态库，该动态库包含hook代码。
+
+举个例子，准备好Injector.framewok，然后设置Link Binary With Libraries，如下
+
+![](images/02_hook_by_dynamic_link.png)
+
+> 示例见TestCPPHook_linkDynamic target
+
+
+
+#### c. 使用`DYLD_INSERT_LIBRARIES`插入动态库hook
+
+使用`DYLD_INSERT_LIBRARIES`插入动态库hook，适用于只有可执行文件的情况。在Xcode中配置环境变量，如下
+
+![](images/03_hook_by_insert_libraries.png)
+
+其中下面路径
+
+```
+/Users/wesley_chen/Library/Developer/Xcode/DerivedData/HelloCPP-dsjwctyhbshyvggefqdemxhdgfbh/Build/Products/Debug-iphonesimulator/Injector.framework/Injector
+```
+
+可以在Injector.framework的产物目录找到。如果是真机或者Release编译，这个路径会发生改变，需要重新设置。
+
+> 示例见TestCPPHook_insertLibraries target
+
+
+
+
+
+
+
+## 8、其他TODO
 
 ### (1) using
 
@@ -769,4 +957,7 @@ https://thispointer.com/stdbind-tutorial-and-usage-details/
 [^5]:https://en.cppreference.com/w/cpp
 
 [^6]:https://thispointer.com/stdbind-tutorial-and-usage-details/
+
+[^7]:https://en.cppreference.com/w/cpp/memory/shared_ptr
+[^8]:https://en.cppreference.com/w/cpp/memory/new/operator_new
 
