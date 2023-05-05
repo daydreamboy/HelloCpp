@@ -8,7 +8,27 @@
 
 
 
-## 2、lambda表达式
+## 2、Initialization初始化
+
+在C++中初始化值，分为下面几类[^11]
+
+* Default initialization
+* Value initialization。例如`std::string s{};`
+* Direct initialization。例如`std::string s("hello");`
+* Copy initialization。例如`std::string s = "hello";`
+* List initialization。例如`std::string s{'a', 'b', 'c'};`
+* Aggregate initialization。例如`char a[3] = {'a', 'b'};`
+* Reference initialization。例如`char& c = a[0];`
+
+其中C++11开始支持List initialization。
+
+TODO
+
+
+
+
+
+## 3、lambda表达式
 
 lambda表达式是指匿名的函数对象，支持在其作用域内捕获变量。
 
@@ -1067,4 +1087,5 @@ https://thispointer.com/stdbind-tutorial-and-usage-details/
 [^8]:https://en.cppreference.com/w/cpp/memory/new/operator_new
 [^9]:https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared
 [^10]:https://cplusplus.com/reference/memory/make_shared/
+[^11]:https://en.cppreference.com/w/cpp/language/initialization
 
