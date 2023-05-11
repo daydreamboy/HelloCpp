@@ -1,0 +1,3 @@
+[submodule "HelloDjinni/djinni"]
+	path = HelloDjinni/djinni
+	url = git@github.com:daydreamboy/djinni.git
