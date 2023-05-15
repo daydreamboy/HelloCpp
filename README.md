@@ -26,9 +26,114 @@ TODO
 
 
 
+## 3、类Class
+
+### (1) 静态成员(static member)
+
+#### a. 静态成员不属于类的实例
+
+在类的定义中，使用关键词static声明的成员，并不属于类的实例。
+
+官方文档描述[^12]，如下
+
+> Inside a class definition, the keyword [`static`](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/keyword/static.html) declares members that are not bound to class instances.
 
 
-## 3、lambda表达式
+
+#### b. 静态成员的声明和定义
+
+关键词static仅用于声明静态成员，在静态成员的定义中不能使用static关键词。
+
+官方文档描述[^12]，如下
+
+> The static keyword is only used with the declaration of a static member, inside the class definition, but not with the definition of that static member:
+
+举个例子，如下
+
+```c++
+class X { public: static int n; }; // declaration (uses 'static')
+int X::n = 1;              // definition (does not use 'static')
+
+- (void)test_X {
+    std::cout << X::n << std::endl;
+}
+```
+
+
+
+#### c. 静态成员同时需要声明和定义
+
+静态成员在类中声明后，需要对应的定义，不然这个成员属于不完整的类型(incomplete type)。
+
+举个例子，如下
+
+```c++
+struct Foo;
+ 
+struct S
+{
+    static int a[]; // declaration, incomplete type
+    static Foo x;   // declaration, incomplete type
+    static S s;     // declaration, incomplete type (inside its own definition)
+};
+ 
+int S::a[10]; // definition, complete type
+struct Foo {};
+Foo S::x;     // definition, complete type
+S S::s;       // definition, complete type
+```
+
+
+
+#### d. 访问静态成员
+
+有两种方式可以访问静态成员。假设访问类T的静态成员m
+
+* 使用类和静态成员名，格式`T::m`
+* 使用实例，格式`E.m`或者`E->m`。这里E是表达式，可以返回T或T*类型
+
+举个例子，如下
+
+```c++
+struct X2
+{
+    static void f(); // declaration
+    static int n;    // declaration
+};
+
+X2 g() { return X2(); } // some function returning X2
+ 
+void f()
+{
+    X2::f();  // X2::f is a qualified name of static member function
+    g().f(); // g().f is member access expression referring to a static member function
+}
+ 
+int X2::n = 7; // definition
+ 
+void X2::f() // definition
+{
+    n = 1; // X2::n is accessible as just n in this scope
+}
+
+- (void)test_X2 {
+    // Case1: static member owned by class
+    std::cout << X2::n << std::endl;
+    X2::f();
+    
+    // Case2: static member shared by all objects
+    X2 o1;
+    std::cout << o1.n << std::endl;
+}
+```
+
+
+
+
+
+
+
+## 4、lambda表达式
 
 lambda表达式是指匿名的函数对象，支持在其作用域内捕获变量。
 
@@ -351,7 +456,7 @@ TODO: https://learn.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=m
 
 
 
-## 3、string库
+## 5、string库
 
 ### (1) std::string
 
@@ -401,7 +506,7 @@ std::cout << cppString2 << std::endl;
 
 
 
-## 4、algorithm库
+## 6、algorithm库
 
 algorithm库提供一些常用的工具函数。
 
@@ -460,7 +565,7 @@ void printVector(std::vector<int> v)
 
 
 
-## 5、concurrency库
+## 7、concurrency库
 
 concurrency库是C++提供内置的能力，用于支持threads、atomic operations、mutual exclusion、condition variable等等。
 
@@ -657,7 +762,7 @@ TODO
 
 
 
-## 6、utilities库
+## 8、utilities库
 
 ### (1) std::bind
 
@@ -860,7 +965,7 @@ struct C
 
 
 
-## 7、C++ Hook
+## 9、C++ Hook
 
 ### (1) hook new和delete操作符
 
@@ -1016,7 +1121,7 @@ public:
 
 
 
-## 8、其他TODO
+## 10、其他TODO
 
 ### (1) using
 
@@ -1088,4 +1193,6 @@ https://thispointer.com/stdbind-tutorial-and-usage-details/
 [^9]:https://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared
 [^10]:https://cplusplus.com/reference/memory/make_shared/
 [^11]:https://en.cppreference.com/w/cpp/language/initialization
+
+[^12]:https://en.cppreference.com/w/cpp/language/static
 
