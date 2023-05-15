@@ -42,4 +42,15 @@ int X::n = 1;              // definition (does not use 'static')
     std::cout << o1.a << std::endl;
 }
 
+- (void)test_static_member_inheritance {
+    // Note: Use `==` for two std::string, @see https://www.tutorialkart.com/cpp/cpp-string-equals/#gsc.tab=0
+    
+    // Case1: foo() only in base class, so it always call base class's function
+    XCTAssertTrue(DerivedClass1::foo() == string("bar"));
+    
+    // Case2: bar() both defined in derived and base class, but they are belong to each class
+    XCTAssertTrue(BaseClass1::bar() == string("bar"));
+    XCTAssertTrue(DerivedClass1::bar() == string("baz"));
+}
+
 @end

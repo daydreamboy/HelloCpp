@@ -12,12 +12,12 @@
 #include <iostream>
 #include <string>
 
+// example from https://stackoverflow.com/questions/34222703/how-to-override-static-method-of-template-class-in-derived-class
 class DerivedClass1: public BaseClass1 {
 public:
-    static std::shared_ptr<BaseClass1> create() {
-        return std::make_shared<DerivedClass1>();
+    static std::string bar() {
+        return "baz";
     }
-//    std::string description();
 };
 
 #endif /* DerivedClass1_hpp */

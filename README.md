@@ -129,6 +129,48 @@ void X2::f() // definition
 
 
 
+#### e. 继承父类的静态函数
+
+参考这个SO的回答[^13]，举个例子，如下
+
+```c++
+class BaseClass1 {
+public:
+    static std::string bar() {
+        return "bar";
+    }
+    static std::string foo() {
+        return bar();
+    }
+};
+
+class DerivedClass1: public BaseClass1 {
+public:
+    static std::string bar() {
+        return "baz";
+    }
+};
+
+- (void)test_static_member_inheritance {    
+    // Case1: foo() only in base class, so it always call base class's function
+    XCTAssertTrue(DerivedClass1::foo() == string("bar"));
+    
+    // Case2: bar() both defined in derived and base class, but they are belong to each class
+    XCTAssertTrue(BaseClass1::bar() == string("bar"));
+    XCTAssertTrue(DerivedClass1::bar() == string("baz"));
+}
+```
+
+第一个case，由于foo函数在子类没有，使用`DerivedClass1::foo()`会访问到父类的方法
+
+第二个case，由于bar函数在子类和父类都用，根据T::m的T类型调用对应的静态成员函数
+
+
+
+### (2) 抽象类(Abstract class)
+
+
+
 
 
 
@@ -1195,4 +1237,6 @@ https://thispointer.com/stdbind-tutorial-and-usage-details/
 [^11]:https://en.cppreference.com/w/cpp/language/initialization
 
 [^12]:https://en.cppreference.com/w/cpp/language/static
+
+[^13]:https://stackoverflow.com/questions/34222703/how-to-override-static-method-of-template-class-in-derived-class
 

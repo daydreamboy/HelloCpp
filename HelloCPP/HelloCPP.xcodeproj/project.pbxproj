@@ -164,6 +164,7 @@
 		4F39BE14277C9ADB00BAF59E /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				4F532A4F2A11DE3000A69160 /* abstract_class */,
 				4F62F06D2A10E247008EA2D9 /* static_member */,
 				4F3AC4CD296AE2180027A8E1 /* Test_call_once.mm */,
 				4F197DAD2784012100D6B11C /* Test_issue.mm */,
@@ -178,7 +179,7 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
-		4F532A4D2A11D02800A69160 /* DummyClass */ = {
+		4F532A4D2A11D02800A69160 /* DummyClass1 */ = {
 			isa = PBXGroup;
 			children = (
 				4F62F06E2A10E263008EA2D9 /* BaseClass1.cpp */,
@@ -186,13 +187,20 @@
 				4F62F0712A10E323008EA2D9 /* DerivedClass1.cpp */,
 				4F62F0722A10E323008EA2D9 /* DerivedClass1.hpp */,
 			);
-			path = DummyClass;
+			path = DummyClass1;
+			sourceTree = "<group>";
+		};
+		4F532A4F2A11DE3000A69160 /* abstract_class */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = abstract_class;
 			sourceTree = "<group>";
 		};
 		4F62F06D2A10E247008EA2D9 /* static_member */ = {
 			isa = PBXGroup;
 			children = (
-				4F532A4D2A11D02800A69160 /* DummyClass */,
+				4F532A4D2A11D02800A69160 /* DummyClass1 */,
 				4F62F06B2A10E176008EA2D9 /* Test_static_member.mm */,
 				4F532A4A2A11D02100A69160 /* DefineStaticMember.cpp */,
 				4F532A4B2A11D02100A69160 /* DefineStaticMember.hpp */,

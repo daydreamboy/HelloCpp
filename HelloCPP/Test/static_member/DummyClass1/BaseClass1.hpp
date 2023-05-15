@@ -9,10 +9,16 @@
 #define BaseClass1_hpp
 
 #include <memory>
+#include <string>
 
 class BaseClass1 {
 public:
-    static std::shared_ptr<BaseClass1> create();
+    static std::string bar() {
+        return "bar";
+    }
+    static std::string foo() {
+        return bar();
+    }
 };
 
 #endif /* BaseClass1_hpp */
