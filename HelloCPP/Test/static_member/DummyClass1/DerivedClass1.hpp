@@ -18,6 +18,8 @@ public:
     static std::string bar() {
         return "baz";
     }
+    // Note: should re-declare again for static member function
+    static std::string description();
 };
 
 #endif /* DerivedClass1_hpp */

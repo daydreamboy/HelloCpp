@@ -19,6 +19,7 @@ public:
     static std::string foo() {
         return bar();
     }
+    static std::string description();
 };
 
 #endif /* BaseClass1_hpp */

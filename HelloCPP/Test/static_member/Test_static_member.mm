@@ -53,4 +53,8 @@ int X::n = 1;              // definition (does not use 'static')
     XCTAssertTrue(DerivedClass1::bar() == string("baz"));
 }
 
+- (void)test_none_inline_implement_static_member_function {
+    XCTAssertTrue(DerivedClass1::description() == string("This is DerivedClass1"));
+}
+
 @end

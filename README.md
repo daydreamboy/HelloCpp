@@ -151,6 +151,7 @@ public:
     }
 };
 
+// Test
 - (void)test_static_member_inheritance {    
     // Case1: foo() only in base class, so it always call base class's function
     XCTAssertTrue(DerivedClass1::foo() == string("bar"));
@@ -164,6 +165,40 @@ public:
 第一个case，由于foo函数在子类没有，使用`DerivedClass1::foo()`会访问到父类的方法
 
 第二个case，由于bar函数在子类和父类都用，根据T::m的T类型调用对应的静态成员函数
+
+
+
+#### d. 非inline实现父类的静态函数
+
+在父类的定义中，可以只定义静态函数，不实现它的定义。如果不使用这个父类的静态函数，则不会编译报错。
+
+这里示例如何实现非inline实现父类的静态函数。举个例子，如下
+
+```c++
+class BaseClass1 {
+public:
+    static std::string description();
+};
+
+class DerivedClass1: public BaseClass1 {
+public:
+    // Note: should re-declare again for static member function
+    static std::string description();
+};
+
+// DerivedClass1.cpp
+std::string DerivedClass1::description()
+{
+    return "This is DerivedClass1";
+}
+
+// Test
+- (void)test_none_inline_implement_static_member_function {
+    XCTAssertTrue(DerivedClass1::description() == string("This is DerivedClass1"));
+}
+```
+
+这里必须在DerivedClass1的定义中，重新声明下description函数，因为静态函数是属于哪个类，如果重写方法实现，则必须重新声明。
 
 
 

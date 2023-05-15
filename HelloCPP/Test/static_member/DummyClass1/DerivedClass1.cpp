@@ -6,3 +6,8 @@
 //
 
 #include "DerivedClass1.hpp"
+
+std::string DerivedClass1::description()
+{
+    return "This is DerivedClass1";
+}
