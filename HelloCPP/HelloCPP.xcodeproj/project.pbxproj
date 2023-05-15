@@ -193,6 +193,8 @@
 		4F532A4D2A11D02800A69160 /* DummyClass1 */ = {
 			isa = PBXGroup;
 			children = (
+				4F532A4A2A11D02100A69160 /* DefineStaticMember.cpp */,
+				4F532A4B2A11D02100A69160 /* DefineStaticMember.hpp */,
 				4F62F06E2A10E263008EA2D9 /* BaseClass1.cpp */,
 				4F62F06F2A10E263008EA2D9 /* BaseClass1.hpp */,
 				4F62F0712A10E323008EA2D9 /* DerivedClass1.cpp */,
@@ -228,8 +230,6 @@
 			children = (
 				4F532A4D2A11D02800A69160 /* DummyClass1 */,
 				4F62F06B2A10E176008EA2D9 /* Test_static_member.mm */,
-				4F532A4A2A11D02100A69160 /* DefineStaticMember.cpp */,
-				4F532A4B2A11D02100A69160 /* DefineStaticMember.hpp */,
 			);
 			path = static_member;
 			sourceTree = "<group>";

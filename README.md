@@ -299,7 +299,7 @@ void ConcreteClass1::h()
 }
 ```
 
-* 在子类ConcreteClass1的定义中，必须再次声明h()函数
+* 在子类ConcreteClass1的定义中，必须再次声明h()函数。`override`关键词是可选的，在C++11开始支持。
 * 在子类ConcreteClass1实现文件(.cpp)中，实现h()函数的定义
 
 
