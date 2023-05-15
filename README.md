@@ -169,7 +169,138 @@ public:
 
 ### (2) 抽象类(Abstract class)
 
+抽象类(Abstract class)是定义一个不能实例化的类，但是可以作为基类。
 
+官方文档描述[^14]，如下
+
+> Defines an abstract type which cannot be instantiated, but can be used as a base class.
+
+这个描述实际是抽象类的用途。
+
+官方文档对抽象类的定义[^14]，如下
+
+> An *abstract class* is a class that either defines or inherits at least one function for which [the final overrider](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/virtual.html) is *pure virtual*.
+
+上面的意思是，类中至少有一个函数，或者继承的函数，是纯虚的(pure virtual)（这个函数也称为纯虚函数），那么这个类是抽象类。
+
+这里首先要介绍纯虚函数的概念。
+
+
+
+#### a. 纯虚函数(pure virtual function)
+
+纯虚函数(pure virtual function)，采用下面语法[^14]
+
+```c++
+declarator virt-specifier(optional) = 0		
+```
+
+这里的`= 0`称为pure描述符(pure-specifier)，它跟着函数声明或者virt-specifier(指的是override或final)的后面。
+
+注意：pure描述符不能出现成员函数定义上，或者友元声明上
+
+> *pure-specifier* cannot appear in a member function definition or [friend](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/friend.html) declaration.
+
+举个例子[^14]，如下
+
+```c++
+struct Base
+{
+    virtual int g();
+    virtual ~Base() {}
+};
+ 
+struct A : Base
+{
+    // OK: declares three member virtual functions, two of them pure
+    virtual int f() = 0, g() override = 0, h();
+ 
+    // OK: destructor can be pure too
+    ~A() = 0;
+ 
+    // Error: pure-specifier on a function definition
+    virtual int b() = 0 {}
+};
+```
+
+在上面示例中，类A的`f（）`、`g()`、`~A()`都是纯虚函数，而`h()`只是虚函数，`b()`是定义，不能使用pure描述符。
+
+
+
+#### b. 继承抽象类
+
+上面提到抽象类不能被实例化，只能被继承。
+
+举个例子，如下
+
+```c++
+struct AbstractClass1
+{
+    virtual void f() = 0;  // pure virtual
+}; // "AbstractClass1" is abstract
+
+struct ConcreteClass1 : AbstractClass1
+{
+    void f() override {}   // non-pure virtual
+    virtual void g() {};      // non-pure virtual
+}; // "ConcreteClass1" is non-abstract
+
+struct AbstractClass2 : ConcreteClass1
+{
+    void g() override = 0; // pure virtual overrider
+}; // "AbstractClass2" is abstract
+
+- (void)test_use_abstract_class_type {
+    //AbstractClass1 a;   // Error: abstract class
+    ConcreteClass1 b;      // OK
+    AbstractClass1& a = b; // OK to reference abstract base
+    a.f();           // virtual dispatch to Concrete::f()
+    //AbstractClass2 a2; // Error: abstract class (final overrider of g() is pure)
+}
+```
+
+上面AbstractClass1因为有f()是纯虚函数，所以它是抽象类。而ConcreteClass1继承AbstractClass1，但是实现了f()纯虚函数，所以它不是抽象类。AbstractClass2继承自非抽象类，但是它包含纯虚函数g()，所以它是抽象类。
+
+> 示例代码，见Test_abstract_class.mm
+
+
+
+#### c. 非inline方式实现纯虚函数
+
+上面ConcreteClass1实现纯虚函数f()是内联方式(inline)，这篇文档[^17]提到在类的定义中，使用和不使用inline关键词是一样的
+
+> In the class declaration, the functions were declared without the **`inline`** keyword. The **`inline`** keyword can be specified in the class declaration; the result is the same.
+
+如果不使用inline方式实现纯虚函数。举个例子，如下
+
+```c++
+struct AbstractClass1
+{
+    virtual void f() = 0;  // pure virtual
+    virtual void h() = 0;  // pure virtual
+}; // "AbstractClass1" is abstract
+
+struct ConcreteClass1 : AbstractClass1
+{
+    void f() override {}   // non-pure virtual
+    void h() override;   // Note: must re-decalre again for pure virutal function
+    virtual void g() {};      // non-pure virtual
+}; // "ConcreteClass1" is non-abstract
+
+// ConcreteClass1.cpp
+void ConcreteClass1::h()
+{
+    std::cout << "h() called" << std::endl;
+}
+
+- (void)test_none_inline_implement_pure_virtual_function {
+    ConcreteClass1 b;
+    b.h(); // will print `h() called`
+}
+```
+
+* 在子类ConcreteClass1的定义中，必须再次声明h()函数
+* 在子类ConcreteClass1实现文件(.cpp)中，实现h()函数的定义
 
 
 
@@ -1159,11 +1290,50 @@ public:
 
 
 
+## 10、C++编译常见报错
+
+### (1)  "vtable for XXX", referenced from:
+
+示例报错，如下
+
+```
+Undefined symbols for architecture x86_64:
+  "vtable for Concrete", referenced from:
+      Concrete::Concrete() in Test_abstract_class.o
+  NOTE: a missing vtable usually means the first non-inline virtual member function has no definition.
+ld: symbol(s) not found for architecture x86_64
+```
+
+原因是，虚函数没有实现，需要定义[^15]
+
+举个报错的例子[^16]，如下
+
+```c++
+class Base
+{
+public:
+  virtual int foo() = 0;
+  virtual int bar() = 0;
+};
+
+class Derived : public Base
+{
+public:
+  Derived() {}
+  ~Derived() {}
+
+  virtual int foo(); // <-- causes this obscure linker error
+  virtual int bar() {return 0;}
+};
+```
 
 
 
 
-## 10、其他TODO
+
+
+
+## 11、其他TODO
 
 ### (1) using
 
@@ -1209,9 +1379,7 @@ C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
 
 
 
-std::bind函数
 
-https://thispointer.com/stdbind-tutorial-and-usage-details/
 
 
 
@@ -1239,4 +1407,7 @@ https://thispointer.com/stdbind-tutorial-and-usage-details/
 [^12]:https://en.cppreference.com/w/cpp/language/static
 
 [^13]:https://stackoverflow.com/questions/34222703/how-to-override-static-method-of-template-class-in-derived-class
-
+[^14]:https://en.cppreference.com/w/cpp/language/abstract_class
+[^15]:https://stackoverflow.com/questions/31861803/a-missing-vtable-usually-means-the-first-non-inline-virtual-member-function-has
+[^16]:https://stackoverflow.com/questions/1458180/vtable-for-referenced-from-compile-error-xcode
+[^17]:https://learn.microsoft.com/en-us/cpp/cpp/inline-functions-cpp?view=msvc-170
