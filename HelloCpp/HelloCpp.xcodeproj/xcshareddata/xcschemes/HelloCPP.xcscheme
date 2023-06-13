@@ -17,7 +17,7 @@
                BlueprintIdentifier = "4F72D3B724CEC28F00D25E53"
                BuildableName = "HelloCpp"
                BlueprintName = "HelloCpp"
-               ReferencedContainer = "container:HelloCPP.xcodeproj">
+               ReferencedContainer = "container:HelloCpp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "4F72D3B724CEC28F00D25E53"
             BuildableName = "HelloCpp"
             BlueprintName = "HelloCpp"
-            ReferencedContainer = "container:HelloCPP.xcodeproj">
+            ReferencedContainer = "container:HelloCpp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "4F72D3B724CEC28F00D25E53"
             BuildableName = "HelloCpp"
             BlueprintName = "HelloCpp"
-            ReferencedContainer = "container:HelloCPP.xcodeproj">
+            ReferencedContainer = "container:HelloCpp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

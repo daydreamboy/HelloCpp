@@ -17,7 +17,7 @@
                BlueprintIdentifier = "4F9CBAC32A28A08A00CFBE71"
                BuildableName = "HelloWorld.app"
                BlueprintName = "HelloWorld"
-               ReferencedContainer = "container:HelloCPP.xcodeproj">
+               ReferencedContainer = "container:HelloCpp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,7 +46,7 @@
             BlueprintIdentifier = "4F9CBAC32A28A08A00CFBE71"
             BuildableName = "HelloWorld.app"
             BlueprintName = "HelloWorld"
-            ReferencedContainer = "container:HelloCPP.xcodeproj">
+            ReferencedContainer = "container:HelloCpp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -63,7 +63,7 @@
             BlueprintIdentifier = "4F9CBAC32A28A08A00CFBE71"
             BuildableName = "HelloWorld.app"
             BlueprintName = "HelloWorld"
-            ReferencedContainer = "container:HelloCPP.xcodeproj">
+            ReferencedContainer = "container:HelloCpp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

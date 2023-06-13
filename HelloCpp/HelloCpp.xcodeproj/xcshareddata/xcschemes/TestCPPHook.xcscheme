@@ -21,7 +21,7 @@
                BlueprintIdentifier = "4F718F282A04E8C9009E9093"
                BuildableName = "TestCPPHook_linkStatic.xctest"
                BlueprintName = "TestCPPHook_linkStatic"
-               ReferencedContainer = "container:HelloCPP.xcodeproj">
+               ReferencedContainer = "container:HelloCpp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

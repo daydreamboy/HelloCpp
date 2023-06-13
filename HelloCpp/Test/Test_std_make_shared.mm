@@ -1,5 +1,5 @@
 //
-//  Test_std_shared_ptr.m
+//  Test_std_make_shared.m
 //  Test
 //
 //  Created by wesley_chen on 2023/5/5.
@@ -20,11 +20,11 @@ struct C
     float f{};
 };
 
-@interface Test_std_shared_ptr : XCTestCase
+@interface Test_std_make_shared : XCTestCase
 
 @end
 
-@implementation Test_std_shared_ptr
+@implementation Test_std_make_shared
 
 // example from https://cplusplus.com/reference/memory/make_shared/
 - (void)test_create_shared_ptr {

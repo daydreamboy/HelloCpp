@@ -21,7 +21,7 @@
                BlueprintIdentifier = "4F718F542A0501CC009E9093"
                BuildableName = "TestCPPHook_insertLibraries.xctest"
                BlueprintName = "TestCPPHook_insertLibraries"
-               ReferencedContainer = "container:HelloCPP.xcodeproj">
+               ReferencedContainer = "container:HelloCpp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
