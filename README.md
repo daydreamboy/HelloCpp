@@ -4,11 +4,440 @@
 
 ## 1、前言
 
-本文目录结构参考[cppreference.com](https://en.cppreference.com/)提供的目录[^5]
+本文目录结构，前面部分参考[cppreference.com](https://en.cppreference.com/)提供的目录[^5]，分为下面几大部分
+
+* 基本概念(Basic concepts)
+* 关键词(Keywords)
+* 预处理器(Preprocessor)
+* 表达式(Expression)
+* 声明(Declarations)
+* 初始化(Initialization)
+* 函数(Functions)
+* 语句(Statements)
+* 类(Classes)
+* 模板(Templates)
+* 异常(Exception)
+
+说明
+
+> 由于内容不多，本文省略Miscellaneous和Idioms部分，可以自行去看官方文档
 
 
 
-## 2、Initialization初始化
+## 2、基本概念(Basic concepts)
+
+
+
+## 3、关键词(Keywords)
+
+官方文档[^19]给出全部C++关键词(keywords)，如下
+
+| keywords                 | 作用 |
+| ------------------------ | ---- |
+|                          |      |
+|                          |      |
+|                          |      |
+|                          |      |
+| reflexpr (reflection TS) |      |
+| register (2)             |      |
+| reinterpret_cast         |      |
+| requires (C++20)         |      |
+| return                   |      |
+| short                    |      |
+| signed                   |      |
+| sizeof (1)               |      |
+| static                   |      |
+| static_assert (C++11)    |      |
+| static_cast              |      |
+| struct (1)               |      |
+| switch                   |      |
+| synchronized (TM TS)     |      |
+| template                 |      |
+| this (4)                 |      |
+| thread_local (C++11)     |      |
+| throw                    |      |
+| true                     |      |
+| try                      |      |
+| typedef                  |      |
+| typeid                   |      |
+| typename                 |      |
+| union                    |      |
+| unsigned                 |      |
+| using (1)                |      |
+| virtual                  |      |
+| void                     |      |
+| volatile                 |      |
+| wchar_t                  |      |
+| while                    |      |
+| xor                      |      |
+| xor_eq                   |      |
+
+- (1) — meaning changed or new meaning added in C++11.
+- (2) — meaning changed in C++17.
+- (3) — meaning changed in C++20.
+- (4) — new meaning added in C++23.
+
+
+
+### (1) using
+
+`using`在C++11上有新的语法。
+
+官方文档的描述[^20]，如下
+
+> - [using-directives ](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/namespace.html#Using-directives)for namespaces and [using-declarations](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/namespace.html) for namespace members
+> - [using-declarations ](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/using_declaration.html)for class members
+> - [using-enum-declarations ](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/enum.html#Using-enum-declaration)for enumerators (since C++20)
+> - [type alias and alias template declaration](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/type_alias.html) (since C++11)
+
+
+
+
+
+## 4、预处理器(Preprocessor)
+
+
+
+## 5、表达式(Expression)
+
+### (1) lambda表达式
+
+lambda表达式是指匿名的函数对象，支持在其作用域内捕获变量。
+
+官方文档对lambda表达式描述[^1]，如下
+
+> Constructs a [closure](https://en.wikipedia.org/wiki/Closure_(computer_science)): an unnamed function object capable of capturing variables in scope.
+
+说明
+
+>在C++ 11开始支持lambda表达式
+
+
+
+#### a. lambda表达式的签名
+
+官方文档对lambda表达式的签名定义，如下
+
+| 函数签名                                                     | 序号 | C++版本                         |
+| ------------------------------------------------------------ | ---- | ------------------------------- |
+| [ captures ] ( params ) specs requires(optional) { body }    | (1)  |                                 |
+| [ captures ] { body }                                        | (2)  | (until C++23)                   |
+| [ captures ] specs { body }                                  | (2)  | (since C++23)                   |
+| [ captures ] < tparams > requires(optional) ( params ) specs requires(optional) { body } | (3)  | (since C++20)                   |
+| [ captures ] < tparams > requires(optional) { body }         | (4)  | (since C++20)<br/>(until C++23) |
+| [ captures ] < tparams > requires(optional) specs { body }   | (4)  | (since C++23)                   |
+
+lambda表达式的签名有很多种，这里只介绍最常用的签名，即(1)类型
+
+```
+[ captures ] ( params ) specs requires(optional) { body }
+```
+
+参数释义
+
+* captures，捕获变量列表，使用`,`分隔
+* params，lambda表达式的参数列表，和一般的函数参数列表是一样的
+* specs，描述列表，包含specifiers, exception, attr和trailing-return-type这4种组件，每个组件都是可选的。
+  * specifiers，可以是mutable关键词等
+  * exception，TODO
+  * attr，TODO
+  * trailing-return-type，即`-> returnType`格式，表示lambda表达式的返回类型
+* requires，TODO
+* body，lambda表达式的函数体
+
+了解了上面最常用的lambda表达式的签名，即表格中的(1)类型，可以重新定义下lambda表达式的语法格式，如下
+
+```
+[ capture list ] (parameters) -> return-type  
+{   
+   definition of method   
+}
+```
+
+
+
+#### b. 使用lambda表达式
+
+lambda表达式的用法，有下面几种
+
+* 作为函数的参数
+* 定义lambda变量
+
+
+
+##### 作为函数的参数
+
+在`<algorithm>`中提供很多工具函数，都支持lambda表达式作为参数。
+
+举个例子，如下
+
+```c++
+void printVector(std::vector<int> v)
+{
+    // lambda expression to print vector
+    for_each(v.begin(), v.end(), [](int i)
+    {
+        std::cout << i << " ";
+    });
+    std::cout << std::endl;
+}
+```
+
+上面for_each的第三个参数可以是一个lambda表达式，遍历每个元素时，for_each函数内部都会调用lambda表达式。
+
+
+
+##### 定义lambda变量
+
+使用lambda表达式赋值给C++变量，这个变量就变成lambda变量，可以使用这个变量当成函数调用来使用。
+
+举个例子，如下
+
+```objective-c
+- (void)test_named_lambda_expression {
+    auto square = [](int i)
+    {
+        return i * i;
+    };
+ 
+    std::cout << "Square of 5 is : " << square(5) << std::endl;
+}
+```
+
+
+
+#### c. lambda表达式的capture列表
+
+上面介绍lambda表达式的签名，提到capture列表，即捕获变量列表。这节详细介绍下capture列表的用法。
+
+capture列表有两种类型的默认捕获(capture-default)，分别使用特定符号`&`和`=`。
+
+* `&`，表示默认按照引用方式，捕获作用域中变量
+* `=`，表示默认按照值拷贝方式，捕获作用域中变量
+
+官方文档描述[^1]，如下
+
+> The only capture defaults are
+>
+> - `&` (implicitly capture the used automatic variables by reference) and
+> - `=` (implicitly capture the used automatic variables by copy).
+
+
+
+#####  `&`按引用捕获
+
+capture列表，如果只使用`&`，表示lambda表达式作用域内的变量默认按照引用捕获。
+
+举个例子，如下
+
+```c++
+- (void)test_lambda_expression_capture_list_by_reference {
+    std::vector<int> v1 = {3, 1, 7, 9};
+    std::vector<int> v2 = {10, 2, 7, 16, 9};
+ 
+    //  access v1 and v2 by reference
+    auto pushinto = [&] (int m)
+    {
+        v1.push_back(m);
+        v2.push_back(m);
+    };
+    
+    // it pushes 20 in both v1 and v2
+    pushinto(20);
+    
+    printVector(v1);
+    printVector(v2);
+}
+```
+
+由于是按照引用捕获变量v1和v2，则调用push_back函数，可以将原始vector数组添加元素20。
+
+
+
+##### `=`按值拷贝捕获
+
+capture列表，如果只使用`=`，表示lambda表达式作用域内的变量默认按照值拷贝捕获。
+
+举个例子，如下
+
+```c++
+- (void)test_lambda_expression_capture_list_by_copy {
+    std::vector<int> v1 = {3, 1, 7, 9};
+    std::vector<int> v2 = {10, 2, 7, 16, 9};
+ 
+    //  access v1 and v2 by copy
+    auto pushinto = [=] (int m)
+    {
+        auto v1_copy = v1;
+        v1_copy.push_back(m);
+        
+        // Compile Error: No matching member function for call to 'push_back'
+        //v2.push_back(m);
+    };
+    
+    // it pushes 20 in both v1 and v2
+    pushinto(20);
+    
+    printVector(v1);
+}
+```
+
+上面使用`=`的值拷贝方式，在pushinto表达式中，没有判断出v2的类型，所以识别不了它的成员函数push_back。这里为了演示，采用临时变量v1_copy，用它调用push_back函数。使用printVector打印v1变量，可以看出pushinto(20)没有向原始vector数组v1添加元素20。v1_copy变量确实是v1的一个值拷贝对象。
+
+
+
+##### 指定变量捕获
+
+在capture列表中指定变量捕获，在官方文档[^1]有下面几种形式：
+
+| 格式                         | 序号 | C++版本       |
+| ---------------------------- | ---- | ------------- |
+| identifier                   | (1)  |               |
+| identifier ...               | (2)  |               |
+| identifier initializer       | (3)  | (since C++14) |
+| & identifier                 | (4)  |               |
+| & identifier ...             | (5)  |               |
+| & identifier initializer     | (6)  | (since C++14) |
+| this                         | (7)  |               |
+| * this                       | (8)  | (since C++17) |
+| ... identifier initializer   | (9)  | (since C++20) |
+| & ... identifier initializer | (10) | (since C++20) |
+
+每种格式的含义，如下
+
+(1) simple by-copy capture
+
+(2) simple by-copy capture that is a [pack expansion](https://en.cppreference.com/w/cpp/language/parameter_pack)
+
+(3) by-copy capture with an [initializer](https://en.cppreference.com/w/cpp/language/initialization)
+
+(4) simple by-reference capture
+
+(5) simple by-reference capture that is a [pack expansion](https://en.cppreference.com/w/cpp/language/parameter_pack)
+
+(6) by-reference capture with an initializer
+
+(7) simple by-reference capture of the current object
+
+(8) simple by-copy capture of the current object
+
+(9) by-copy capture with an initializer that is a pack expansion
+
+(10) by-reference capture with an initializer that is a pack expansion
+
+
+
+这里列举几个常用格式的例子[^4]，如下
+
+```c++
+- (void)test_lambda_expression_capture_list_specify_variable {
+    
+    // Case1
+    std::vector<int> v1 = {3, 1, 7, 9};
+    // access v1 by copy
+    auto printV1 = [v1]()
+    {
+        for (auto p = v1.begin(); p != v1.end(); p++)
+        {
+            std::cout << *p << " ";
+        }
+        
+        std::cout << std::endl;
+    };
+    
+    printV1();
+    
+    // Case2
+    int N = 5;
+    std::vector<int>::iterator p = find_if(v1.begin(), v1.end(), [N](int i)
+    {
+        return i > N;
+    });
+    
+    if (p != std::end(v1)) {
+        std::cout << "First number greater than 5 is : " << *p << std::endl;
+    }
+    else {
+        std::cout << "First number greater than 5 not found" << std::endl;
+    }
+    
+    // Case3
+    auto pushinto = [&v1] (int m)
+    {
+        v1.push_back(m);
+    };
+    
+    // it pushes 20 in both v1 and v2
+    pushinto(20);
+    printVector(v1);
+}
+```
+
+
+
+在capture列表中可以定义变量并初始化，举个例子[^1]，如下
+
+```c++
+- (void)test_lambda_expression_capture_list_initialize_variable {
+    int x = 4;
+     
+    auto y = [&r = x, x = x + 1]() -> int
+    {
+        r += 2;
+        return x * x;
+    }(); // updates ::x to 6 and initializes y to 25.
+    
+    std::cout << "x: " << x << std::endl;
+    std::cout << "y: " << y << std::endl;
+}
+
+```
+
+* 上面r变量是x变量的引用，对r变量的修改，等价是修改x变量
+* capture列表的第2个变量x，是新的变量，不同于int x=4中x变量，x*x实际是5 * 5，并将值赋值给y
+
+
+
+##### 没有变量捕获
+
+如果没有变量捕获，则capture列表可以为空。
+
+举个例子，如下
+
+```c++
+auto square = [](int i)
+{
+    return i * i;
+};
+
+std::cout << "Square of 5 is : " << square(5) << std::endl;
+```
+
+
+
+##### pack expansion
+
+TODO: https://learn.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=msvc-170
+
+
+
+### (2) 字符串字母量(String literal)
+
+格式：prefix(optional) R "delimiter( raw_characters )delimiter"
+
+[1] https://en.cppreference.com/w/cpp/language/string_literal
+
+
+
+
+
+## 6、声明(Declarations)
+
+
+
+
+
+## 7、初始化(Initialization)
 
 在C++中初始化值，分为下面几类[^11]
 
@@ -26,7 +455,15 @@ TODO
 
 
 
-## 3、类Class
+## 8、函数(Functions)
+
+
+
+## 9、语句(Statements)
+
+
+
+## 10、类(Classes)
 
 ### (1) 静态成员(static member)
 
@@ -164,7 +601,7 @@ public:
 
 第一个case，由于foo函数在子类没有，使用`DerivedClass1::foo()`会访问到父类的方法
 
-第二个case，由于bar函数在子类和父类都用，根据T::m的T类型调用对应的静态成员函数
+第二个case，由于bar函数在子类和父类都有，根据T::m的T类型调用对应的静态成员函数
 
 
 
@@ -339,382 +776,53 @@ void ConcreteClass1::h()
 
 
 
+## 11、模板(Templates)
 
+### (1) C++常见模板参数
 
-## 4、lambda表达式
+在C++文档中，经常看到下面的函数签名，例如`std::shared_ptr<T>::shared_ptr`的文档
 
-lambda表达式是指匿名的函数对象，支持在其作用域内捕获变量。
+```c++
+template< class Deleter > 
+shared_ptr( std::nullptr_t ptr, Deleter d );
 
-官方文档对lambda表达式描述[^1]，如下
+template< class Y, class Deleter, class Alloc > 
+shared_ptr( Y* ptr, Deleter d, Alloc alloc );
+```
 
-> Constructs a [closure](https://en.wikipedia.org/wiki/Closure_(computer_science)): an unnamed function object capable of capturing variables in scope.
+这里Deleter和Alloc，不同普通的模板参数Y，它们属于特定语法含义。
 
 说明
 
->在C++ 11开始支持lambda表达式
+> C++模板参数，类似Swift泛型中类型参数，都有命名含义和无命名含义的区分，比如这里的Deleter和Alloc属于有名模板参数。
 
+因此，这里将具有特定含义的模板参数归纳一下
 
+| 模板参数 | 含义         |
+| -------- | ------------ |
+| Alloc    |              |
+| Args     |              |
+| Deleter  |              |
+| Mutex    |              |
+| ...      | 可变模板参数 |
 
-### (1) lambda表达式的签名
 
-官方文档对lambda表达式的签名定义，如下
 
-| 函数签名                                                     | 序号 | C++版本                         |
-| ------------------------------------------------------------ | ---- | ------------------------------- |
-| [ captures ] ( params ) specs requires(optional) { body }    | (1)  |                                 |
-| [ captures ] { body }                                        | (2)  | (until C++23)                   |
-| [ captures ] specs { body }                                  | (2)  | (since C++23)                   |
-| [ captures ] < tparams > requires(optional) ( params ) specs requires(optional) { body } | (3)  | (since C++20)                   |
-| [ captures ] < tparams > requires(optional) { body }         | (4)  | (since C++20)<br/>(until C++23) |
-| [ captures ] < tparams > requires(optional) specs { body }   | (4)  | (since C++23)                   |
 
-lambda表达式的签名有很多种，这里只介绍最常用的签名，即(1)类型
 
-```
-[ captures ] ( params ) specs requires(optional) { body }
-```
 
-参数释义
 
-* captures，捕获变量列表，使用`,`分隔
-* params，lambda表达式的参数列表，和一般的函数参数列表是一样的
-* specs，描述列表，包含specifiers, exception, attr和trailing-return-type这4种组件，每个组件都是可选的。
-  * specifiers，可以是mutable关键词等
-  * exception，TODO
-  * attr，TODO
-  * trailing-return-type，即`-> returnType`格式，表示lambda表达式的返回类型
-* requires，TODO
-* body，lambda表达式的函数体
+## 12、异常(Exception)
 
-了解了上面最常用的lambda表达式的签名，即表格中的(1)类型，可以重新定义下lambda表达式的语法格式，如下
 
-```
-[ capture list ] (parameters) -> return-type  
-{   
-   definition of method   
-}
-```
 
+## 13、其他语法
 
 
-### (2) 使用lambda表达式
 
-lambda表达式的用法，有下面几种
 
-* 作为函数的参数
-* 定义lambda变量
 
-
-
-#### a. 作为函数的参数
-
-在`<algorithm>`中提供很多工具函数，都支持lambda表达式作为参数。
-
-举个例子，如下
-
-```c++
-void printVector(std::vector<int> v)
-{
-    // lambda expression to print vector
-    for_each(v.begin(), v.end(), [](int i)
-    {
-        std::cout << i << " ";
-    });
-    std::cout << std::endl;
-}
-```
-
-上面for_each的第三个参数可以是一个lambda表达式，遍历每个元素时，for_each函数内部都会调用lambda表达式。
-
-
-
-#### b. 定义lambda变量
-
-使用lambda表达式赋值给C++变量，这个变量就变成lambda变量，可以使用这个变量当成函数调用来使用。
-
-举个例子，如下
-
-```objective-c
-- (void)test_named_lambda_expression {
-    auto square = [](int i)
-    {
-        return i * i;
-    };
- 
-    std::cout << "Square of 5 is : " << square(5) << std::endl;
-}
-```
-
-
-
-### (3) lambda表达式的capture列表
-
-上面介绍lambda表达式的签名，提到capture列表，即捕获变量列表。这节详细介绍下capture列表的用法。
-
-capture列表有两种类型的默认捕获(capture-default)，分别使用特定符号`&`和`=`。
-
-* `&`，表示默认按照引用方式，捕获作用域中变量
-* `=`，表示默认按照值拷贝方式，捕获作用域中变量
-
-官方文档描述[^1]，如下
-
-> The only capture defaults are
->
-> - `&` (implicitly capture the used automatic variables by reference) and
-> - `=` (implicitly capture the used automatic variables by copy).
-
-
-
-#### a. `&`按引用捕获
-
-capture列表，如果只使用`&`，表示lambda表达式作用域内的变量默认按照引用捕获。
-
-举个例子，如下
-
-```c++
-- (void)test_lambda_expression_capture_list_by_reference {
-    std::vector<int> v1 = {3, 1, 7, 9};
-    std::vector<int> v2 = {10, 2, 7, 16, 9};
- 
-    //  access v1 and v2 by reference
-    auto pushinto = [&] (int m)
-    {
-        v1.push_back(m);
-        v2.push_back(m);
-    };
-    
-    // it pushes 20 in both v1 and v2
-    pushinto(20);
-    
-    printVector(v1);
-    printVector(v2);
-}
-```
-
-由于是按照引用捕获变量v1和v2，则调用push_back函数，可以将原始vector数组添加元素20。
-
-
-
-#### b. `=`按值拷贝捕获
-
-capture列表，如果只使用`=`，表示lambda表达式作用域内的变量默认按照值拷贝捕获。
-
-举个例子，如下
-
-```c++
-- (void)test_lambda_expression_capture_list_by_copy {
-    std::vector<int> v1 = {3, 1, 7, 9};
-    std::vector<int> v2 = {10, 2, 7, 16, 9};
- 
-    //  access v1 and v2 by copy
-    auto pushinto = [=] (int m)
-    {
-        auto v1_copy = v1;
-        v1_copy.push_back(m);
-        
-        // Compile Error: No matching member function for call to 'push_back'
-        //v2.push_back(m);
-    };
-    
-    // it pushes 20 in both v1 and v2
-    pushinto(20);
-    
-    printVector(v1);
-}
-```
-
-上面使用`=`的值拷贝方式，在pushinto表达式中，没有判断出v2的类型，所以识别不了它的成员函数push_back。这里为了演示，采用临时变量v1_copy，用它调用push_back函数。使用printVector打印v1变量，可以看出pushinto(20)没有向原始vector数组v1添加元素20。v1_copy变量确实是v1的一个值拷贝对象。
-
-
-
-#### c. 指定变量捕获
-
-在capture列表中指定变量捕获，在官方文档[^1]有下面几种形式：
-
-| 格式                         | 序号 | C++版本       |
-| ---------------------------- | ---- | ------------- |
-| identifier                   | (1)  |               |
-| identifier ...               | (2)  |               |
-| identifier initializer       | (3)  | (since C++14) |
-| & identifier                 | (4)  |               |
-| & identifier ...             | (5)  |               |
-| & identifier initializer     | (6)  | (since C++14) |
-| this                         | (7)  |               |
-| * this                       | (8)  | (since C++17) |
-| ... identifier initializer   | (9)  | (since C++20) |
-| & ... identifier initializer | (10) | (since C++20) |
-
-每种格式的含义，如下
-
-(1) simple by-copy capture
-
-(2) simple by-copy capture that is a [pack expansion](https://en.cppreference.com/w/cpp/language/parameter_pack)
-
-(3) by-copy capture with an [initializer](https://en.cppreference.com/w/cpp/language/initialization)
-
-(4) simple by-reference capture
-
-(5) simple by-reference capture that is a [pack expansion](https://en.cppreference.com/w/cpp/language/parameter_pack)
-
-(6) by-reference capture with an initializer
-
-(7) simple by-reference capture of the current object
-
-(8) simple by-copy capture of the current object
-
-(9) by-copy capture with an initializer that is a pack expansion
-
-(10) by-reference capture with an initializer that is a pack expansion
-
-
-
-这里列举几个常用格式的例子[^4]，如下
-
-```c++
-- (void)test_lambda_expression_capture_list_specify_variable {
-    
-    // Case1
-    std::vector<int> v1 = {3, 1, 7, 9};
-    // access v1 by copy
-    auto printV1 = [v1]()
-    {
-        for (auto p = v1.begin(); p != v1.end(); p++)
-        {
-            std::cout << *p << " ";
-        }
-        
-        std::cout << std::endl;
-    };
-    
-    printV1();
-    
-    // Case2
-    int N = 5;
-    std::vector<int>::iterator p = find_if(v1.begin(), v1.end(), [N](int i)
-    {
-        return i > N;
-    });
-    
-    if (p != std::end(v1)) {
-        std::cout << "First number greater than 5 is : " << *p << std::endl;
-    }
-    else {
-        std::cout << "First number greater than 5 not found" << std::endl;
-    }
-    
-    // Case3
-    auto pushinto = [&v1] (int m)
-    {
-        v1.push_back(m);
-    };
-    
-    // it pushes 20 in both v1 and v2
-    pushinto(20);
-    printVector(v1);
-}
-```
-
-
-
-在capture列表中可以定义变量并初始化，举个例子[^1]，如下
-
-```c++
-- (void)test_lambda_expression_capture_list_initialize_variable {
-    int x = 4;
-     
-    auto y = [&r = x, x = x + 1]() -> int
-    {
-        r += 2;
-        return x * x;
-    }(); // updates ::x to 6 and initializes y to 25.
-    
-    std::cout << "x: " << x << std::endl;
-    std::cout << "y: " << y << std::endl;
-}
-
-```
-
-* 上面r变量是x变量的引用，对r变量的修改，等价是修改x变量
-* capture列表的第2个变量x，是新的变量，不同于int x=4中x变量，x*x实际是5 * 5，并将值赋值给y
-
-
-
-#### d. 没有变量捕获
-
-如果没有变量捕获，则capture列表可以为空。
-
-举个例子，如下
-
-```c++
-auto square = [](int i)
-{
-    return i * i;
-};
-
-std::cout << "Square of 5 is : " << square(5) << std::endl;
-```
-
-
-
-#### e. pack expansion
-
-TODO: https://learn.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=msvc-170
-
-
-
-
-
-## 5、string库
-
-### (1) std::string
-
-std::string有下面几种初始化方式
-
-* 从const char*初始化
-
-```c++
-// Creating a string from const char*     
-std::string str1 = "hello";
-std::string str2 = std::string("hello");
-```
-
-* 字面量初始化
-
-```c++
-using namespace std::literals;
-auto cppString2 = "中文"s;
-std::cout << cppString2 << std::endl;
-```
-
-注意
-
-> 字面量字符串带后缀s，并且配合using namespace std::literals;使用，否则auto推断的类型会不准确，导致调用这个变量的方法时，可能会有编译错误。
-
-
-
-### (2) String IO
-
-`ostringstream`是`basic_ostringstream<char>`的别名，它定义在`<sstream>`头文件中。作用是存放输出字符串。
-
-举个例子，如下
-
-```c++
-- (void)test_std_ostringstream {
-    std::ostringstream stream;
-    
-    stream << "Hello, " << "ostring" << "stream";
-    stream << std::endl;
-    
-    std::string string = stream.str();
-    const char* s = string.c_str();
-    
-    printf("%s", s);
-}
-```
-
-
-
-## 6、algorithm库
+## 14、algorithm库
 
 algorithm库提供一些常用的工具函数。
 
@@ -773,7 +881,7 @@ void printVector(std::vector<int> v)
 
 
 
-## 7、concurrency库
+## 15、concurrency库
 
 concurrency库是C++提供内置的能力，用于支持threads、atomic operations、mutual exclusion、condition variable等等。
 
@@ -787,21 +895,15 @@ concurrency库是C++提供内置的能力，用于支持threads、atomic operati
 
 
 
-### (1) Threads
+* Threads
 
-TODO
-
-
-
-### (2) Atomic operations
-
-TODO
+* Atomic operations
+* Mutual exclusion
+* Condition variables
 
 
 
-### (3) Mutual exclusion
-
-#### a. call_once函数
+### (1) std::call_once函数
 
 导入头文件方式：`#include <mutex>`
 
@@ -906,7 +1008,7 @@ Didn't throw, call_once will not attempt again
 
 
 
-##### 使用call_once函数创建一个单例
+#### a. 使用call_once函数创建一个单例
 
 call_once函数的常见用途，就是创建一个单例。举个例子，如下
 
@@ -962,17 +1064,110 @@ void get_shared_instance()
 
 
 
-### (4) Condition variables
+### (2) std::lock_guard类
 
-TODO
+类型声明，如下
+
+| Defined in header `<mutex>`               | C++版本       |
+| ----------------------------------------- | ------------- |
+| template< class Mutex > class lock_guard; | (since C++11) |
+
+std::lock_guard类是mutex的包装，当lock_guard对象创建时，会尝试获取mutex的所有权。当lock_guard对象被销毁时，对应的mutex会被释放。
+
+官方文档描述[^18]，如下
+
+> The class `lock_guard` is a mutex wrapper that provides a convenient [RAII-style](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/raii.html) mechanism for owning a mutex for the duration of a scoped block. 
+>
+> When a `lock_guard` object is created, it attempts to take ownership of the mutex it is given. When control leaves the scope in which the `lock_guard` object was created, the `lock_guard` is destructed and the mutex is released.
+
+举个例子，如下
+
+```c++
+int g_i = 0;
+std::mutex g_i_mutex;  // protects g_i
+ 
+void safe_increment()
+{
+    const std::lock_guard<std::mutex> lock(g_i_mutex);
+    ++g_i;
+ 
+    std::cout << "g_i: " << g_i << "; in thread #"
+              << std::this_thread::get_id() << '\n';
+ 
+    // g_i_mutex is automatically released when lock
+    // goes out of scope
+}
+
+- (void)test_std_lock_guard {
+    std::cout << "g_i: " << g_i << "; in main()\n";
+ 
+    std::thread t1(safe_increment);
+    std::thread t2(safe_increment);
+ 
+    t1.join();
+    t2.join();
+ 
+    std::cout << "g_i: " << g_i << "; in main()\n";
+}
+```
+
+
+
+## 16、string库
+
+### (1) std::string
+
+std::string有下面几种初始化方式
+
+* 从const char*初始化
+
+```c++
+// Creating a string from const char*     
+std::string str1 = "hello";
+std::string str2 = std::string("hello");
+```
+
+* 字面量初始化
+
+```c++
+using namespace std::literals;
+auto cppString2 = "中文"s;
+std::cout << cppString2 << std::endl;
+```
+
+注意
+
+> 字面量字符串带后缀s，并且配合using namespace std::literals;使用，否则auto推断的类型会不准确，导致调用这个变量的方法时，可能会有编译错误。
+
+
+
+### (2) String IO
+
+`ostringstream`是`basic_ostringstream<char>`的别名，它定义在`<sstream>`头文件中。作用是存放输出字符串。
+
+举个例子，如下
+
+```c++
+- (void)test_std_ostringstream {
+    std::ostringstream stream;
+    
+    stream << "Hello, " << "ostring" << "stream";
+    stream << std::endl;
+    
+    std::string string = stream.str();
+    const char* s = string.c_str();
+    
+    printf("%s", s);
+}
+```
 
 
 
 
 
-## 8、utilities库
+## 17、utilities库
 
-### (1) std::bind
+### (1) std::bind函数
 
 std::bind函数的签名，如下
 
@@ -1032,7 +1227,7 @@ std::bind函数常用的几个用法
 
 
 
-### (2) std::shared_ptr
+### (2) std::shared_ptr类
 
 std::shared_ptr是C++智能指针(Smart Poiner)的一种，它持有对象的拥有权，几个shared_ptr指针可以拥有同一个对象。对象的销毁和内存释放，满足下面两个条件之一：
 
@@ -1046,9 +1241,42 @@ std::shared_ptr是C++智能指针(Smart Poiner)的一种，它持有对象的拥
 > - the last remaining `shared_ptr` owning the object is destroyed;
 > - the last remaining `shared_ptr` owning the object is assigned another pointer via [operator=](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/shared_ptr/operator%3D.html) or [reset()](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/shared_ptr/reset.html).
 
+类型声明，如下
+
+| Defined in header `<memory>`          | C++版本       |
+| ------------------------------------- | ------------- |
+| template< class T > class shared_ptr; | (since C++11) |
 
 
-#### a. std::make_shared函数
+
+#### a. 构造函数
+
+std::shared_ptr类的构造函数，签名如下
+
+| 函数签名                                                     | 序号 | C++版本            |
+| ------------------------------------------------------------ | ---- | ------------------ |
+| constexpr shared_ptr() noexcept;                             | (1)  |                    |
+| constexpr shared_ptr( [std::nullptr_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/nullptr_t.html) ) noexcept; | (2)  |                    |
+| template< class Y >  explicit shared_ptr( Y* ptr );          | (3)  |                    |
+| template< class Y, class Deleter >  shared_ptr( Y* ptr, Deleter d ); | (4)  |                    |
+| template< class Deleter >  shared_ptr( [std::nullptr_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/nullptr_t.html) ptr, Deleter d ); | (5)  |                    |
+| template< class Y, class Deleter, class Alloc >  shared_ptr( Y* ptr, Deleter d, Alloc alloc ); | (6)  |                    |
+| template< class Deleter, class Alloc >  shared_ptr( [std::nullptr_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/nullptr_t.html) ptr, Deleter d, Alloc alloc ); | (7)  |                    |
+| template< class Y >  shared_ptr( const shared_ptr<Y>& r, element_type* ptr ) noexcept; | (8)  |                    |
+| template< class Y >  shared_ptr( shared_ptr<Y>&& r, element_type* ptr ) noexcept; | (8)  | (since C++20)      |
+| shared_ptr( const shared_ptr& r ) noexcept;                  | (9)  |                    |
+| template< class Y >  shared_ptr( const shared_ptr<Y>& r ) noexcept; | (9)  |                    |
+| shared_ptr( shared_ptr&& r ) noexcept;                       | (10) |                    |
+| template< class Y >  shared_ptr( shared_ptr<Y>&& r ) noexcept; | (10) |                    |
+| template< class Y >  explicit shared_ptr( const [std::weak_ptr](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/weak_ptr.html)<Y>& r ); | (11) |                    |
+| template< class Y >  shared_ptr( [std::auto_ptr](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/auto_ptr.html)<Y>&& r ); | (12) | (removed in C++17) |
+| template< class Y, class Deleter >  shared_ptr( [std::unique_ptr](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/unique_ptr.html)<Y, Deleter>&& r ); | (13) |                    |
+
+
+
+
+
+### (3) std::make_shared函数
 
 std::make_shared函数，用于创建std::shared_ptr指针。
 
@@ -1056,13 +1284,13 @@ std::make_shared的签名，如下
 
 | 函数签名                                                     | 序号 | C++版本                            |
 | ------------------------------------------------------------ | ---- | ---------------------------------- |
-| template< class T, class... Args ><br/>shared_ptr<T> make_shared( Args&&... args ); | (1)  | (since C++11)<br/>(T is not array) |
-| template< class T ><br/>shared_ptr<T> make_shared( [std::size_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/size_t.html) N ); | (2)  | (since C++20)<br/>(T is U[])       |
-| template< class T ><br/>shared_ptr<T> make_shared();         | (3)  | (since C++20)<br/>(T is U[N])      |
-| template< class T ><br/>shared_ptr<T> make_shared( [std::size_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/size_t.html) N, const [std::remove_extent_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/remove_extent.html)<T>& u ); | (4)  | (since C++20)<br/>(T is U[])       |
-| template< class T ><br/>shared_ptr<T> make_shared( const [std::remove_extent_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/remove_extent.html)<T>& u ); | (5)  | (since C++20)<br/>(T is U[N])      |
-| template< class T ><br/>shared_ptr<T> make_shared_for_overwrite(); | (6)  | (since C++20)<br/>(T is not U[])   |
-| template< class T ><br/>shared_ptr<T> make_shared_for_overwrite( [std::size_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/size_t.html) N ); | (7)  | (since C++20)<br/>(T is U[])       |
+| template< class T, class... Args ><br/>shared_ptr< T > make_shared( Args&&... args ); | (1)  | (since C++11)<br/>(T is not array) |
+| template< class T ><br/>shared_ptr< T > make_shared( [std::size_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/size_t.html) N ); | (2)  | (since C++20)<br/>(T is U[])       |
+| template< class T ><br/>shared_ptr< T > make_shared();       | (3)  | (since C++20)<br/>(T is U[N])      |
+| template< class T ><br/>shared_ptr< T > make_shared( [std::size_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/size_t.html) N, const [std::remove_extent_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/remove_extent.html)<T>& u ); | (4)  | (since C++20)<br/>(T is U[])       |
+| template< class T ><br/>shared_ptr< T > make_shared( const [std::remove_extent_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/remove_extent.html)<T>& u ); | (5)  | (since C++20)<br/>(T is U[N])      |
+| template< class T ><br/>shared_ptr< T > make_shared_for_overwrite(); | (6)  | (since C++20)<br/>(T is not U[])   |
+| template< class T ><br/>shared_ptr< T > make_shared_for_overwrite( [std::size_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/size_t.html) N ); | (7)  | (since C++20)<br/>(T is U[])       |
 
 定义在`<memory>`头文件中。
 
@@ -1070,7 +1298,7 @@ std::make_shared的签名，如下
 
 
 
-##### 1. 创建shared_ptr指针
+#### a. 创建shared_ptr指针
 
 创建shared_ptr指针有两种方式
 
@@ -1108,7 +1336,7 @@ std::make_shared的签名，如下
 
 
 
-##### 2. std::make_shared函数返回值使用auto类型
+#### b. std::make_shared函数返回值使用auto类型
 
 std::make_shared函数类型是std::shared_ptr，但是也可以使用auto类型，让编译器自己推断类型。
 
@@ -1123,7 +1351,7 @@ std::make_shared函数类型是std::shared_ptr，但是也可以使用auto类型
 
 
 
-##### 3. std::make_shared函数使用标准库类型
+#### c. std::make_shared函数使用标准库类型
 
 上面例子中`std::shared_ptr<int>`，T是int类型，是基本类型，但实际T也可以标准库类型。
 
@@ -1140,7 +1368,7 @@ std::make_shared函数类型是std::shared_ptr，但是也可以使用auto类型
 
 
 
-##### 4. std::make_shared函数使用自定义类
+#### d. std::make_shared函数使用自定义类
 
 官方文档[^10]提供下面的示例代码，如下
 
@@ -1173,7 +1401,41 @@ struct C
 
 
 
-## 9、C++ Hook
+
+
+ISSUE
+
+https://stackoverflow.com/questions/8112656/objective-c-blocks-and-c-objects
+
+
+
+TODO：
+
+依赖的lib：gmock
+
+依赖的头文件：#include <gmock/gmock.h>
+
+下载地址：https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
+
+https://chromium.googlesource.com/external/github.com/google/googletest/+/HEAD/docs/reference/mocking.md
+
+
+
+比较2个版本号字符串
+
+C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
+
+
+
+右值引用&&
+
+https://stackoverflow.com/questions/5481539/what-does-t-double-ampersand-mean-in-c11
+
+
+
+
+
+## 18、C++ Hook
 
 ### (1) hook new和delete操作符
 
@@ -1325,7 +1587,7 @@ public:
 
 
 
-## 10、C++编译常见报错
+## 19、C++编译常见报错
 
 ### (1)  "vtable for XXX", referenced from:
 
@@ -1368,58 +1630,6 @@ public:
 
 
 
-## 11、其他TODO
-
-### (1) using
-
-（1）别名
-
-C++11支持using用于别名
-
-[1] https://stackoverflow.com/a/20791007
-
-
-
-### (2) R语法
-
-格式：prefix(optional) R "delimiter( raw_characters )delimiter"
-
-[1] https://en.cppreference.com/w/cpp/language/string_literal
-
-
-
-ISSUE
-
-https://stackoverflow.com/questions/8112656/objective-c-blocks-and-c-objects
-
-
-
-
-
-TODO：
-
-依赖的lib：gmock
-
-依赖的头文件：#include <gmock/gmock.h>
-
-下载地址：https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
-
-https://chromium.googlesource.com/external/github.com/google/googletest/+/HEAD/docs/reference/mocking.md
-
-
-
-比较2个版本号字符串
-
-C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
-
-
-
-
-
-
-
-
-
 ## References
 
 [^1]:https://en.cppreference.com/w/cpp/language/lambda
@@ -1429,7 +1639,7 @@ C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
 
 [^4]:https://www.geeksforgeeks.org/lambda-expression-in-c/
 
-[^5]:https://en.cppreference.com/w/cpp
+[^5]:https://en.cppreference.com/w/cpp/language
 
 [^6]:https://thispointer.com/stdbind-tutorial-and-usage-details/
 
@@ -1446,3 +1656,7 @@ C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
 [^15]:https://stackoverflow.com/questions/31861803/a-missing-vtable-usually-means-the-first-non-inline-virtual-member-function-has
 [^16]:https://stackoverflow.com/questions/1458180/vtable-for-referenced-from-compile-error-xcode
 [^17]:https://learn.microsoft.com/en-us/cpp/cpp/inline-functions-cpp?view=msvc-170
+[^18]:https://en.cppreference.com/w/cpp/thread/lock_guard
+[^19]:https://en.cppreference.com/w/cpp/keyword
+[^20]:https://en.cppreference.com/w/cpp/keyword/using
+

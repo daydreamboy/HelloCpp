@@ -14,6 +14,7 @@
 		4F39BE16277C9ADB00BAF59E /* Test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE15277C9ADB00BAF59E /* Test.mm */; };
 		4F39BE1B277C9D1400BAF59E /* Test_string.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE1A277C9D1400BAF59E /* Test_string.mm */; };
 		4F3AC4CE296AE2180027A8E1 /* Test_call_once.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F3AC4CD296AE2180027A8E1 /* Test_call_once.mm */; };
+		4F4311812A38707100F4D2C1 /* Test_std_lock_guard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4311802A38707100F4D2C1 /* Test_std_lock_guard.mm */; };
 		4F4F399029B5E33E00FDF8E5 /* Test_std_bind.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F398F29B5E33E00FDF8E5 /* Test_std_bind.mm */; };
 		4F532A4C2A11D02100A69160 /* DefineStaticMember.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F532A4A2A11D02100A69160 /* DefineStaticMember.cpp */; };
 		4F532A532A11E67A00A69160 /* AbstractClass1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F532A512A11E67A00A69160 /* AbstractClass1.cpp */; };
@@ -83,6 +84,7 @@
 		4F39BE15277C9ADB00BAF59E /* Test.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test.mm; sourceTree = "<group>"; };
 		4F39BE1A277C9D1400BAF59E /* Test_string.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_string.mm; sourceTree = "<group>"; };
 		4F3AC4CD296AE2180027A8E1 /* Test_call_once.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_call_once.mm; sourceTree = "<group>"; };
+		4F4311802A38707100F4D2C1 /* Test_std_lock_guard.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_std_lock_guard.mm; sourceTree = "<group>"; };
 		4F4F398F29B5E33E00FDF8E5 /* Test_std_bind.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_std_bind.mm; sourceTree = "<group>"; };
 		4F532A4A2A11D02100A69160 /* DefineStaticMember.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DefineStaticMember.cpp; sourceTree = "<group>"; };
 		4F532A4B2A11D02100A69160 /* DefineStaticMember.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DefineStaticMember.hpp; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				4F20EBAC296998F20029B8B9 /* Test_lambda_expression.mm */,
 				4FD17251277DAB54000F8F49 /* Test_move.m */,
 				4F4F398F29B5E33E00FDF8E5 /* Test_std_bind.mm */,
+				4F4311802A38707100F4D2C1 /* Test_std_lock_guard.mm */,
 				4F718F232A04E5D0009E9093 /* Test_std_make_shared.mm */,
 				4F39BE1A277C9D1400BAF59E /* Test_string.mm */,
 				4FA0079B277D9C8F000B2746 /* Test_vector.mm */,
@@ -624,6 +627,7 @@
 				4F62F0732A10E323008EA2D9 /* DerivedClass1.cpp in Sources */,
 				4F532A5B2A1203F600A69160 /* AbstractClass2.cpp in Sources */,
 				4F532A4C2A11D02100A69160 /* DefineStaticMember.cpp in Sources */,
+				4F4311812A38707100F4D2C1 /* Test_std_lock_guard.mm in Sources */,
 				4F62F0702A10E263008EA2D9 /* BaseClass1.cpp in Sources */,
 				4F9CBABF2A289D2D00CFBE71 /* Test_block.mm in Sources */,
 				4FD17252277DAB54000F8F49 /* Test_move.m in Sources */,
