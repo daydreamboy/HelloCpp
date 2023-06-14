@@ -421,11 +421,18 @@ TODO: https://learn.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=m
 
 
 
-### (2) 字符串字母量(String literal)
+### (2) 字符串字面量(String literal)
 
-格式：prefix(optional) R "delimiter( raw_characters )delimiter"
+C++的字符串字面量(String literal)，有多种语法格式，官方文档[^21]提供格式，如下
 
-[1] https://en.cppreference.com/w/cpp/language/string_literal
+| 语法格式                                                     | 序号 | C++版本       |
+| ------------------------------------------------------------ | ---- | ------------- |
+| "*s-char-sequence* ﻿(optional)"                               | (1)  |               |
+| L"*s-char-sequence* ﻿(optional)"                              | (2)  |               |
+| u8"*s-char-sequence* ﻿(optional)"                             | (3)  | (since C++11) |
+| u"*s-char-sequence* ﻿(optional)"`                             | (4)  | (since C++11) |
+| U"*s-char-sequence* ﻿(optional)"                              | (5)  | (since C++11) |
+| *prefix* ﻿(optional) R"*d-char-sequence* ﻿(optional)(*r-char-sequence* ﻿(optional))*d-char-sequence* ﻿(optional)" | (6)  | (since C++11) |
 
 
 
@@ -1659,4 +1666,6 @@ public:
 [^18]:https://en.cppreference.com/w/cpp/thread/lock_guard
 [^19]:https://en.cppreference.com/w/cpp/keyword
 [^20]:https://en.cppreference.com/w/cpp/keyword/using
+
+[^21]:https://en.cppreference.com/w/cpp/language/string_literal
 
