@@ -7,6 +7,3 @@
 
 #import "WCCPPTool.h"
 
-@implementation WCCPPTool
-
-@end

@@ -11,7 +11,7 @@
 		4F20EBAD296998F20029B8B9 /* Test_lambda_expression.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F20EBAC296998F20029B8B9 /* Test_lambda_expression.mm */; };
 		4F23676929D453D700563DF5 /* Hook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F23676729D453D700563DF5 /* Hook.cpp */; };
 		4F39BE0E277C9A1400BAF59E /* WCCPPTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE0D277C9A1400BAF59E /* WCCPPTool.mm */; };
-		4F39BE16277C9ADB00BAF59E /* Test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE15277C9ADB00BAF59E /* Test.mm */; };
+		4F39BE16277C9ADB00BAF59E /* Test_WCCPPMacroTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE15277C9ADB00BAF59E /* Test_WCCPPMacroTool.mm */; };
 		4F39BE1B277C9D1400BAF59E /* Test_string.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE1A277C9D1400BAF59E /* Test_string.mm */; };
 		4F3AC4CE296AE2180027A8E1 /* Test_call_once.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F3AC4CD296AE2180027A8E1 /* Test_call_once.mm */; };
 		4F4311812A38707100F4D2C1 /* Test_std_lock_guard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F4311802A38707100F4D2C1 /* Test_std_lock_guard.mm */; };
@@ -33,6 +33,8 @@
 		4F72D3BC24CEC28F00D25E53 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F72D3BB24CEC28F00D25E53 /* main.cpp */; };
 		4F72D3C224CEC3A400D25E53 /* MyService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F72D3C024CEC3A400D25E53 /* MyService.cpp */; };
 		4F95F49E2A3AAF0B00D14779 /* Test_breakpoint_for_cpp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F95F49D2A3AAF0B00D14779 /* Test_breakpoint_for_cpp.mm */; };
+		4F95F4A12A3AE41700D14779 /* Test_WCCPPTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F95F4A02A3AE41700D14779 /* Test_WCCPPTool.mm */; };
+		4F95F4A22A3AE46E00D14779 /* WCCPPTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE0D277C9A1400BAF59E /* WCCPPTool.mm */; };
 		4F9CBABF2A289D2D00CFBE71 /* Test_block.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F9CBABE2A289D2D00CFBE71 /* Test_block.mm */; };
 		4F9CBAC82A28A08A00CFBE71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9CBAC72A28A08A00CFBE71 /* AppDelegate.m */; };
 		4F9CBACE2A28A08A00CFBE71 /* BlockCaptureThisPointerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F9CBACD2A28A08A00CFBE71 /* BlockCaptureThisPointerViewController.mm */; };
@@ -82,7 +84,7 @@
 		4F39BE0C277C9A1400BAF59E /* WCCPPTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCCPPTool.h; sourceTree = "<group>"; };
 		4F39BE0D277C9A1400BAF59E /* WCCPPTool.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WCCPPTool.mm; sourceTree = "<group>"; };
 		4F39BE13277C9ADB00BAF59E /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F39BE15277C9ADB00BAF59E /* Test.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test.mm; sourceTree = "<group>"; };
+		4F39BE15277C9ADB00BAF59E /* Test_WCCPPMacroTool.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_WCCPPMacroTool.mm; sourceTree = "<group>"; };
 		4F39BE1A277C9D1400BAF59E /* Test_string.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_string.mm; sourceTree = "<group>"; };
 		4F3AC4CD296AE2180027A8E1 /* Test_call_once.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_call_once.mm; sourceTree = "<group>"; };
 		4F4311802A38707100F4D2C1 /* Test_std_lock_guard.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_std_lock_guard.mm; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		4F72D3C024CEC3A400D25E53 /* MyService.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MyService.cpp; sourceTree = "<group>"; };
 		4F72D3C124CEC3A400D25E53 /* MyService.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MyService.hpp; sourceTree = "<group>"; };
 		4F95F49D2A3AAF0B00D14779 /* Test_breakpoint_for_cpp.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_breakpoint_for_cpp.mm; sourceTree = "<group>"; };
+		4F95F4A02A3AE41700D14779 /* Test_WCCPPTool.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_WCCPPTool.mm; sourceTree = "<group>"; };
 		4F9CBABE2A289D2D00CFBE71 /* Test_block.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_block.mm; sourceTree = "<group>"; };
 		4F9CBAC42A28A08A00CFBE71 /* HelloWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F9CBAC62A28A08A00CFBE71 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -218,7 +221,8 @@
 				4F718F232A04E5D0009E9093 /* Test_std_make_shared.mm */,
 				4F39BE1A277C9D1400BAF59E /* Test_string.mm */,
 				4FA0079B277D9C8F000B2746 /* Test_vector.mm */,
-				4F39BE15277C9ADB00BAF59E /* Test.mm */,
+				4F39BE15277C9ADB00BAF59E /* Test_WCCPPMacroTool.mm */,
+				4F95F4A02A3AE41700D14779 /* Test_WCCPPTool.mm */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -644,12 +648,14 @@
 				4F9CBABF2A289D2D00CFBE71 /* Test_block.mm in Sources */,
 				4FD17252277DAB54000F8F49 /* Test_move.m in Sources */,
 				4F62F06C2A10E176008EA2D9 /* Test_static_member.mm in Sources */,
-				4F39BE16277C9ADB00BAF59E /* Test.mm in Sources */,
+				4F39BE16277C9ADB00BAF59E /* Test_WCCPPMacroTool.mm in Sources */,
 				4F39BE1B277C9D1400BAF59E /* Test_string.mm in Sources */,
+				4F95F4A12A3AE41700D14779 /* Test_WCCPPTool.mm in Sources */,
 				4FA0079C277D9C8F000B2746 /* Test_vector.mm in Sources */,
 				4F532A582A12039800A69160 /* ConcreteClass1.cpp in Sources */,
 				4F718F242A04E5D0009E9093 /* Test_std_make_shared.mm in Sources */,
 				4F532A552A12000F00A69160 /* Test_abstract_class.mm in Sources */,
+				4F95F4A22A3AE46E00D14779 /* WCCPPTool.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

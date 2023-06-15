@@ -1,20 +1,26 @@
 //
-//  Test.m
+//  Test_WCCPPMacroTool.m
 //  Test
 //
 //  Created by wesley_chen on 2021/12/29.
 //
 
-#import <XCTest/XCTest.h>
 #import "WCCPPMacroTool.h"
-#include <string>
-#include <iostream>
 
-@interface Test : XCTestCase
+#import <XCTest/XCTest.h>
+
+#include <string>
+#include <vector>
+
+#include <iostream>
+#include <typeinfo>
+#include <cxxabi.h>
+
+@interface Test_WCCPPMacroTool : XCTestCase
 
 @end
 
-@implementation Test
+@implementation Test_WCCPPMacroTool
 
 - (void)test_CPPStringFromNSString {
     NSString *nsString;
@@ -77,6 +83,22 @@
     nsString = NSStringFromCPPString(cppString3);
     NSLog(@"%@", nsString);
     XCTAssertEqualObjects(nsString, @"");
+}
+
+- (void)test_WCDumpType {
+    // Case 1: C type
+    WCDumpType(int)
+    WCDumpType(int64_t)
+    
+    WCDumpType(double)
+    WCDumpType(float)
+    
+    WCDumpType(char)
+    WCDumpType(bool)
+    
+    // Case 2: C++ type
+    WCDumpType(std::string)
+    WCDumpType(std::vector<std::string>)
 }
 
 @end

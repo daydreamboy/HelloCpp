@@ -9,6 +9,8 @@
 
 #include <string>
 #include <iostream>
+#include <typeinfo>
+#include <cxxabi.h>
 
 class A {
 public:
@@ -53,6 +55,17 @@ public:
     // Note: set breakpoint B::getString(std::string) not work
     // should set breakpoint B::getString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
     output = b.getString("1");
+    
+//    const std::type_info& ti = typeid(std::string);
+//    int status;
+//    char* demangled_name = abi::__cxa_demangle(ti.name(), nullptr, nullptr, &status);
+//    if (status == 0) {
+//        std::cout << demangled_name << std::endl;
+//        free(demangled_name);
+//    } else {
+//        std::cerr << "[WCDumpType] " << ti.name() << ", error: " << status << std::endl;
+//    }
+//
 }
 
 @end

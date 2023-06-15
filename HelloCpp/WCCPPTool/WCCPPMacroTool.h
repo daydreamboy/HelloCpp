@@ -40,4 +40,27 @@ if (cString_ != NULL) { \
 returnedString_; \
 })
 
+/**
+ Dump type info for C++ type, e.g. std::string, int, ...
+ 
+ @param type_ the C++ type
+ 
+ @header
+ #include <iostream>
+ #include <typeinfo>
+ #include <cxxabi.h>
+ */
+#define WCDumpType(type_) \
+do { \
+    const std::type_info& ti = typeid(type_); \
+    int status; \
+    char* demangled_name = abi::__cxa_demangle(ti.name(), nullptr, nullptr, &status); \
+    if (status == 0) { \
+        std::cout <<  #type_ << " = " << demangled_name << std::endl; \
+        free(demangled_name); \
+    } else { \
+        std::cerr << "[WCDumpType] " << ti.name() << ", error: " << status << std::endl; \
+    } \
+} while (0);
+
 #endif /* WCCPPMacroTool_h */
