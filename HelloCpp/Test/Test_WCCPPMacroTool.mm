@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 #include <iostream>
 #include <typeinfo>
@@ -98,7 +99,10 @@
     
     // Case 2: C++ type
     WCDumpType(std::string)
+    WCDumpType(std::vector<int>)
     WCDumpType(std::vector<std::string>)
+    WCDumpType(std::map<int, int>)
+    WCDumpType(std::map<std::string, std::string>)
 }
 
 @end

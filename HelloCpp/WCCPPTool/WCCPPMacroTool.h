@@ -43,20 +43,20 @@ returnedString_; \
 /**
  Dump type info for C++ type, e.g. std::string, int, ...
  
- @param type_ the C++ type
+ @param ... the C++ type
  
  @header
  #include <iostream>
  #include <typeinfo>
  #include <cxxabi.h>
  */
-#define WCDumpType(type_) \
+#define WCDumpType(...) \
 do { \
-    const std::type_info& ti = typeid(type_); \
+    const std::type_info& ti = typeid(__VA_ARGS__); \
     int status; \
     char* demangled_name = abi::__cxa_demangle(ti.name(), nullptr, nullptr, &status); \
     if (status == 0) { \
-        std::cout <<  #type_ << " = " << demangled_name << std::endl; \
+        std::cout <<  #__VA_ARGS__ << " = " << demangled_name << std::endl; \
         free(demangled_name); \
     } else { \
         std::cerr << "[WCDumpType] " << ti.name() << ", error: " << status << std::endl; \
