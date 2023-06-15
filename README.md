@@ -1440,9 +1440,17 @@ https://stackoverflow.com/questions/5481539/what-does-t-double-ampersand-mean-in
 
 
 
+## 18、C++调试
+
+### (1) 调试成员函数
 
 
-## 18、C++ Hook
+
+
+
+
+
+## 19、C++ Hook
 
 ### (1) hook new和delete操作符
 
@@ -1594,7 +1602,7 @@ public:
 
 
 
-## 19、C++编译常见报错
+## 20、C++编译常见报错
 
 ### (1)  "vtable for XXX", referenced from:
 
