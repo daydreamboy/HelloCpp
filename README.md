@@ -81,6 +81,23 @@
 
 ### (1) typeid
 
+`typeid`关键词，用于操作符，它的作用是查询类型的信息。
+
+语法格式，如下
+
+| 语法格式                   | 序号 |
+| -------------------------- | ---- |
+| **typeid** ( *type*)       | (1)  |
+| **typeid** ( *expression*) | (2)  |
+
+说明
+
+> type和expression是class类型或者class类型的引用，那么它不能是[incomplete type](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/type%23Incomplete_type.html)类型
+
+头文件:  `<typeinfo>`
+
+typeid的返回值是`std::type_info`类型，定义在 `<typeinfo>`中。
+
 
 
 
