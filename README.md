@@ -459,6 +459,18 @@ C++的字符串字面量(String literal)，有多种语法格式，官方文档[
 
 
 
+### (3) 值类别(Value categories)
+
+
+
+https://en.cppreference.com/w/cpp/language/value_category
+
+https://www.scs.stanford.edu/~dm/blog/decltype.html
+
+https://stackoverflow.com/questions/3601602/what-are-rvalues-lvalues-xvalues-glvalues-and-prvalues
+
+
+
 
 
 ## 6、声明(Declarations)
@@ -1427,6 +1439,27 @@ struct C
 
 
 
+### (4) std::move函数
+
+函数声明，如下
+
+| Defined in header `<utility>`                                | C++版本                     |
+| ------------------------------------------------------------ | --------------------------- |
+| template< class T ><br/>typename std::remove_reference< T >::type&& move( T&& t ) noexcept; | (since C++11) (until C++14) |
+| template< class T ><br/>constexpr std::remove_reference_t< T >&& move( T&& t ) noexcept; | (since C++14)               |
+
+std::move用于指示编译器某个对象的内容可以被移出去，能将一个对象内容移入到另一个对象中。
+
+官方文档描述[^22]，如下
+
+> `std::move` is used to *indicate* that an object `t` may be "moved from", i.e. allowing the efficient transfer of resources from `t` to another object. 
+>
+> In particular, `std::move` produces an [xvalue expression](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/value_category.html) that identifies its argument `t`. It is exactly equivalent to a `static_cast` to an rvalue reference type.
+
+上面文档，提到std::move函数的返回值是一个xvalue表达式，确切地说是一个rvalue引用类型(也称为右值引用)。
+
+> xvalue、rvalue属于值类别(Value categories)的概念，具体参考官方文档[^23]
+
 
 
 
@@ -1699,4 +1732,7 @@ public:
 [^20]:https://en.cppreference.com/w/cpp/keyword/using
 
 [^21]:https://en.cppreference.com/w/cpp/language/string_literal
+
+[^22]:https://en.cppreference.com/w/cpp/utility/move
+[^23]:https://en.cppreference.com/w/cpp/language/value_category
 

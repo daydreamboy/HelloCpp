@@ -1,5 +1,5 @@
 //
-//  Test_vector.m
+//  Test_std_vector.m
 //  Test
 //
 //  Created by wesley_chen on 2021/12/30.
@@ -11,11 +11,11 @@
 #include <iostream>
 #include <iomanip>
 
-@interface Test_vector : XCTestCase
+@interface Test_std_vector : XCTestCase
 
 @end
 
-@implementation Test_vector
+@implementation Test_std_vector
 
 - (void)test_push_back {
     // create a string vector

@@ -1,5 +1,5 @@
 //
-//  Test_call_once.m
+//  Test_std_call_once.m
 //  Test
 //
 //  Created by wesley_chen on 2023/1/8.
@@ -31,11 +31,11 @@ public:
     }
 };
 
-@interface Test_call_once : XCTestCase
+@interface Test_std_call_once : XCTestCase
 
 @end
 
-@implementation Test_call_once
+@implementation Test_std_call_once
 
 std::once_flag flag1, flag2;
  

@@ -63,4 +63,21 @@ do { \
     } \
 } while (0);
 
+
+#pragma mark - Test Value Categories
+
+template<typename T> constexpr const char *__category = "prvalue";
+template<typename T> constexpr const char *__category<T&> = "lvalue";
+template<typename T> constexpr const char *__category<T&&> = "xvalue";
+
+/**
+ Test the expression belong to which value category (prvalue/lvalue/xvalue)
+ 
+ @param E the expression
+ 
+ @discussion This macro will print the value category
+ @see https://www.scs.stanford.edu/~dm/blog/decltype.html
+ */
+#define SHOW_VALUE_CATEGORY(E) std::cout << #E << ": " << __category<decltype((E))> << std::endl
+
 #endif /* WCCPPMacroTool_h */

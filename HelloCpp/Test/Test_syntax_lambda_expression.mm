@@ -1,5 +1,5 @@
 //
-//  Test_lambda_expression.m
+//  Test_syntax_lambda_expression.m
 //  Test
 //
 //  Created by wesley_chen on 2023/1/7.
@@ -21,11 +21,11 @@ void printVector(std::vector<int> v)
     std::cout << std::endl;
 }
 
-@interface Test_lambda_expression : XCTestCase
+@interface Test_syntax_lambda_expression : XCTestCase
 
 @end
 
-@implementation Test_lambda_expression
+@implementation Test_syntax_lambda_expression
 
 // Example code from https://www.geeksforgeeks.org/lambda-expression-in-c/
 - (void)test_lambda_expression_work_with_algorithm_function_as_parameter {

@@ -105,4 +105,17 @@
     WCDumpType(std::map<std::string, std::string>)
 }
 
+- (void)test_SHOW_VALUE_CATEGORY {
+    std::string str1 = "Salut";
+    std::string str2 = std::move(str1);
+    std::string str3 = std::move("hello");
+    
+    SHOW_VALUE_CATEGORY("hello");
+    SHOW_VALUE_CATEGORY(std::move("hello"));
+    SHOW_VALUE_CATEGORY(str3);
+    SHOW_VALUE_CATEGORY(str3 = std::move("hello"));
+    SHOW_VALUE_CATEGORY(1);
+    SHOW_VALUE_CATEGORY(1 + 2);
+}
+
 @end
