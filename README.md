@@ -471,9 +471,102 @@ https://stackoverflow.com/questions/3601602/what-are-rvalues-lvalues-xvalues-glv
 
 
 
+```mermaid
+graph BT
+lvalue -->|Primary| glvalue
+xvalue -->|Primary| glvalue
+
+xvalue -->|Primary| rvalue
+prvalue -->|Primary| rvalue
+
+glvalue -->|Mixed| expression
+rvalue -->|Mixed| expression
+```
+
+
+
+
+
 
 
 ## 6、声明(Declarations)
+
+### (1) 引用(Reference)
+
+引用(Reference)的定义是，声明一个有名变量作为引用，相当于现有对象或函数的别名。
+
+官方文档的描述[^24]，如下
+
+> Declares a named variable as a reference, that is, an alias to an already-existing object or function.
+
+语法格式，如下
+
+| 语法格式                              | 序号 | C++版本       |
+| ------------------------------------- | ---- | ------------- |
+| **&** *attr* ﻿(optional) *declarator*  | (1)  |               |
+| **&&** *attr* ﻿(optional) *declarator* | (2)  | (since C++11) |
+
+(1) 左值引用声明(Lvalue reference declarator)：声明格式`S& D;`，声明D为左值引用，其类型根据S定义
+
+(2) 右值引用声明(Rvalue reference declarator)：声明格式`S&& D;`，声明D为右值引用，其类型根据S定义
+
+对应官方文档的描述[^24]，如下
+
+> (1) **Lvalue reference declarator**: the declaration S& D; declares `D` as an *lvalue reference* to the type determined by *decl-specifier-seq* `S`.
+>
+> (2) **Rvalue reference declarator**: the declaration S&& D; declares `D` as an *rvalue reference* to the type determined by *decl-specifier-seq* `S`.
+>
+> | *declarator* | -    | any [declarator](https://en.cppreference.com/w/cpp/language/declarations) except another reference declarator (there are no references to references) |
+> | ------------ | ---- | ------------------------------------------------------------ |
+> | *attr*       | -    | (since C++11) list of [attributes](https://en.cppreference.com/w/cpp/language/attributes) |
+
+关于引用有几点要求
+
+* 引用必须初始化为一个有效的对象或者函数
+* 没有void的引用类型
+* 没有引用的引用
+* 引用类型在顶级作用域内不能使用const或volatile修饰
+* 引用不是新对象，一般情况不会占用空间（某些情况，编译器会分配存储空间）
+* 没有C数组的引用、没有指针的引用
+
+官方文档的描述[^24]，如下
+
+> A reference is required to be initialized to refer to a valid object or function: see [reference initialization](https://en.cppreference.com/w/cpp/language/reference_initialization).
+>
+> There are no references to void and no references to references.
+>
+> Reference types cannot be [cv-qualified](https://en.cppreference.com/w/cpp/language/cv) at the top level; there is no syntax for that in declaration, and if a qualification is added to a typedef-name or [`decltype`](https://en.cppreference.com/w/cpp/language/decltype) specifier, (since C++11) or [type template parameter](https://en.cppreference.com/w/cpp/language/template_parameters#Type_template_parameter), it is ignored.
+>
+> References are not objects; they do not necessarily occupy storage, although the compiler may allocate storage if it is necessary to implement the desired semantics (e.g. a non-static data member of reference type usually increases the size of the class by the amount necessary to store a memory address).
+>
+> Because references are not objects, there are no arrays of references, no pointers to references, and no references to references:
+
+举个例子，如下
+
+```c++
+int& a[3]; // error
+int&* p;   // error
+int& &r;   // error
+```
+
+上面代码如文档所述，
+
+* C数组不支持定义引用变量
+* 指针不支持定义引用变量
+* 不支持定义引用的引用变量
+
+
+
+#### a. 引用合并(Reference collapsing)
+
+引用合并用于别名或者模板的情况，存在引用的引用。编译器按照下面规则进行合并：
+
+* 右值引用的有值引用，则合并为右值引用
+* 其他情况，都合并为有值引用
+
+官方文档描述[^24]，如下
+
+> It is permitted to form references to references through type manipulations in templates or typedefs, in which case the *reference collapsing* rules apply: rvalue reference to rvalue reference collapses to rvalue reference, all other combinations form lvalue reference:
 
 
 
@@ -1735,4 +1828,5 @@ public:
 
 [^22]:https://en.cppreference.com/w/cpp/utility/move
 [^23]:https://en.cppreference.com/w/cpp/language/value_category
+[^24]:https://en.cppreference.com/w/cpp/language/reference
 
