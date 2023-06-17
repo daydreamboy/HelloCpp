@@ -45,6 +45,16 @@
     SHOW_VALUE_CATEGORY(std::move("hello"));
     SHOW_VALUE_CATEGORY(str3);
     SHOW_VALUE_CATEGORY(str3 = std::move("hello"));
+    
+    // Case 3
+    int i1 = 42;
+    int&& rri = std::move(i1); // binds directly to i1
+    std::cout << "i1 is " << i1 << std::endl;
+    
+    // Case 4
+    std::vector<int> v{1, 2, 3, 4, 5};
+    std::vector<int> v2(std::move(v)); // binds an rvalue reference to v
+    assert(v.empty());
 }
 
 - (void)test_std_move_with_vector {

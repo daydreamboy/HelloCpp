@@ -101,4 +101,65 @@ char& char_number(std::string& s, std::size_t n)
     print(std::move(s3));   // rvalue reference
 }
 
+- (void)test_syntax_rvalue_reference_for_temperary_object {
+    // Case 1
+    std::string s1 = "Test";
+    //std::string& lref1 = "Test"; // Error: lvalue ref only apply object or function
+    const std::string& lref1 = "Test";
+    std::string&& rref1 = "Test"; // Ok: rvalue ref apply temp object which compiler create a temp std::string
+  
+    // Case 2
+    //std::string& lref2 = s1 + s1; // Error: lvalue ref can't apply a temperary type
+    const std::string& lref2 = s1 + s1; // okay: lvalue reference to const extends lifetime
+    std::string&& rref2 = s1 + s1; // okay: lvalue reference to const extends lifetime
+    rref2 += "Test"; // okay: can modify through reference to non-const
+    
+    std::cout << rref2 << '\n';
+}
+
+- (void)test_syntax_rvalue_reference_restrict_usage {
+    std::string s1 = "Test";
+    //std::string&& r1 = s1;           // error: can't bind to lvalue
+}
+
+void f(int& x)
+{
+    std::cout << "lvalue reference overload f(" << x << ")\n";
+}
+ 
+void f(const int& x)
+{
+    std::cout << "lvalue reference to const overload f(" << x << ")\n";
+}
+ 
+void f(int&& x)
+{
+    std::cout << "rvalue reference overload f(" << x << ")\n";
+}
+
+- (void)test_syntax_rvalue_reference_function_overload {
+    int i = 1;
+    const int ci = 2;
+ 
+    f(i);  // calls f(int&)
+    f(ci); // calls f(const int&)
+    f(3);  // calls f(int&&)
+           // would call f(const int&) if f(int&&) overload wasn't provided
+    f(std::move(i)); // calls f(int&&)
+ 
+    // rvalue reference variables are lvalues when used in expressions
+    int&& x = 1;
+    f(x);            // calls f(int& x)
+    f(std::move(x)); // calls f(int&& x)
+}
+
+- (void)test_syntax_rvalue_reference_work_with_std_move {
+    int i2 = 42;
+    int&& rri = std::move(i2); // binds directly to i2
+    
+    std::vector<int> v{1, 2, 3, 4, 5};
+    std::vector<int> v2(std::move(v)); // binds an rvalue reference to v
+    assert(v.empty());
+}
+
 @end

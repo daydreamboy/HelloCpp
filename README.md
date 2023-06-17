@@ -919,9 +919,135 @@ const左值引用类型，不能修改变量的内容。
 
 #### c. 右值引用(Rvalue references)
 
-右值引用(Rvalue references)，语法格式是`S&& D;`，用于延长临时对象的生命周期。
+右值引用(Rvalue references)，语法格式是`S&& D;`，用于延长临时对象的生命周期，以及配合使用std::move函数
+
+官方文档描述[^24]，如下
+
+> Rvalue references can be used to [extend the lifetimes](https://en.cppreference.com/w/cpp/language/reference_initialization#Lifetime_of_a_temporary) of temporary objects (note, lvalue references to const can extend the lifetimes of temporary objects too, but they are not modifiable through them):
+
+右值引用(Rvalue references)有几个作用，如下
+
+* 引用临时对象
+* 作为函数形参
+* 实现移动语义
 
 
+
+##### 引用临时对象
+
+举个例子，如下
+
+```c++
+- (void)test_syntax_rvalue_reference_for_temperary_object {
+    // Case 1
+    std::string s1 = "Test";
+    //std::string& lref1 = "Test"; // Error: lvalue ref only apply object or function
+    const std::string& lref1 = "Test";
+    std::string&& rref1 = "Test"; // Ok: rvalue ref apply temp object which compiler create a temp std::string
+  
+    // Case 2
+    //std::string& lref2 = s1 + s1; // Error: lvalue ref can't apply a temperary type
+    const std::string& lref2 = s1 + s1; // okay: lvalue reference to const extends lifetime
+    std::string&& rref2 = s1 + s1; // okay: lvalue reference to const extends lifetime
+    rref2 += "Test"; // okay: can modify through reference to non-const
+    
+    std::cout << rref2 << '\n';
+}
+
+```
+
+在上面例子中，使用const左值引用可以引用临时对象，但是它不能修改对象的内容。
+
+使用有值引用可以引用临时对象，而且可以直接修改对象的内容。
+
+
+
+##### 作为函数形参
+
+右值引用可以作为函数形参。而且可以和左值引用进行重载。
+
+需要注意的是，右值引用作为函数形参，它绑定是rvlaue，即prvalue或者xvalue，而不是按照类型匹配来重载的。而左值引用作为函数形参，它绑定是lvlaue
+
+官方文档描述[^24]，如下
+
+> More importantly, when a function has both rvalue reference and lvalue reference [overloads](https://en.cppreference.com/w/cpp/language/overload_resolution), the rvalue reference overload binds to rvalues (including both prvalues and xvalues), while the lvalue reference overload binds to lvalues:
+
+
+
+举个例子，如下
+
+```c++
+void f(int& x)
+{
+    std::cout << "lvalue reference overload f(" << x << ")\n";
+}
+ 
+void f(const int& x)
+{
+    std::cout << "lvalue reference to const overload f(" << x << ")\n";
+}
+ 
+void f(int&& x)
+{
+    std::cout << "rvalue reference overload f(" << x << ")\n";
+}
+
+- (void)test_syntax_rvalue_reference_function_overload {
+    int i = 1;
+    const int ci = 2;
+ 
+    f(i);  // calls f(int&)
+    f(ci); // calls f(const int&)
+    f(3);  // calls f(int&&)
+           // would call f(const int&) if f(int&&) overload wasn't provided
+    f(std::move(i)); // calls f(int&&)
+ 
+    // rvalue reference variables are lvalues when used in expressions
+    int&& x = 1;
+    f(x);            // calls f(int& x)
+    f(std::move(x)); // calls f(int&& x)
+}
+```
+
+* f(i)调用f(int&)，实参转成形参时变成引用类型
+* f(ci)调用f(const int&)，由于const也是允许函数重载，所以优先匹配f(const int&)，而不是f(int& x)
+* f(3)调用f(int&&)，由于表达式`3`是prvalue，匹配f(int&&)
+* f(std::move(i))调用f(int&&)，由于std::move函数是实现move语义，它一定会返回xvalue，所以匹配匹配f(int&&)
+* f(x)调用f(int& x)，这里不是匹配f(int&&)，直接参考官方文档的注释“rvalue reference variables are lvalues when used in expressions”，意思是右值引用变量作为表达式使用时，就变成lvalue，所以`f(x)`中x就是lvalue了
+* f(std::move(x))调用f(int&& x)，和f(std::move(i))的一样的原因
+
+
+
+##### 实现移动语义
+
+C++11开始引入移动语义（move semantic），主要是使用std::move函数，这个函数会返回一个属于xvalue类别的值。因此，右值引用可以配合std::move函数。
+
+举个例子，如下
+
+```c++
+- (void)test_syntax_rvalue_reference_work_with_std_move {
+    int i2 = 42;
+    int&& rri = std::move(i2); // binds directly to i2
+    
+    std::vector<int> v{1, 2, 3, 4, 5};
+    std::vector<int> v2(std::move(v)); // binds an rvalue reference to v
+    assert(v.empty());
+}
+```
+
+上面例子中将向量v的内容移出到向量v2中，可以减少数据拷贝，提高性能。
+
+
+
+#### d. 转发引用(Forwarding references)
+
+TODO: https://en.cppreference.com/w/cpp/language/reference
+
+
+
+#### e. 悬挂引用(Dangling references)
+
+TODO: https://en.cppreference.com/w/cpp/language/reference
 
 
 
