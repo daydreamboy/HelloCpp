@@ -461,15 +461,23 @@ C++的字符串字面量(String literal)，有多种语法格式，官方文档[
 
 ### (3) 值类别(Value categories)
 
+每个C++表达式（一个操作符和它的操作数、字面量、变量名等），有两个独立的属性：类型（type）和值类别（value category）。
 
+每个表达式属于下面三种基本类别中的一种类别（或者也称分类）
 
-https://en.cppreference.com/w/cpp/language/value_category
+* prvalue (“pure” rvalue)
+* xvalue (an “eXpiring” value)
+* lvalue
 
-https://www.scs.stanford.edu/~dm/blog/decltype.html
+说明
 
-https://stackoverflow.com/questions/3601602/what-are-rvalues-lvalues-xvalues-glvalues-and-prvalues
+> 由于value category的翻译缘故，下文有时候称为值分类，它和值类别是一样的意思
 
+官方文档描述[^23]，如下
 
+> Each C++ [expression](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/expressions.html) (an operator with its operands, a literal, a variable name, etc.) is characterized by two independent properties: a *[type](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/type.html)* and a *value category*. Each expression has some non-reference type, and each expression belongs to exactly one of the three primary value categories: *prvalue*, *xvalue*, and *lvalue*.
+
+关于完整的值类别的构成图，可以参考下图
 
 ```mermaid
 graph BT
@@ -483,9 +491,247 @@ glvalue -->|Mixed| expression
 rvalue -->|Mixed| expression
 ```
 
+这个图来自这篇文章[^25]的图片，按照构成的思路，只是箭头的方向不一样。
+
+根据上面图的构成，可以看出
+
+有三种基本类别(Primary categories)，上面也提到过，这里再赘述下
+
+* prvalue (“pure” rvalue)
+* xvalue (an “eXpiring” value)
+* lvalue
+
+由上面三种类别构成的有两种混合类别(Mixed categories)，如下
+
+* glvalue (“generalized” lvalue)
+* rvalue
+
+每个C++表达式按照分类，即属于两种混合类别(Mixed categories)之一，也属于三种基本类别(Primary categories)之一。
+
+初次理解上面这个值类别的构成图，有点难理解，SO[^26]上也有人提问：
+
+在C++03标准上，表达式属于rvalue或者lvalue
+
+而在C++11标准上，新增了分类，扩大成上面这个值类别构成图，有5种值类别
+
+* prvalue (“pure” rvalue)
+* xvalue (an “eXpiring” value)
+* lvalue
+* glvalue (“generalized” lvalue)
+* rvalue
+
+其中lvalue和rvalue还是保留C++03标准中的概念。
+
+官方文档对这5种值类别的定义[^23]，如下
+
+> - a glvalue (“generalized” lvalue) is an expression whose evaluation determines the identity of an object or function;
+>
+> - a prvalue (“pure” rvalue) is an expression whose evaluation
+>
+>   - computes the value of an operand of a built-in operator (such prvalue has no *result object*), or
+>
+>   - initializes an object (such prvalue is said to have a *result object*).
+>
+>     The result object may be a variable, an object created by new-expression, a temporary created by temporary materialization, or a member thereof. Note that non-void discarded expressions have a result object (the materialized temporary). Also, every class and array prvalue has a result object except when it is the operand of decltype;
+>
+> - an xvalue (an “eXpiring” value) is a glvalue that denotes an object whose resources can be reused;
+> - an lvalue (so-called, historically, because lvalues could appear on the left-hand side of an assignment expression) is a glvalue that is not an xvalue;
+> - an rvalue (so-called, historically, because rvalues could appear on the right-hand side of an assignment expression) is a prvalue or an xvalue.
+
+这里将上面这段文档，按照自己的理解释义一下，不一定完全正确。
+
+由于三种基本类别(Primary categories)是原子的，混合类别(Mixed categories)都是被构成的，这里先释义三种基本类别(Primary categories)。
+
+* prvalue (“pure” rvalue)，纯右值类别，这个类别指的表达式属于下面两种情况
+
+  * 表达式使用内置操作符计算操作数的值，称prvalue没有结果对象。举个例子，`int i = 1 + 2;`，其中`1 + 2`是表达式。
+  * 表达式用于初始化一个对象，称prvalue有结果对象。举个例子，`int i = 1;`，其中`1`是表达式。
+
+  这里的结果对象(result object)，是指new表达式创建的对象、临时实体化的临时对象、成员访问的临时对象
+
+* xvalue (an “eXpiring” value)，是指对象持有资源是可以被重用的。举个例子，表达式`std::move("hello")`属于xvalue，因为它求值后的对象是可以被重用的。
+
+* lvalue(历史缘故，称为左值)。现在含义是属于glvalue，但是要除去xvalue。举个例子，`int i = 1 + 2;`，其中`i`是表达式，属于lvaue。
+
+* glvalue是广义上lvalue，表达式求值能确定对象和函数的标识，这里的标识(identity)，也可以理解为有标识符的表达式。
+* rvalue(历史缘故，称为右值)。现在含义是属于prvalue或xvalue。
 
 
 
+#### a. 基本类别(Primary categories)
+
+这篇文章[^25]提供一种方法让编译器来测试表达式属于哪一种基本类别(Primary categories)。
+
+定义下面宏，如下
+
+```c++
+template<typename T> constexpr const char *category = "prvalue";
+template<typename T> constexpr const char *category<T&> = "lvalue";
+template<typename T> constexpr const char *category<T&&> = "xvalue";
+
+#define SHOW(E) std::cout << #E << ": " << category<decltype((E))> << std::endl
+```
+
+
+
+##### lvalue表达式
+
+官方文档[^23]，如下
+
+> The following expressions are *lvalue expressions*:
+>
+> - the name of a variable, a function, a [template parameter object](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/template_parameters.html#Non-type_template_parameter) (since C++20), or a data member, regardless of type, such as [std::cin](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/io/cin.html) or [std::endl](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/io/manip/endl.html). Even if the variable's type is rvalue reference, the expression consisting of its name is an lvalue expression (but see [Move-eligible expressions](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/value_category.html#Move-eligible_expressions));
+> - a function call or an overloaded operator expression, whose return type is lvalue reference, such as [std::getline](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/string/basic_string/getline.html)([std::cin](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/io/cin.html), str), [std::cout](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/io/cout.html) << 1, str1 = str2, or ++it;
+> - a = b, a += b, a %= b, and all other built-in [assignment and compound assignment](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_assignment.html) expressions;
+> - ++a and --a, the built-in [pre-increment and pre-decrement](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_incdec.html#Built-in_prefix_operators) expressions;
+> - *p, the built-in [indirection](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_indirection_operator) expression;
+> - a[n] and p[n], the built-in [subscript](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_subscript_operator) expressions, where one operand in a[n] is an array lvalue (since C++11);
+> - a.m, the [member of object](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function, or where a is an rvalue and `m` is a non-static data member of object type;
+> - p->m, the built-in [member of pointer](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_member_access_operators) expression, except where `m` is a member enumerator or a non-static member function;
+> - a.*mp, the [pointer to member of object](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_pointer-to-member_access_operators) expression, where a is an lvalue and `mp` is a pointer to data member;
+> - p->*mp, the built-in [pointer to member of pointer](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to data member;
+> - a, b, the built-in [comma](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_other.html#Built-in_comma_operator) expression, where b is an lvalue;
+> - a ? b : c, the [ternary conditional](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_other.html#Conditional_operator) expression for certain b and c (e.g., when both are lvalues of the same type, but see [definition](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_other.html#Conditional_operator) for detail);
+> - a [string literal](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/string_literal.html), such as "Hello, world!";
+> - a cast expression to lvalue reference type, such as static_cast<int&>(x) or static_cast<void(&)(int)>(x);
+> - a non-type [template parameter](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/template_parameters.html) of an lvalue reference type;
+> - a function call or an overloaded operator expression, whose return type is rvalue reference to function; (since C++11)
+> - a cast expression to rvalue reference to function type, such as static_cast<void(&&)(int)>(x). (since C++11)
+>
+> Properties:
+>
+> - Same as glvalue (below).
+> - Address of an lvalue may be taken by built-in address-of operator: &++i[[1\]](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/value_category.html#cite_note-1) and &[std::endl](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/io/manip/endl.html) are valid expressions.
+> - A modifiable lvalue may be used as the left-hand operand of the built-in assignment and compound assignment operators.
+> - An lvalue may be used to [initialize an lvalue reference](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/reference_initialization.html); this associates a new name with the object identified by the expression.
+
+
+
+##### prvalue表达式
+
+官方文档[^23]，如下
+
+> The following expressions are *prvalue expressions*:
+>
+> - a [literal](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/expressions.html#Literals) (except for [string literal](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/string_literal.html)), such as 42, true or nullptr;
+> - a function call or an overloaded operator expression, whose return type is non-reference, such as str.substr(1, 2), str1 + str2, or it++;
+> - a++ and a--, the built-in [post-increment and post-decrement](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_incdec.html#Built-in_postfix_operators) expressions;
+> - a + b, a % b, a & b, a << b, and all other built-in [arithmetic](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_arithmetic.html) expressions;
+> - a && b, a || b, !a, the built-in [logical](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_logical.html) expressions;
+> - a < b, a == b, a >= b, and all other built-in [comparison](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_comparison.html) expressions;
+> - &a, the built-in [address-of](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_address-of_operator) expression;
+> - a.m, the [member of object](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_member_access_operators) expression, where `m` is a member enumerator or a non-static member function[[2\]](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/value_category.html#cite_note-pmfc-2);
+> - p->m, the built-in [member of pointer](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_member_access_operators) expression, where `m` is a member enumerator or a non-static member function[[2\]](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/value_category.html#cite_note-pmfc-2);
+> - a.*mp, the [pointer to member of object](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to member function[[2\]](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/value_category.html#cite_note-pmfc-2);
+> - p->*mp, the built-in [pointer to member of pointer](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_pointer-to-member_access_operators) expression, where `mp` is a pointer to member function[[2\]](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/value_category.html#cite_note-pmfc-2);
+> - a, b, the built-in [comma](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_other.html#Built-in_comma_operator) expression, where b is an rvalue;
+> - a ? b : c, the [ternary conditional](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_other.html#Conditional_operator) expression for certain b and c (see [definition](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_other.html#Conditional_operator) for detail);
+> - a cast expression to non-reference type, such as static_cast<double>(x), [std::string](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/string/basic_string.html){}, or (int)42;
+> - the [`this`](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/this.html) pointer;
+> - an [enumerator](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/enum.html);
+> - a non-type [template parameter](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/template_parameters.html) of a scalar type;
+> - a [lambda expression](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/lambda.html), such as [](int x){ return x * x; }; (since C++11)
+> - a [requires-expression](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/constraints.html), such as requires (T i) { typename T::type; }; (since C++20)
+> - a specialization of a [concept](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/constraints.html), such as [std::equality_comparable](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/concepts/equality_comparable.html)<int>. (since C++20)
+>
+> Properties:
+>
+> - Same as rvalue (below).
+> - A prvalue cannot be [polymorphic](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/object.html#Polymorphic_objects): the [dynamic type](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/type.html#Dynamic_type) of the object it denotes is always the type of the expression.
+> - A non-class non-array prvalue cannot be [cv-qualified](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/cv.html), unless it is [materialized](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/implicit_conversion.html#Temporary_materialization) in order to be [bound to a reference](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/reference_initialization.html) to a cv-qualified type (since C++17). (Note: a function call or cast expression may result in a prvalue of non-class cv-qualified type, but the cv-qualifier is generally immediately stripped out.)
+> - A prvalue cannot have [incomplete type](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/type.html#Incomplete_type) (except for type void, see below, or when used in [`decltype`](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/decltype.html) specifier)
+> - A prvalue cannot have [abstract class type](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/abstract_class.html) or an array thereof.
+
+
+
+##### xvalue表达式
+
+官方文档[^23]，如下
+
+> The following expressions are *xvalue expressions*:
+>
+> - a.m, the [member of object](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_member_access_operators) expression, where a is an rvalue and `m` is a non-static data member of an object type;
+> - a.*mp, the [pointer to member of object](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_pointer-to-member_access_operators) expression, where a is an rvalue and `mp` is a pointer to data member;
+> - a ? b : c, the [ternary conditional](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_other.html#Conditional_operator) expression for certain b and c (see [definition](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_other.html#Conditional_operator) for detail);
+> - a function call or an overloaded operator expression, whose return type is rvalue reference to object, such as std::move(x); (since C++11)
+> - a[n], the built-in [subscript](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/operator_member_access.html#Built-in_subscript_operator) expression, where one operand is an array rvalue; (since C++11)
+> -  a cast expression to rvalue reference to object type, such as static_cast<char&&>(x); (since C++11)
+> - any expression that designates a temporary object, after [temporary materialization](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/implicit_conversion.html#Temporary_materialization).  (since C++17)
+> - a [move-eligible expression](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/value_category.html#Move-eligible_expressions). (since C++23)
+>
+> Properties:
+>
+> - Same as rvalue (below).
+> - Same as glvalue (below).
+>
+> In particular, like all rvalues, xvalues bind to rvalue references, and like all glvalues, xvalues may be [polymorphic](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/object.html#Polymorphic_objects), and non-class xvalues may be [cv-qualified](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/cv.html).
+
+举个例子，如下
+
+```c++
+struct Foo {
+    int x;
+};
+
+Foo createFoo() {
+    return Foo{42};
+}
+
+- (void)test_xvalue {
+    // Case 1
+    SHOW_VALUE_CATEGORY(std::move("hello")); // xvalue
+    
+    // Case 2
+    SHOW_VALUE_CATEGORY(createFoo().x); // xvalue
+    
+    // Case 3
+    int Foo::* p = &Foo::x;
+    int&& x = createFoo().*p;
+    SHOW_VALUE_CATEGORY(createFoo().*p); // xvalue
+    
+    // Case 4
+    int x2 = 42;
+    int&& y = static_cast<int&&>(x2);
+    SHOW_VALUE_CATEGORY(static_cast<int&&>(x));  // xvalue
+    SHOW_VALUE_CATEGORY(y); // lvalue
+    
+    // Case 5
+    int x3 = (int[]){1, 2, 3}[1]; // a[n], the built-in subscript expression, where one operand is an array rvalue;
+    SHOW_VALUE_CATEGORY((int[]){1, 2, 3}[1]); // xvalue
+}
+```
+
+
+
+#### b. 混合类别(Mixed categories)
+
+##### glvalue表达式
+
+官方文档[^23]，如下
+
+> A *glvalue expression* is either lvalue or xvalue. 
+>
+> Properties:
+>
+> - A glvalue may be implicitly converted to a prvalue with lvalue-to-rvalue, array-to-pointer, or function-to-pointer [implicit conversion](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/implicit_conversion.html).
+> - A glvalue may be [polymorphic](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/object.html#Polymorphic_objects): the [dynamic type](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/type.html#Dynamic_type) of the object it identifies is not necessarily the static type of the expression.
+> - A glvalue can have [incomplete type](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/type.html#Incomplete_type), where permitted by the expression.
+
+
+
+##### rvalue表达式
+
+官方文档[^23]，如下
+
+> An *rvalue expression* is either prvalue or xvalue.
+>
+> Properties:
+>
+> - Address of an rvalue cannot be taken by built-in address-of operator: &int(), &i++[[3\]](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/value_category.html#cite_note-3), &42, and &std::move(x) are invalid.
+> - An rvalue can't be used as the left-hand operand of the built-in assignment or compound assignment operators.
+> - An rvalue may be used to [initialize a const lvalue reference](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/reference_initialization.html), in which case the lifetime of the object identified by the rvalue is [extended](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/reference_initialization.html#Lifetime_of_a_temporary) until the scope of the reference ends.
+> - An rvalue may be used to [initialize an rvalue reference](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/reference_initialization.html), in which case the lifetime of the object identified by the rvalue is [extended](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/reference_initialization.html#Lifetime_of_a_temporary) until the scope of the reference ends. (since C++11)
+> - When used as a function argument and when [two overloads](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/overload_resolution.html) of the function are available, one taking rvalue reference parameter and the other taking lvalue reference to const parameter, an rvalue binds to the rvalue reference overload (thus, if both copy and move constructors are available, an rvalue argument invokes the [move constructor](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/language/move_constructor.html), and likewise with copy and move assignment operators). (since C++11)
 
 
 
@@ -1829,4 +2075,7 @@ public:
 [^22]:https://en.cppreference.com/w/cpp/utility/move
 [^23]:https://en.cppreference.com/w/cpp/language/value_category
 [^24]:https://en.cppreference.com/w/cpp/language/reference
+
+[^25]:https://www.scs.stanford.edu/~dm/blog/decltype.html
+[^26]:https://stackoverflow.com/questions/3601602/what-are-rvalues-lvalues-xvalues-glvalues-and-prvalues
 
