@@ -90,19 +90,51 @@
     // Case 1: C type
     WCDumpType(int)
     WCDumpType(int64_t)
-    
+
     WCDumpType(double)
     WCDumpType(float)
-    
+
     WCDumpType(char)
     WCDumpType(bool)
-    
+
     // Case 2: C++ type
+    WCDumpType(int&)
+    WCDumpType(int&&)
     WCDumpType(std::string)
     WCDumpType(std::vector<int>)
     WCDumpType(std::vector<std::string>)
     WCDumpType(std::map<int, int>)
     WCDumpType(std::map<std::string, std::string>)
+}
+
+- (void)test_WCDumpObject {
+    // Case 1: C type value
+    WCDumpObject(42);         // 42 = int
+    WCDumpObject("hello");    // hello = char [6]&
+    WCDumpObject(3.14f);      // 3.14 = float
+    WCDumpObject(3.15);      // 3.15 = double
+    WCDumpObject(true);      // 1 = bool
+    WCDumpObject(1 + 2);      // 3 = int
+
+    // Case 2: C++ type value
+    std::string string = "abc";
+    WCDumpObject(string); // std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>
+    std::string s = std::string("hello") + "world";
+    WCDumpObject(std::string("hello") + "world");      // 1 = bool
+    
+    // Case 3: C++ reference type
+    int i = 1;
+    int& lRef = i;
+    int&& rRef = 2;
+    std::string& stringRef = string;
+    
+    bool isLref = std::is_lvalue_reference_v<decltype("hello")>;
+    XCTAssertTrue(isLref);
+    
+    WCDumpObject(i);
+    WCDumpObject(lRef);
+    WCDumpObject(rRef);
+    WCDumpObject(stringRef);
 }
 
 int& modify(int& a)
@@ -127,37 +159,6 @@ int& modify(int& a)
     SHOW_VALUE_CATEGORY(str3 = std::move("hello"));
     SHOW_VALUE_CATEGORY(1);
     SHOW_VALUE_CATEGORY(1 + 2);
-}
-
-struct Foo {
-    int x;
-};
-
-Foo createFoo() {
-    return Foo{42};
-}
-
-- (void)test_xvalue {
-    // Case 1
-    SHOW_VALUE_CATEGORY(std::move("hello")); // xvalue
-    
-    // Case 2
-    SHOW_VALUE_CATEGORY(createFoo().x); // xvalue
-    
-    // Case 3
-    int Foo::* p = &Foo::x;
-    int&& x = createFoo().*p;
-    SHOW_VALUE_CATEGORY(createFoo().*p); // xvalue
-    
-    // Case 4
-    int x2 = 42;
-    int&& y = static_cast<int&&>(x2);
-    SHOW_VALUE_CATEGORY(static_cast<int&&>(x));  // xvalue
-    SHOW_VALUE_CATEGORY(y); // lvalue
-    
-    // Case 5
-    int x3 = (int[]){1, 2, 3}[1]; // a[n], the built-in subscript expression, where one operand is an array rvalue;
-    SHOW_VALUE_CATEGORY((int[]){1, 2, 3}[1]); // xvalue
 }
 
 @end

@@ -895,7 +895,31 @@ char& char_number(std::string& s, std::size_t n)
 
 
 
+##### const左值引用
+
+const左值引用类型，不能修改变量的内容。
+
+举个例子，如下
+
+```c++
+- (void)test_syntax_lvalue_reference_variable {
+    std::string s = "Ex";
+    std::string& r1 = s;
+    const std::string& r2 = s;
+ 
+    r1 += "ample";           // modifies s
+    //r2 += "!";               // error: cannot modify through reference to const
+    std::cout << r2 << '\n'; // prints s, which now holds "Example"
+}
+```
+
+上面r2变量是const左值引用类型，使用这个变量是不能修改对应的内容。
+
+
+
 #### c. 右值引用(Rvalue references)
+
+右值引用(Rvalue references)，语法格式是`S&& D;`，用于延长临时对象的生命周期。
 
 
 

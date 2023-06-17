@@ -48,6 +48,11 @@ void print(std::string&& str) {
     WCDumpObject(r2);
     WCDumpObject(r3);
     WCDumpObject(r4);
+    
+    XCTAssertTrue(std::is_lvalue_reference_v<lref&>);
+    XCTAssertTrue(std::is_lvalue_reference_v<lref&&>);
+    XCTAssertTrue(std::is_lvalue_reference_v<rref&>);
+    XCTAssertTrue(std::is_rvalue_reference_v<rref&&>);
 }
 
 #pragma mark - lvalue reference

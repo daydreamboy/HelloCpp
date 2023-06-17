@@ -8,6 +8,10 @@
 #ifndef WCCPPMacroTool_h
 #define WCCPPMacroTool_h
 
+#include <iostream>
+#include <typeinfo>
+#include <cxxabi.h>
+
 /// The macros in this file used for .mm files
 
 /**
@@ -40,6 +44,8 @@ if (cString_ != NULL) { \
 returnedString_; \
 })
 
+#pragma mark - WCDumpType
+
 /**
  Dump type info for C++ type, e.g. std::string, int, ...
  
@@ -62,6 +68,45 @@ do { \
         std::cerr << "[WCDumpType] " << ti.name() << ", error: " << status << std::endl; \
     } \
 } while (0);
+
+#pragma mark - WCDumpObject
+
+// Note: use extern "C++" instead of extern "C"
+// see https://dawnarc.com/2019/07/c-error-templates-must-have-c-linkage/
+extern "C++"  {
+
+/**
+ Dump object info
+ 
+ @param rawString the plain string expected as an expression
+ @param value the C/C++ value
+ @param isLvalueRef the flag for lvalue reference
+ @param isRvalueRef the flag for rvalue reference
+ 
+ @header
+ #include <iostream>
+ #include <typeinfo>
+ #include <cxxabi.h>
+ 
+ @discussion If you need to dump type, try to use WCDumpType macro
+ */
+template<typename T>
+void __WCDumpObject(std::string&& rawString, const T& value, bool isLvalueRef, bool isRvalueRef) {
+    const std::type_info& ti = typeid(T);
+    int status;
+    char* demangled_name = abi::__cxa_demangle(ti.name(), nullptr, nullptr, &status);
+    if (status == 0) {
+        std::cout << rawString << " = " << value << " (" << demangled_name << ((isLvalueRef || isRvalueRef) ? (isLvalueRef ? "&": "&&"): "") << ")" << std::endl;
+        free(demangled_name);
+    } else {
+        std::cerr << "[WCDumpObject] " << ti.name() << ", error: " << status << std::endl;
+    }
+}
+
+} // extern "C"
+
+#define WCDumpObject(expression)\
+__WCDumpObject(#expression, expression, std::is_lvalue_reference_v<decltype(expression)>, std::is_rvalue_reference_v<decltype(expression)>)
 
 
 #pragma mark - Test Value Categories
