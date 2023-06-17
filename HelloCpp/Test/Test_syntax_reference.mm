@@ -52,7 +52,7 @@ void print(std::string&& str) {
 
 #pragma mark - lvalue reference
 
-- (void)test_syntax_lvalue_reference {
+- (void)test_syntax_lvalue_reference_variable {
     std::string s = "Ex";
     std::string& r1 = s;
     const std::string& r2 = s;
@@ -78,7 +78,7 @@ char& char_number(std::string& s, std::size_t n)
     return s.at(n); // string::at() returns a reference to char
 }
 
-- (void)test_syntax_function_return_lvalue_reference {
+- (void)test_syntax_function_return_type_lvalue_reference {
     std::string str = "Test";
     char_number(str, 1) = 'a'; // the function call is lvalue, can be assigned to
     std::cout << str << '\n';

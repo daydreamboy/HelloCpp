@@ -807,12 +807,95 @@ int& &r;   // error
 
 引用合并用于别名或者模板的情况，存在引用的引用。编译器按照下面规则进行合并：
 
-* 右值引用的有值引用，则合并为右值引用
-* 其他情况，都合并为有值引用
+* 右值引用的右值引用，则合并为右值引用
+* 其他情况，都合并为左值引用
 
 官方文档描述[^24]，如下
 
 > It is permitted to form references to references through type manipulations in templates or typedefs, in which case the *reference collapsing* rules apply: rvalue reference to rvalue reference collapses to rvalue reference, all other combinations form lvalue reference:
+
+举个例子，如下
+
+```c++
+typedef int&  lref;
+typedef int&& rref;
+int n;
+ 
+lref&  r1 = n; // type of r1 is int&
+lref&& r2 = n; // type of r2 is int&
+rref&  r3 = n; // type of r3 is int&
+rref&& r4 = 1; // type of r4 is int&&
+```
+
+
+
+#### b. 左值引用(Lvalue references)
+
+左值引用(Lvalue references)，采用声明格式`S& D;`，有下面几个作用
+
+* 定义变量别名，可以修改原始变量的值
+* 作为函数形参，用于修改实参
+* 用于函数返回类型
+
+
+
+##### 定义变量别名
+
+举个例子，如下
+
+```c++
+- (void)test_syntax_lvalue_reference_variable {
+    std::string s = "Ex";
+    std::string& r1 = s;
+    const std::string& r2 = s;
+ 
+    r1 += "ample";           // modifies s
+    //r2 += "!";               // error: cannot modify through reference to const
+    std::cout << r2 << '\n'; // prints s, which now holds "Example"
+}
+```
+
+
+
+##### 作为函数形参
+
+举个例子，如下
+
+```c++
+void double_string(std::string& s)
+{
+    s += s; // 's' is the same object as main()'s 'str'
+}
+
+- (void)test_syntax_lvalue_reference_parameter_modify_orignal_variable {
+    std::string str = "Test";
+    double_string(str);
+    std::cout << str << '\n';
+}
+```
+
+
+
+##### 用于函数返回类型
+
+举个例子，如下
+
+```c++
+char& char_number(std::string& s, std::size_t n)
+{
+    return s.at(n); // string::at() returns a reference to char
+}
+
+- (void)test_syntax_function_return_type_lvalue_reference {
+    std::string str = "Test";
+    char_number(str, 1) = 'a'; // the function call is lvalue, can be assigned to
+    std::cout << str << '\n';
+}
+```
+
+
+
+#### c. 右值引用(Rvalue references)
 
 
 
