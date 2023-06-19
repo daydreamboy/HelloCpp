@@ -1841,56 +1841,15 @@ std::bind函数常用的几个用法
 
 
 
-### (2) std::shared_ptr类
-
-std::shared_ptr是C++智能指针(Smart Poiner)的一种，它持有对象的拥有权，几个shared_ptr指针可以拥有同一个对象。对象的销毁和内存释放，满足下面两个条件之一：
-
-* 最后持有对象的shared_ptr指针被销毁
-* 最后持有对象的shared_ptr指针，通过operator=被重新赋值，或者调用了reset()函数
-
-官方文档的描述[^7]，如下
-
-> `std::shared_ptr` is a smart pointer that retains shared ownership of an object through a pointer. Several `shared_ptr` objects may own the same object. The object is destroyed and its memory deallocated when either of the following happens:
->
-> - the last remaining `shared_ptr` owning the object is destroyed;
-> - the last remaining `shared_ptr` owning the object is assigned another pointer via [operator=](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/shared_ptr/operator%3D.html) or [reset()](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/shared_ptr/reset.html).
-
-类型声明，如下
-
-| Defined in header `<memory>`          | C++版本       |
-| ------------------------------------- | ------------- |
-| template< class T > class shared_ptr; | (since C++11) |
+### (2) std::enable_shared_from_this类
 
 
 
-#### a. 构造函数
-
-std::shared_ptr类的构造函数，签名如下
-
-| 函数签名                                                     | 序号 | C++版本            |
-| ------------------------------------------------------------ | ---- | ------------------ |
-| constexpr shared_ptr() noexcept;                             | (1)  |                    |
-| constexpr shared_ptr( [std::nullptr_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/nullptr_t.html) ) noexcept; | (2)  |                    |
-| template< class Y >  explicit shared_ptr( Y* ptr );          | (3)  |                    |
-| template< class Y, class Deleter >  shared_ptr( Y* ptr, Deleter d ); | (4)  |                    |
-| template< class Deleter >  shared_ptr( [std::nullptr_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/nullptr_t.html) ptr, Deleter d ); | (5)  |                    |
-| template< class Y, class Deleter, class Alloc >  shared_ptr( Y* ptr, Deleter d, Alloc alloc ); | (6)  |                    |
-| template< class Deleter, class Alloc >  shared_ptr( [std::nullptr_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/nullptr_t.html) ptr, Deleter d, Alloc alloc ); | (7)  |                    |
-| template< class Y >  shared_ptr( const shared_ptr<Y>& r, element_type* ptr ) noexcept; | (8)  |                    |
-| template< class Y >  shared_ptr( shared_ptr<Y>&& r, element_type* ptr ) noexcept; | (8)  | (since C++20)      |
-| shared_ptr( const shared_ptr& r ) noexcept;                  | (9)  |                    |
-| template< class Y >  shared_ptr( const shared_ptr<Y>& r ) noexcept; | (9)  |                    |
-| shared_ptr( shared_ptr&& r ) noexcept;                       | (10) |                    |
-| template< class Y >  shared_ptr( shared_ptr<Y>&& r ) noexcept; | (10) |                    |
-| template< class Y >  explicit shared_ptr( const [std::weak_ptr](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/weak_ptr.html)<Y>& r ); | (11) |                    |
-| template< class Y >  shared_ptr( [std::auto_ptr](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/auto_ptr.html)<Y>&& r ); | (12) | (removed in C++17) |
-| template< class Y, class Deleter >  shared_ptr( [std::unique_ptr](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/unique_ptr.html)<Y, Deleter>&& r ); | (13) |                    |
+### (3) std::function类
 
 
 
-
-
-### (3) std::make_shared函数
+### (4) std::make_shared函数
 
 std::make_shared函数，用于创建std::shared_ptr指针。
 
@@ -2011,7 +1970,7 @@ struct C
 
 
 
-### (4) std::move函数
+### (5) std::move函数
 
 函数声明，如下
 
@@ -2033,6 +1992,53 @@ std::move用于指示编译器某个对象的内容可以被移出去，能将�
 > xvalue、rvalue属于值类别(Value categories)的概念，具体参考官方文档[^23]
 
 
+
+
+
+### (6) std::shared_ptr类
+
+std::shared_ptr是C++智能指针(Smart Poiner)的一种，它持有对象的拥有权，几个shared_ptr指针可以拥有同一个对象。对象的销毁和内存释放，满足下面两个条件之一：
+
+* 最后持有对象的shared_ptr指针被销毁
+* 最后持有对象的shared_ptr指针，通过operator=被重新赋值，或者调用了reset()函数
+
+官方文档的描述[^7]，如下
+
+> `std::shared_ptr` is a smart pointer that retains shared ownership of an object through a pointer. Several `shared_ptr` objects may own the same object. The object is destroyed and its memory deallocated when either of the following happens:
+>
+> - the last remaining `shared_ptr` owning the object is destroyed;
+> - the last remaining `shared_ptr` owning the object is assigned another pointer via [operator=](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/shared_ptr/operator%3D.html) or [reset()](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/shared_ptr/reset.html).
+
+类型声明，如下
+
+| Defined in header `<memory>`          | C++版本       |
+| ------------------------------------- | ------------- |
+| template< class T > class shared_ptr; | (since C++11) |
+
+
+
+#### a. 构造函数
+
+std::shared_ptr类的构造函数，签名如下
+
+| 函数签名                                                     | 序号 | C++版本            |
+| ------------------------------------------------------------ | ---- | ------------------ |
+| constexpr shared_ptr() noexcept;                             | (1)  |                    |
+| constexpr shared_ptr( [std::nullptr_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/nullptr_t.html) ) noexcept; | (2)  |                    |
+| template< class Y >  explicit shared_ptr( Y* ptr );          | (3)  |                    |
+| template< class Y, class Deleter >  shared_ptr( Y* ptr, Deleter d ); | (4)  |                    |
+| template< class Deleter >  shared_ptr( [std::nullptr_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/nullptr_t.html) ptr, Deleter d ); | (5)  |                    |
+| template< class Y, class Deleter, class Alloc >  shared_ptr( Y* ptr, Deleter d, Alloc alloc ); | (6)  |                    |
+| template< class Deleter, class Alloc >  shared_ptr( [std::nullptr_t](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/types/nullptr_t.html) ptr, Deleter d, Alloc alloc ); | (7)  |                    |
+| template< class Y >  shared_ptr( const shared_ptr<Y>& r, element_type* ptr ) noexcept; | (8)  |                    |
+| template< class Y >  shared_ptr( shared_ptr<Y>&& r, element_type* ptr ) noexcept; | (8)  | (since C++20)      |
+| shared_ptr( const shared_ptr& r ) noexcept;                  | (9)  |                    |
+| template< class Y >  shared_ptr( const shared_ptr<Y>& r ) noexcept; | (9)  |                    |
+| shared_ptr( shared_ptr&& r ) noexcept;                       | (10) |                    |
+| template< class Y >  shared_ptr( shared_ptr<Y>&& r ) noexcept; | (10) |                    |
+| template< class Y >  explicit shared_ptr( const [std::weak_ptr](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/weak_ptr.html)<Y>& r ); | (11) |                    |
+| template< class Y >  shared_ptr( [std::auto_ptr](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/auto_ptr.html)<Y>&& r ); | (12) | (removed in C++17) |
+| template< class Y, class Deleter >  shared_ptr( [std::unique_ptr](dfile:///Users/wesley_chen/Library/Application Support/Dash/DocSets/C++/C++.docset/Contents/Resources/Documents/en.cppreference.com/w/cpp/memory/unique_ptr.html)<Y, Deleter>&& r ); | (13) |                    |
 
 
 
@@ -2059,12 +2065,6 @@ https://chromium.googlesource.com/external/github.com/google/googletest/+/HEAD/d
 比较2个版本号字符串
 
 C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
-
-
-
-右值引用&&
-
-https://stackoverflow.com/questions/5481539/what-does-t-double-ampersand-mean-in-c11
 
 
 
