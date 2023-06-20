@@ -1755,7 +1755,9 @@ std::cout << cppString2 << std::endl;
 
 
 
-### (2) String IO
+## 17、IO(Input/Output)库
+
+### (1) String IO
 
 `ostringstream`是`basic_ostringstream<char>`的别名，它定义在`<sstream>`头文件中。作用是存放输出字符串。
 
@@ -1779,7 +1781,7 @@ std::cout << cppString2 << std::endl;
 
 
 
-## 17、utilities库
+## 18、utilities库
 
 ### (1) std::bind函数
 
@@ -2068,17 +2070,84 @@ C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
 
 
 
-## 18、C++调试
+## 19、C++调试
 
-### (1) 调试成员函数
+### (1) 查看成员函数的地址
+
+目前有两种方式
+
+* 使用代码打印地址
+* lldb调试打印地址
 
 
 
+#### a. 使用代码打印地址
+
+举个例子，如下
+
+```c++
+class TestClass {
+public:
+    void sayHello() {
+        // Note: make a breakpoint here
+        std::cout << "Hello, world!" << std::endl;
+    }
+};
+
+typedef void (TestClass::*SayHelloPtr)();
+
+- (void)test_check_member_function_address {
+    TestClass test;
+    
+    // Case 1: print member function address
+    SayHelloPtr p = &TestClass::sayHello;
+    
+    // Note: use void *& reference force convert to disable warning
+    printf("sayHello address: %p\n", (void *&)p);
+    test.sayHello();
+    
+    // Case 2: use member function address to call member function
+    void (TestClass::*p2)(void) = &TestClass::sayHello;
+    (test.*p2)();
+}
+```
+
+在sayHello成员函数中设置一个断点，Xcode调试停在这里，如下图
+
+![](images/04_check_member_function_address.png)
+
+可以到函数地址是0x1036dd200。
+
+和Xcode的console打印的地址是一样的。
+
+```shell
+sayHello address: 0x1036dd200
+```
 
 
 
+#### b. lldb调试打印地址
 
-## 19、C++ Hook
+使用`image lookup -n`，可以查询C++的成员函数的文件偏移量，然后加上所在image的加载地址，可以算出成员函数地址。
+
+举个例子，如下
+
+```shell
+(lldb) image lookup -n TestClass::sayHello
+1 match found in /Users/wesley_chen/Library/Developer/XCTestDevices/45B43424-EC82-4078-8B25-3A7354871B02/data/Containers/Bundle/Application/B527DD32-B8B2-4B9C-AFF7-E6E7298992D4/HelloCppDebugging.app/PlugIns/Test.xctest/Test:
+        Address: Test[0x0000000000003200] (Test.__TEXT.__text + 288)
+        Summary: Test`TestClass::sayHello() at Test_check_member_function_address.mm:14
+(lldb) image list Test
+[  0] DDD40116-27EA-3DA3-A735-E76DF93EE30B 0x00000001036da000 /Users/wesley_chen/Library/Developer/XCTestDevices/45B43424-EC82-4078-8B25-3A7354871B02/data/Containers/Bundle/Application/B527DD32-B8B2-4B9C-AFF7-E6E7298992D4/HelloCppDebugging.app/PlugIns/Test.xctest/Test 
+(lldb) p/x 0x00000001036da000 + 0x0000000000003200
+(long) $0 = 0x00000001036dd200
+```
+
+上面0x00000001036dd200，和Xcode中显示的地址是一样的。
+
+
+
+## 20、C++ Hook
 
 ### (1) hook new和delete操作符
 
@@ -2230,7 +2299,7 @@ public:
 
 
 
-## 20、C++编译常见报错
+## 21、C++编译常见报错
 
 ### (1)  "vtable for XXX", referenced from:
 

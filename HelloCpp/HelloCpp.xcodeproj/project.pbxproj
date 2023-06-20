@@ -23,6 +23,7 @@
 		4F532A552A12000F00A69160 /* Test_abstract_class.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F532A542A12000F00A69160 /* Test_abstract_class.mm */; };
 		4F532A582A12039800A69160 /* ConcreteClass1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F532A562A12039800A69160 /* ConcreteClass1.cpp */; };
 		4F532A5B2A1203F600A69160 /* AbstractClass2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F532A592A1203F600A69160 /* AbstractClass2.cpp */; };
+		4F535D482A419663001F3A46 /* Test_syntax_member_function_pointer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F535D472A419663001F3A46 /* Test_syntax_member_function_pointer.mm */; };
 		4F62F06C2A10E176008EA2D9 /* Test_static_member.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F62F06B2A10E176008EA2D9 /* Test_static_member.mm */; };
 		4F62F0702A10E263008EA2D9 /* BaseClass1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F62F06E2A10E263008EA2D9 /* BaseClass1.cpp */; };
 		4F62F0732A10E323008EA2D9 /* DerivedClass1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F62F0712A10E323008EA2D9 /* DerivedClass1.cpp */; };
@@ -102,6 +103,7 @@
 		4F532A572A12039800A69160 /* ConcreteClass1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConcreteClass1.hpp; sourceTree = "<group>"; };
 		4F532A592A1203F600A69160 /* AbstractClass2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractClass2.cpp; sourceTree = "<group>"; };
 		4F532A5A2A1203F600A69160 /* AbstractClass2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AbstractClass2.hpp; sourceTree = "<group>"; };
+		4F535D472A419663001F3A46 /* Test_syntax_member_function_pointer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_syntax_member_function_pointer.mm; sourceTree = "<group>"; };
 		4F62F06B2A10E176008EA2D9 /* Test_static_member.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_static_member.mm; sourceTree = "<group>"; };
 		4F62F06E2A10E263008EA2D9 /* BaseClass1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseClass1.cpp; sourceTree = "<group>"; };
 		4F62F06F2A10E263008EA2D9 /* BaseClass1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BaseClass1.hpp; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				4F39BE15277C9ADB00BAF59E /* Test_WCCPPMacroTool.mm */,
 				4F95F4A02A3AE41700D14779 /* Test_WCCPPTool.mm */,
 				4F20EBAC296998F20029B8B9 /* Test_syntax_lambda_expression.mm */,
+				4F535D472A419663001F3A46 /* Test_syntax_member_function_pointer.mm */,
 				4F41D0542A3C3072008F1F7D /* Test_syntax_reference.mm */,
 				4F3809802A3DDFB2002C192F /* Test_syntax_value_categories.mm */,
 				4F197DAD2784012100D6B11C /* Test_issue.mm */,
@@ -647,6 +650,7 @@
 				4F197DAE2784012100D6B11C /* Test_issue.mm in Sources */,
 				4F532A532A11E67A00A69160 /* AbstractClass1.cpp in Sources */,
 				4F62F0732A10E323008EA2D9 /* DerivedClass1.cpp in Sources */,
+				4F535D482A419663001F3A46 /* Test_syntax_member_function_pointer.mm in Sources */,
 				4F95F49E2A3AAF0B00D14779 /* Test_breakpoint_for_cpp.mm in Sources */,
 				4F3809812A3DDFB2002C192F /* Test_syntax_value_categories.mm in Sources */,
 				4F532A5B2A1203F600A69160 /* AbstractClass2.cpp in Sources */,
