@@ -29,7 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4F4CC1DB2961C12600645AD4 /* HelloStringIO */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloStringIO; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F4CC1DB2961C12600645AD4 /* HelloIOLibrary */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloIOLibrary; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4CC1DE2961C12600645AD4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4F4CC1E92961C16E00645AD4 /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4CC1EB2961C16E00645AD4 /* Test.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test.mm; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				4F4CC1F02961C57300645AD4 /* LogMessage */,
-				4F4CC1DD2961C12600645AD4 /* HelloStringIO */,
+				4F4CC1DD2961C12600645AD4 /* HelloIOLibrary */,
 				4F4CC1EA2961C16E00645AD4 /* Test */,
 				4F4CC1DC2961C12600645AD4 /* Products */,
 			);
@@ -72,18 +72,18 @@
 		4F4CC1DC2961C12600645AD4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4F4CC1DB2961C12600645AD4 /* HelloStringIO */,
+				4F4CC1DB2961C12600645AD4 /* HelloIOLibrary */,
 				4F4CC1E92961C16E00645AD4 /* Test.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4F4CC1DD2961C12600645AD4 /* HelloStringIO */ = {
+		4F4CC1DD2961C12600645AD4 /* HelloIOLibrary */ = {
 			isa = PBXGroup;
 			children = (
 				4F4CC1DE2961C12600645AD4 /* main.cpp */,
 			);
-			path = HelloStringIO;
+			path = HelloIOLibrary;
 			sourceTree = "<group>";
 		};
 		4F4CC1EA2961C16E00645AD4 /* Test */ = {
@@ -98,7 +98,6 @@
 		4F4CC1F02961C57300645AD4 /* LogMessage */ = {
 			isa = PBXGroup;
 			children = (
-				4F4CC1F52961CB7100645AD4 /* Tools */,
 				4F4CC1F12961C7A200645AD4 /* LogMessage.cpp */,
 				4F4CC1F22961C7A200645AD4 /* LogMessage.hpp */,
 				4F4CC20B2962CBD700645AD4 /* LogSetting.cpp */,
@@ -108,19 +107,12 @@
 			path = LogMessage;
 			sourceTree = "<group>";
 		};
-		4F4CC1F52961CB7100645AD4 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tools;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4F4CC1DA2961C12600645AD4 /* HelloStringIO */ = {
+		4F4CC1DA2961C12600645AD4 /* HelloIOLibrary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F4CC1E22961C12600645AD4 /* Build configuration list for PBXNativeTarget "HelloStringIO" */;
+			buildConfigurationList = 4F4CC1E22961C12600645AD4 /* Build configuration list for PBXNativeTarget "HelloIOLibrary" */;
 			buildPhases = (
 				4F4CC1D72961C12600645AD4 /* Sources */,
 				4F4CC1D82961C12600645AD4 /* Frameworks */,
@@ -130,9 +122,9 @@
 			);
 			dependencies = (
 			);
-			name = HelloStringIO;
+			name = HelloIOLibrary;
 			productName = HelloStringIO;
-			productReference = 4F4CC1DB2961C12600645AD4 /* HelloStringIO */;
+			productReference = 4F4CC1DB2961C12600645AD4 /* HelloIOLibrary */;
 			productType = "com.apple.product-type.tool";
 		};
 		4F4CC1E82961C16E00645AD4 /* Test */ = {
@@ -169,7 +161,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4F4CC1D62961C12600645AD4 /* Build configuration list for PBXProject "HelloStringIO" */;
+			buildConfigurationList = 4F4CC1D62961C12600645AD4 /* Build configuration list for PBXProject "HelloIOLibrary" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -182,7 +174,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4F4CC1DA2961C12600645AD4 /* HelloStringIO */,
+				4F4CC1DA2961C12600645AD4 /* HelloIOLibrary */,
 				4F4CC1E82961C16E00645AD4 /* Test */,
 			);
 		};
@@ -377,7 +369,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4F4CC1D62961C12600645AD4 /* Build configuration list for PBXProject "HelloStringIO" */ = {
+		4F4CC1D62961C12600645AD4 /* Build configuration list for PBXProject "HelloIOLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F4CC1E02961C12600645AD4 /* Debug */,
@@ -386,7 +378,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F4CC1E22961C12600645AD4 /* Build configuration list for PBXNativeTarget "HelloStringIO" */ = {
+		4F4CC1E22961C12600645AD4 /* Build configuration list for PBXNativeTarget "HelloIOLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F4CC1E32961C12600645AD4 /* Debug */,

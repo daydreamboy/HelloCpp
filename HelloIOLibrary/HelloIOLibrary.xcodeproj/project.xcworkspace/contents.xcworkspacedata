@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/wesley_chen/GitHub_Projects/HelloCpp/HelloIOLibrary/HelloIOLibrary.xcodeproj">
    </FileRef>
 </Workspace>
