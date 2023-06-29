@@ -41,7 +41,11 @@ typedef void (TestClass::*SayHelloPtr)();
     
     // Case 1: call as object's member function
     SayHelloPtr p = &TestClass::sayHello; // get member function address
+    // https://stackoverflow.com/questions/12189057/how-to-call-through-a-member-function-pointer
     (test.*p)(); // call member function
+    
+    void (TestClass::*p2)(void) = &TestClass::sayHello;
+    (test.*p2)();
 
     // Case 2: C++ 11, use std::mem_fn to wrapper the member function address
     auto f = std::mem_fn(&TestClass::sayHello);

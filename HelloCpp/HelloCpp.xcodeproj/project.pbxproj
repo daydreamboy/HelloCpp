@@ -35,7 +35,6 @@
 		4F718F5D2A05068A009E9093 /* Injector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F23676029D453AD00563DF5 /* Injector.framework */; };
 		4F72D3BC24CEC28F00D25E53 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F72D3BB24CEC28F00D25E53 /* main.cpp */; };
 		4F72D3C224CEC3A400D25E53 /* MyService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F72D3C024CEC3A400D25E53 /* MyService.cpp */; };
-		4F95F49E2A3AAF0B00D14779 /* Test_breakpoint_for_cpp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F95F49D2A3AAF0B00D14779 /* Test_breakpoint_for_cpp.mm */; };
 		4F95F4A12A3AE41700D14779 /* Test_WCCPPTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F95F4A02A3AE41700D14779 /* Test_WCCPPTool.mm */; };
 		4F95F4A22A3AE46E00D14779 /* WCCPPTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F39BE0D277C9A1400BAF59E /* WCCPPTool.mm */; };
 		4F9CBABF2A289D2D00CFBE71 /* Test_block.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F9CBABE2A289D2D00CFBE71 /* Test_block.mm */; };
@@ -114,7 +113,6 @@
 		4F72D3BB24CEC28F00D25E53 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4F72D3C024CEC3A400D25E53 /* MyService.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MyService.cpp; sourceTree = "<group>"; };
 		4F72D3C124CEC3A400D25E53 /* MyService.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MyService.hpp; sourceTree = "<group>"; };
-		4F95F49D2A3AAF0B00D14779 /* Test_breakpoint_for_cpp.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_breakpoint_for_cpp.mm; sourceTree = "<group>"; };
 		4F95F4A02A3AE41700D14779 /* Test_WCCPPTool.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_WCCPPTool.mm; sourceTree = "<group>"; };
 		4F9CBABE2A289D2D00CFBE71 /* Test_block.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_block.mm; sourceTree = "<group>"; };
 		4F9CBAC42A28A08A00CFBE71 /* HelloWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,7 +205,6 @@
 		4F39BE14277C9ADB00BAF59E /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				4F95F49F2A3AAF1200D14779 /* lldb_debug */,
 				4F9CBABD2A289D0A00CFBE71 /* mixed_with_OC */,
 				4F532A4F2A11DE3000A69160 /* abstract_class */,
 				4F62F06D2A10E247008EA2D9 /* static_member */,
@@ -333,14 +330,6 @@
 				4F9CBAC42A28A08A00CFBE71 /* HelloWorld.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		4F95F49F2A3AAF1200D14779 /* lldb_debug */ = {
-			isa = PBXGroup;
-			children = (
-				4F95F49D2A3AAF0B00D14779 /* Test_breakpoint_for_cpp.mm */,
-			);
-			path = lldb_debug;
 			sourceTree = "<group>";
 		};
 		4F9CBABD2A289D0A00CFBE71 /* mixed_with_OC */ = {
@@ -643,7 +632,6 @@
 				4F532A532A11E67A00A69160 /* AbstractClass1.cpp in Sources */,
 				4F62F0732A10E323008EA2D9 /* DerivedClass1.cpp in Sources */,
 				4F535D482A419663001F3A46 /* Test_syntax_member_function_pointer.mm in Sources */,
-				4F95F49E2A3AAF0B00D14779 /* Test_breakpoint_for_cpp.mm in Sources */,
 				4F3809812A3DDFB2002C192F /* Test_syntax_value_categories.mm in Sources */,
 				4F532A5B2A1203F600A69160 /* AbstractClass2.cpp in Sources */,
 				4F532A4C2A11D02100A69160 /* DefineStaticMember.cpp in Sources */,
