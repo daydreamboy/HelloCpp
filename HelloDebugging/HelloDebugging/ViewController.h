@@ -1,6 +1,6 @@
 //
 //  ViewController.h
-//  HelloCppDebugging
+//  HelloDebugging
 //
 //  Created by wesley_chen on 2023/6/20.
 //

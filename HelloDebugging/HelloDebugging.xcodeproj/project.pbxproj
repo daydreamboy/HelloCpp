@@ -29,7 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4F535D522A419B11001F3A46 /* HelloCppDebugging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloCppDebugging.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F535D522A419B11001F3A46 /* HelloDebugging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloDebugging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F535D552A419B11001F3A46 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4F535D562A419B11001F3A46 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4F535D582A419B11001F3A46 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		4F535D492A419B11001F3A46 = {
 			isa = PBXGroup;
 			children = (
-				4F535D542A419B11001F3A46 /* HelloCppDebugging */,
+				4F535D542A419B11001F3A46 /* HelloDebugging */,
 				4F535D732A419B33001F3A46 /* Test */,
 				4F535D532A419B11001F3A46 /* Products */,
 			);
@@ -76,13 +76,13 @@
 		4F535D532A419B11001F3A46 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4F535D522A419B11001F3A46 /* HelloCppDebugging.app */,
+				4F535D522A419B11001F3A46 /* HelloDebugging.app */,
 				4F535D722A419B33001F3A46 /* Test.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4F535D542A419B11001F3A46 /* HelloCppDebugging */ = {
+		4F535D542A419B11001F3A46 /* HelloDebugging */ = {
 			isa = PBXGroup;
 			children = (
 				4F535D552A419B11001F3A46 /* AppDelegate.h */,
@@ -97,7 +97,7 @@
 				4F535D662A419B13001F3A46 /* Info.plist */,
 				4F535D672A419B13001F3A46 /* main.m */,
 			);
-			path = HelloCppDebugging;
+			path = HelloDebugging;
 			sourceTree = "<group>";
 		};
 		4F535D732A419B33001F3A46 /* Test */ = {
@@ -112,9 +112,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4F535D512A419B11001F3A46 /* HelloCppDebugging */ = {
+		4F535D512A419B11001F3A46 /* HelloDebugging */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F535D6B2A419B13001F3A46 /* Build configuration list for PBXNativeTarget "HelloCppDebugging" */;
+			buildConfigurationList = 4F535D6B2A419B13001F3A46 /* Build configuration list for PBXNativeTarget "HelloDebugging" */;
 			buildPhases = (
 				4F535D4E2A419B11001F3A46 /* Sources */,
 				4F535D4F2A419B11001F3A46 /* Frameworks */,
@@ -124,9 +124,9 @@
 			);
 			dependencies = (
 			);
-			name = HelloCppDebugging;
+			name = HelloDebugging;
 			productName = HelloCppDebugging;
-			productReference = 4F535D522A419B11001F3A46 /* HelloCppDebugging.app */;
+			productReference = 4F535D522A419B11001F3A46 /* HelloDebugging.app */;
 			productType = "com.apple.product-type.application";
 		};
 		4F535D712A419B33001F3A46 /* Test */ = {
@@ -165,7 +165,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4F535D4D2A419B11001F3A46 /* Build configuration list for PBXProject "HelloCppDebugging" */;
+			buildConfigurationList = 4F535D4D2A419B11001F3A46 /* Build configuration list for PBXProject "HelloDebugging" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -178,7 +178,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4F535D512A419B11001F3A46 /* HelloCppDebugging */,
+				4F535D512A419B11001F3A46 /* HelloDebugging */,
 				4F535D712A419B33001F3A46 /* Test */,
 			);
 		};
@@ -230,7 +230,7 @@
 /* Begin PBXTargetDependency section */
 		4F535D772A419B33001F3A46 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4F535D512A419B11001F3A46 /* HelloCppDebugging */;
+			target = 4F535D512A419B11001F3A46 /* HelloDebugging */;
 			targetProxy = 4F535D762A419B33001F3A46 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -372,8 +372,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HelloCppDebugging/Info.plist;
+				INFOPLIST_FILE = HelloDebugging/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -384,7 +383,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.wc.HelloCppDebugging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wc.HelloDebugging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -398,8 +397,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HelloCppDebugging/Info.plist;
+				INFOPLIST_FILE = HelloDebugging/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -410,7 +408,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.wc.HelloCppDebugging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wc.HelloDebugging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -429,7 +427,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloCppDebugging.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HelloCppDebugging";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloDebugging.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HelloDebugging";
 			};
 			name = Debug;
 		};
@@ -445,14 +443,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloCppDebugging.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HelloCppDebugging";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloDebugging.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HelloDebugging";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4F535D4D2A419B11001F3A46 /* Build configuration list for PBXProject "HelloCppDebugging" */ = {
+		4F535D4D2A419B11001F3A46 /* Build configuration list for PBXProject "HelloDebugging" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F535D692A419B13001F3A46 /* Debug */,
@@ -461,7 +459,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F535D6B2A419B13001F3A46 /* Build configuration list for PBXNativeTarget "HelloCppDebugging" */ = {
+		4F535D6B2A419B13001F3A46 /* Build configuration list for PBXNativeTarget "HelloDebugging" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F535D6C2A419B13001F3A46 /* Debug */,
