@@ -2147,6 +2147,248 @@ sayHello address: 0x1036dd200
 
 
 
+### (2) 设置成员函数的符号断点
+
+在Xcode中给C++成员函数设置符号断点，有几种方式
+
+* 按照函数名匹配
+* 按照函数签名匹配
+* 使用内存地址匹配
+
+
+
+#### a. 按照函数名匹配
+
+按照`namespace::class:member_function`的格式设置，Xcode会自动搜索符号，列出符合这个格式的所有断点。
+
+举个例子，如下
+
+```c++
+namespace My {
+namespace Namespace {
+
+class C {
+public:
+    int getInt(int a);
+};
+
+}
+}
+
+int My::Namespace::C::getInt(int a) {
+    std::cout << a << std::endl;
+    return 5;
+}
+```
+
+设置符号断点`My::Namespace::C::getInt`，Xcode的断点显示，如下
+
+<img src="images/05_set_breakpoint_by_name.png" style="zoom:50%; float:left;" />
+
+
+
+#### b. 按照函数签名匹配
+
+按照函数签名的格式（除去返回值类型）设置，Xcode会自动搜索符号，列出符合这个格式的断点，理论上应该只有一个断点。
+
+举个例子，如下
+
+```c++
+namespace My {
+namespace Namespace {
+
+class D {
+public:
+    int getInt(int a);
+};
+
+}
+}
+
+namespace My {
+namespace Namespace {
+
+int D::getInt(int a) {
+    std::cout << a << std::endl;
+    return 6;
+}
+
+}
+}
+```
+
+设置符号断点`My::Namespace::D::getInt(int)`，Xcode的断点显示，如下
+
+<img src="images/06_set_breakpoint_by_function_signature.png" style="zoom:50%; float:left;" />
+
+
+
+##### 函数签名的参数存在模板类
+
+如果函数签名的参数，如果有模板的情况，则需要设置展开模板后的函数签名。
+
+举个例子，如下
+
+```c++
+class B {
+public:
+    int getString(std::string a) {
+        std::cout << a << std::endl;
+        return 5;
+    }
+    int getString(std::string a, std::string b) {
+        return 6;
+    }
+};
+```
+
+如果在Xcode中设置符号断点`B::getString(std::string)`，是不生效的。
+
+实际上，std::string是一个模板类，它展开后，是下面这个形式
+
+```c++
+std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >
+```
+
+上面是模板类std::__1::basic_string，带三个模板参数。
+
+如果直接看源码，可能很难看懂std::string和上面是等价的，可以使用下面的宏来打印std::string类型
+
+```c++
+#define WCDumpType(...) \
+do { \
+    const std::type_info& ti = typeid(__VA_ARGS__); \
+    int status; \
+    char* demangled_name = abi::__cxa_demangle(ti.name(), nullptr, nullptr, &status); \
+    if (status == 0) { \
+        std::cout <<  #__VA_ARGS__ << " = " << demangled_name << std::endl; \
+        free(demangled_name); \
+    } else { \
+        std::cerr << "[WCDumpType] " << ti.name() << ", error: " << status << std::endl; \
+    } \
+} while (0);
+
+WCDumpType(std::string)
+```
+
+在Xcode设置下面断点，如下
+
+```c++
+B::getString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >)
+```
+
+Xcode的断点显示，如下
+
+<img src="images/07_set_breakpoint_by_function_signature_with_template.png" style="zoom:50%; float:left;" />
+
+
+
+#### c. 使用内存地址匹配
+
+使用这种方式，需要在lldb中使用br命令来设置。先说说为什么需要这种方式？因为C++符号可能被优化，导致实际符号可能和代码中的函数签名不一致。
+
+代码示例如下，并设置`some::name::SomeManager::Start`符号断点
+
+```c++
+SHORT_NAMESPACE_BEGIN
+
+void SomeManager::Start(int type) {
+    std::cout << "type: " << type << std::endl;
+}
+
+SHORT_NAMESPACE_END
+```
+
+正常C++函数符号，在bt命令的显示，如下
+
+```shell
+(lldb) bt
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 3.1
+  * frame #0: 0x0000000100e08770 Test`some::name::SomeManager::Start(this=0x0000600002838230, type=24576) at SomeManager.cpp:14
+    frame #1: 0x0000000100e08940 Test`-[SomeOCManager startWithConfig:](self=0x0000600002838230, _cmd="startWithConfig:", config=0 key/value pairs) at SomeOCManager.mm:26:17
+```
+
+可以看到完整的函数签名，以及参数值，和对应源码位置。
+
+
+
+被编译器优化后的C++函数符号，在bt命令的显示，如下
+
+```shell
+(lldb) bt
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 6.1
+  * frame #0: 0x0000000109c29a10 SomeApp`::Start() at source1.cpp:154 [opt]
+    frame #1: 0x0000000109c1bff0 SomeApp`::Start() at source2.cpp:155:10 [opt]
+    frame #2: 0x0000000105d4895c SomeApp`-[OCClass startWithSuccess:failed:](self=<unavailable>, _cmd=<unavailable>, success=<unavailable>, failed=<unavailable>) at source3.mm:136:13 [opt]
+```
+
+可以看到每帧后面跟着一个[opt]的提示，实际的函数名`namespace::class:Start`，被优化成`::Start()`，而优化后有多个重复的命名。实际上在Xcode设置`::Start()`可以找到多个匹配的C++断点，如果使用这个方式，可能会触发很多次不是需要的断点，导致调试效率非常点，因此需要使用内存地址匹配。
+
+以some::name::SomeManager::Start为例，介绍设置内存地址匹配的断点
+
+* 确定函数在哪个可执行文件中
+* 确定函数在MachO的偏移量
+* 确定镜像image的加载地址
+* 计算函数的内存地址
+* 使用br命令设置断点
+
+
+
+1)确定函数在哪个可执行文件中，直接看源码编译到哪个产物，或者lldb中确认一下。
+
+```shell
+(lldb) image lookup -a 0x0000000100e08770
+      Address: Test[0x0000000000003770] (Test.__TEXT.__text + 4800)
+      Summary: Test`some::name::SomeManager::Start(int) at SomeManager.cpp:14
+```
+
+这里是在Test可执行文件中。
+
+2)确定函数在MachO的偏移量
+
+```shell
+$ cd /Users/wesley_chen/Library/Developer/Xcode/DerivedData/HelloDebugging-hfgzjntuqdkyiqdepophzsqxmmhh/Build/Products/Debug-iphonesimulator/HelloDebugging.app/PlugIns/Test.xctest/
+$ ll
+total 200
+-rw-r--r--  1 wesley_chen  staff   711B Jun 29 11:00 Info.plist
+-rwxr-xr-x  1 wesley_chen  staff    96K Jun 29 15:19 Test
+drwxr-xr-x  3 wesley_chen  staff    96B Jun 29 11:00 _CodeSignature
+$ nm -m Test | c++filt | grep -e "Start"
+0000000000003770 (__TEXT,__text) external some::name::SomeManager::Start(int)
+```
+
+3)确定镜像image的加载地址
+
+```shell
+(lldb) image list Test
+[  0] 746147CC-5144-3180-8332-5DFB93CDC396 0x0000000100e05000 /Users/wesley_chen/Library/Developer/XCTestDevices/2C8DDA19-9710-4566-940E-29144546F679/data/Containers/Bundle/Application/9652A957-2DAF-40D8-B7EE-EEEF0A9B70D6/HelloDebugging.app/PlugIns/Test.xctest/Test 
+```
+
+4)计算函数的内存地址
+
+```shell
+(lldb) p/x 0x0000000100e05000 + 0x0000000000003770
+(long) $0 = 0x0000000100e08770
+```
+
+说明
+
+> 由于文件偏移量0x0000000000003770，没有加上4GB，则不用减去0x0000000100000000
+
+5)使用br命令设置断点
+
+```shell
+$ br set -a 0x0000000100e08770
+```
+
+说明
+
+> 如果是app启动阶段，则直接在main函数先断点停住，获取到函数的内存地址，再设置断点
+
+
+
+
+
 ## 20、C++ Hook
 
 ### (1) hook new和delete操作符
