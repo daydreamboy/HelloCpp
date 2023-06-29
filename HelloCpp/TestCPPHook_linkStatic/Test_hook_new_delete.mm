@@ -9,6 +9,23 @@
 
 #include <iostream>
 
+namespace My {
+namespace Namespace {
+
+class Request {
+public:
+    Request(const std::string& requestLine);
+};
+
+}
+}
+
+My::Namespace::Request::Request(const std::string& requestLine)
+{
+    std::cout << "requestLine: " << requestLine << std::endl;
+}
+
+
 class MyClass {
 public:
     MyClass() {
@@ -25,11 +42,16 @@ public:
 
 @implementation TestCPPHook
 
-- (void)test {
+- (void)test_custom_class {
     std::cout << "Allocating MyClass" << std::endl;
     MyClass* ptr = new MyClass();
     std::cout << "Deleting MyClass" << std::endl;
     delete ptr;
+}
+
+- (void)test_custom_class_with_parameter {
+    My::Namespace::Request *r = new My::Namespace::Request("some/request");
+    delete r;
 }
 
 @end

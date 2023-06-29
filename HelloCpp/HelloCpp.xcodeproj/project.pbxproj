@@ -50,13 +50,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4F718F2E2A04E8C9009E9093 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4F72D3AE24CEC27100D25E53 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4F23675F29D453AD00563DF5;
-			remoteInfo = Injector;
-		};
 		4F718F5E2A05068F009E9093 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4F72D3AE24CEC27100D25E53 /* Project object */;
@@ -452,7 +445,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4F718F2F2A04E8C9009E9093 /* PBXTargetDependency */,
 			);
 			name = TestCPPHook_linkStatic;
 			productName = TestCPPHook;
@@ -720,11 +712,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4F718F2F2A04E8C9009E9093 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4F23675F29D453AD00563DF5 /* Injector */;
-			targetProxy = 4F718F2E2A04E8C9009E9093 /* PBXContainerItemProxy */;
-		};
 		4F718F5F2A05068F009E9093 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4F23675F29D453AD00563DF5 /* Injector */;

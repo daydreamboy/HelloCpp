@@ -27,7 +27,7 @@ void hookSayHello(TestClass* obj) {
     originalSayHello(obj); // 调用原始的sayHello函数
 }
 
-// 声明一个指向成员函数的指针类型
+// Define a type for pointer to member function
 typedef void (TestClass::*SayHelloPtr)();
 
 @interface Test_syntax_member_function_pointer : XCTestCase
@@ -38,19 +38,24 @@ typedef void (TestClass::*SayHelloPtr)();
 
 - (void)test {
     TestClass test;
-//    SayHelloPtr p = &TestClass::sayHello; // 获取成员函数的地址
-//    (test.*p)(); // 调用成员函数
-//
-//    // C++ 11
-//    auto f = std::mem_fn(&TestClass::sayHello);
-//    f(test); // 调用成员函数
     
-//    originalSayHello = reinterpret_cast<void (*)(TestClass*)>(dlsym(RTLD_DEFAULT, "__ZN9TestClass8sayHelloEv")); // 获取原始的sayHello函数地址
+    // Case 1: call as object's member function
+    SayHelloPtr p = &TestClass::sayHello; // get member function address
+    (test.*p)(); // call member function
+
+    // Case 2: C++ 11, use std::mem_fn to wrapper the member function address
+    auto f = std::mem_fn(&TestClass::sayHello);
+    f(test); // call member function
+    
+    // Note: not work
+    /*
+    originalSayHello = reinterpret_cast<void (*)(TestClass*)>(dlsym(RTLD_DEFAULT, "__ZN9TestClass8sayHelloEv")); // 获取原始的sayHello函数地址
     test.sayHello(); // 调用原始的sayHello函数
-//
-//    originalSayHello = reinterpret_cast<void (*)(TestClass*)>(dlsym(RTLD_DEFAULT, "__ZN9TestClass8sayHelloEv")); // 重新获取原始的sayHello函数地址
-//    reinterpret_cast<void (*)(TestClass*)>(&hookSayHello)(&test); // 使用hookSayHello函数来hook成员函数
-//    test.sayHello(); // 调用被hook的sayHello函数
+
+    originalSayHello = reinterpret_cast<void (*)(TestClass*)>(dlsym(RTLD_DEFAULT, "__ZN9TestClass8sayHelloEv")); // 重新获取原始的sayHello函数地址
+    reinterpret_cast<void (*)(TestClass*)>(&hookSayHello)(&test); // 使用hookSayHello函数来hook成员函数
+    test.sayHello(); // 调用被hook的sayHello函数
+     */
 }
 
 
