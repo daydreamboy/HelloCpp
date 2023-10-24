@@ -7,3 +7,14 @@
 
 #import "WCCPPTool.h"
 
+std::string convertNSDataToCPPString(const NSData* data) {
+    if (data == nullptr) {
+        return "";
+    }
+
+    const char* bytes = (const char *)[data bytes];
+    size_t length = [data length];
+    std::string s(bytes, length);
+    
+    return s;
+}

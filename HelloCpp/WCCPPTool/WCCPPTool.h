@@ -6,4 +6,17 @@
 //
 
 
+// OC
+#import <Foundation/Foundation.h>
 
+// C++
+#include <string>
+
+/**
+ Store NSData bytes into std::string style
+ 
+ @param data the NSData object
+ 
+ @return the std::string
+ */
+std::string convertNSDataToCPPString(const NSData* data);
