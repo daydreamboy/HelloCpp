@@ -44,6 +44,10 @@ typedef void (TestClass::*SayHelloPtr)();
     // https://stackoverflow.com/questions/12189057/how-to-call-through-a-member-function-pointer
     (test.*p)(); // call member function
     
+    // Note: cast to void * reference
+    // @see https://stackoverflow.com/a/11112061
+    NSLog(@"%p", (void* &)p);
+    
     void (TestClass::*p2)(void) = &TestClass::sayHello;
     (test.*p2)();
 

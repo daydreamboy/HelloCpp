@@ -115,6 +115,51 @@ typeid的返回值是`std::type_info`类型，定义在 `<typeinfo>`中。
 
 
 
+### (3) extern
+
+#### a. extern "C"
+
+在C++中，使用`extern "C"`声明，可以用于指示C++编译器，在生成对应符号时采用C符号形式。
+
+使用`extern "C"`声明的示例[^27]，如下
+
+```c++
+extern "C" void foo(int);
+extern "C"
+{
+   void g(char);
+   int i;
+}
+```
+
+这里采用上面第二种形式，举个例子，如下
+
+```objective-c
+void cppGlobalFunc(void)
+{
+}
+
+extern "C" {
+    void cppGlobalFuncUsingExtern(void);
+}
+
+void cppGlobalFuncUsingExtern(void)
+{
+}
+```
+
+编译上面代码，找到对应的可执行文件中，使用nm查看符号，如下
+
+```shell
+$ nm -m Test | grep "cppGlobal"
+0000000000019580 (__TEXT,__text) external __Z13cppGlobalFuncv
+0000000000019590 (__TEXT,__text) external _cppGlobalFuncUsingExtern
+```
+
+可以看到cppGlobalFuncUsingExtern函数保留C符号形式，以`_`开头。
+
+
+
 
 
 ## 4、预处理器(Preprocessor)
@@ -456,6 +501,39 @@ C++的字符串字面量(String literal)，有多种语法格式，官方文档[
 | u"*s-char-sequence* ﻿(optional)"`                             | (4)  | (since C++11) |
 | U"*s-char-sequence* ﻿(optional)"                              | (5)  | (since C++11) |
 | *prefix* ﻿(optional) R"*d-char-sequence* ﻿(optional)(*r-char-sequence* ﻿(optional))*d-char-sequence* ﻿(optional)" | (6)  | (since C++11) |
+
+
+
+C++ 11支持Raw String，在.mm文件中可以使用R"\<LANG\>(raw string)\<LANG\>"语法，用于直接写非转义的C字符串。如下
+
+```objective-c
+static NSString *jsonString = @R"JSON(
+{
+    "glossary": {
+        "title": "example glossary",
+        "GlossDiv": {
+            "title": "S",
+            "GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+                    "SortAs": "SGML",
+                    "GlossTerm": "Standard Generalized Markup Language",
+                    "Acronym": "SGML",
+                    "Abbrev": "ISO 8879:1986",
+                    "GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+                        "GlossSeeAlso": ["GML", "XML"]
+                    },
+                    "GlossSee": "markup"
+                }
+            }
+        }
+    }
+}
+)JSON";
+```
+
+上面的@符号将C字符串转成Objective-C的NSString类型。
 
 
 
@@ -2622,4 +2700,6 @@ public:
 
 [^25]:https://www.scs.stanford.edu/~dm/blog/decltype.html
 [^26]:https://stackoverflow.com/questions/3601602/what-are-rvalues-lvalues-xvalues-glvalues-and-prvalues
+
+[^27]:https://stackoverflow.com/questions/1041866/what-is-the-effect-of-extern-c-in-c
 
