@@ -27,6 +27,7 @@
 		4F62F06C2A10E176008EA2D9 /* Test_static_member.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F62F06B2A10E176008EA2D9 /* Test_static_member.mm */; };
 		4F62F0702A10E263008EA2D9 /* BaseClass1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F62F06E2A10E263008EA2D9 /* BaseClass1.cpp */; };
 		4F62F0732A10E323008EA2D9 /* DerivedClass1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F62F0712A10E323008EA2D9 /* DerivedClass1.cpp */; };
+		4F67035B2BA7DBB1005343A2 /* Test_std_map.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F67035A2BA7DBB1005343A2 /* Test_std_map.mm */; };
 		4F718F242A04E5D0009E9093 /* Test_std_make_shared.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F718F232A04E5D0009E9093 /* Test_std_make_shared.mm */; };
 		4F718F2C2A04E8C9009E9093 /* Test_hook_new_delete.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4F718F2B2A04E8C9009E9093 /* Test_hook_new_delete.mm */; };
 		4F718F342A04ED4A009E9093 /* Hook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F718F332A04ED4A009E9093 /* Hook.cpp */; };
@@ -102,6 +103,7 @@
 		4F62F06F2A10E263008EA2D9 /* BaseClass1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BaseClass1.hpp; sourceTree = "<group>"; };
 		4F62F0712A10E323008EA2D9 /* DerivedClass1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DerivedClass1.cpp; sourceTree = "<group>"; };
 		4F62F0722A10E323008EA2D9 /* DerivedClass1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DerivedClass1.hpp; sourceTree = "<group>"; };
+		4F67035A2BA7DBB1005343A2 /* Test_std_map.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_std_map.mm; sourceTree = "<group>"; };
 		4F718F232A04E5D0009E9093 /* Test_std_make_shared.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_std_make_shared.mm; sourceTree = "<group>"; };
 		4F718F292A04E8C9009E9093 /* TestCPPHook_linkStatic.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestCPPHook_linkStatic.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F718F2B2A04E8C9009E9093 /* Test_hook_new_delete.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Test_hook_new_delete.mm; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				4F3AC4CD296AE2180027A8E1 /* Test_std_call_once.mm */,
 				4F4311802A38707100F4D2C1 /* Test_std_lock_guard.mm */,
 				4F718F232A04E5D0009E9093 /* Test_std_make_shared.mm */,
+				4F67035A2BA7DBB1005343A2 /* Test_std_map.mm */,
 				4FD17251277DAB54000F8F49 /* Test_std_move.mm */,
 				4F39BE1A277C9D1400BAF59E /* Test_std_string.mm */,
 				4FA0079B277D9C8F000B2746 /* Test_std_vector.mm */,
@@ -645,6 +648,7 @@
 				4F62F06C2A10E176008EA2D9 /* Test_static_member.mm in Sources */,
 				4F39BE16277C9ADB00BAF59E /* Test_WCCPPMacroTool.mm in Sources */,
 				4F39BE1B277C9D1400BAF59E /* Test_std_string.mm in Sources */,
+				4F67035B2BA7DBB1005343A2 /* Test_std_map.mm in Sources */,
 				4F8FFDCB2B2EE415002382DA /* Test_keyword_extern.mm in Sources */,
 				4F95F4A12A3AE41700D14779 /* Test_WCCPPTool.mm in Sources */,
 				4FA0079C277D9C8F000B2746 /* Test_std_vector.mm in Sources */,

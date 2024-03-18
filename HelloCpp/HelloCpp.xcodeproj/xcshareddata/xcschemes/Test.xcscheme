@@ -19,7 +19,7 @@
                BlueprintIdentifier = "4F39BE12277C9ADB00BAF59E"
                BuildableName = "Test.xctest"
                BlueprintName = "Test"
-               ReferencedContainer = "container:HelloCPP.xcodeproj">
+               ReferencedContainer = "container:HelloCpp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

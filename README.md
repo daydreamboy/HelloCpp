@@ -1571,9 +1571,109 @@ void printVector(std::vector<int> v)
 
 
 
+## 15、container库
+
+container库，主要包含一些通用集合类型的模板类，用于处理常见的数据格式，例如队列(queue)、列表(list)、栈(stack)等。
+
+有下面四种分类：
+
+* 序列容器(sequence container)
+* 关联容器(associative container)
+* 无序的关联容器(unordered associative container)（C++11+支持）
+
+* 容器适配器(container adaptor)，使用容器适配某种特殊数据结构，例如栈、队列等
+
+[官方文档描述](https://en.cppreference.com/w/cpp/container)，如下
+
+> The Containers library is a generic collection of class templates and algorithms that allow programmers to easily implement common data structures like queues, lists and stacks. There are two(until C++11)three(since C++11) classes of containers:
+>
+> - sequence containers,
+> - associative containers, and
+> - unordered associative containers,(since C++11)
+
+这里简单给出上面四种容器对应的常用容器
+
+说明
+
+> 如果没有特殊说明，下面的常用容器都是模板类 (class template)
+
+* 序列容器(sequence container)
+
+| 容器         | 作用                     | 说明               |
+| ------------ | ------------------------ | ------------------ |
+| array        | static contiguous array  | (C++11)            |
+| vector       | dynamic contiguous array |                    |
+| deque        | double-ended queue       | 队列的两端支持访问 |
+| forward_list | singly-linked list       | 单链表(C++11)      |
+| list         | doubly-linked list       | 双链表             |
+
+* 关联容器(associative container)
+
+| 容器     | 作用                                                         | 说明          |
+| -------- | ------------------------------------------------------------ | ------------- |
+| set      | collection of unique keys, sorted by keys                    | key不允许重复 |
+| map      | collection of key-value pairs, sorted by keys, keys are unique | key不允许重复 |
+| multiset | collection of keys, sorted by keys                           | key允许重复   |
+| multimap | collection of key-value pairs, sorted by keys                | key允许重复   |
+
+* 无序的关联容器(unordered associative container)（C++11+支持）
+
+| 容器               | 作用                                                         | 说明 |
+| ------------------ | ------------------------------------------------------------ | ---- |
+| unordered_set      | collection of unique keys, hashed by keys                    |      |
+| unordered_map      | collection of key-value pairs, hashed by keys, keys are unique |      |
+| unordered_multiset | collection of keys, hashed by keys                           |      |
+| unordered_multimap | collection of key-value pairs, hashed by keys                |      |
+
+* 容器适配器(container adaptor)，使用容器适配某种特殊数据结构，例如栈、队列等
+
+| 容器           | 作用                                                         | 说明    |
+| -------------- | ------------------------------------------------------------ | ------- |
+| stack          | adapts a container to provide stack (LIFO data structure)    |         |
+| queue          | adapts a container to provide queue (FIFO data structure)    |         |
+| priority_queue | adapts a container to provide priority queue                 |         |
+| flat_set       | adapts a container to provide a collection of unique keys, sorted by keys | (C++23) |
+| flat_map       | adapts two containers to provide a collection of key-value pairs, sorted by unique keys | (C++23) |
+| flat_multiset  | adapts a container to provide a collection of keys, sorted by keys | (C++23) |
+| flat_multimap  | adapts two containers to provide a collection of key-value pairs, sorted by keys | (C++23) |
 
 
-## 15、concurrency库
+
+### (1) std::map类
+
+#### a. operator[]成员函数
+
+operator[]成员函数，用于访问元素，或者插入一个元素
+
+举个例子，如下
+
+```c++
+- (void)test_operator_square_bracket {
+    // C++ doc:
+    // operator[]: access or insert specified element (public member function)
+    std::map<__unsafe_unretained Class, std::map<SEL,struct _xtrace_info>> map;
+    
+    Class clz = [Test_std_map class];
+    SEL sel = NSSelectorFromString(@"stub1");
+    
+    // Case1
+    struct _xtrace_info &info1 = map[clz][sel];
+    info1.depth = 1;
+    XCTAssertTrue(info1.depth == 1);
+    
+    // Case2
+    sel = NSSelectorFromString(@"stub2");
+    struct _xtrace_info *info2 = &map[clz][sel];
+    info2->depth = 1;
+    XCTAssertTrue(info2->depth == 1);
+}
+```
+
+
+
+
+
+## 16、concurrency库
 
 concurrency库是C++提供内置的能力，用于支持threads、atomic operations、mutual exclusion、condition variable等等。
 
@@ -1805,7 +1905,7 @@ void safe_increment()
 
 
 
-## 16、string库
+## 17、string库
 
 ### (1) std::string
 
@@ -1833,7 +1933,7 @@ std::cout << cppString2 << std::endl;
 
 
 
-## 17、IO(Input/Output)库
+## 18、IO(Input/Output)库
 
 ### (1) String IO
 
@@ -1859,7 +1959,7 @@ std::cout << cppString2 << std::endl;
 
 
 
-## 18、utilities库
+## 19、utilities库
 
 ### (1) std::bind函数
 
@@ -2148,7 +2248,7 @@ C++版本：https://www.geeksforgeeks.org/compare-two-version-numbers/
 
 
 
-## 19、C++调试
+## 20、C++调试
 
 ### (1) 查看成员函数的地址
 
@@ -2467,7 +2567,7 @@ $ br set -a 0x0000000100e08770
 
 
 
-## 20、C++ Hook
+## 21、C++ Hook
 
 ### (1) hook new和delete操作符
 
@@ -2619,7 +2719,7 @@ public:
 
 
 
-## 21、C++编译常见报错
+## 22、C++编译常见报错
 
 ### (1)  "vtable for XXX", referenced from:
 
