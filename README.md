@@ -2363,6 +2363,10 @@ int My::Namespace::C::getInt(int a) {
 
 <img src="images/05_set_breakpoint_by_name.png" style="zoom:50%; float:left;" />
 
+说明
+
+> 实际上，去掉namespace部分，设置符号断点，也是可以的，例如`C::getInt`
+
 
 
 #### b. 按照函数签名匹配
